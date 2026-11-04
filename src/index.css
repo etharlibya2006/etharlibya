@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  /* Exact Colors from Ethar Libya Official SVG Logos */
+  --color-brick-red: #b4362d;
+  --color-brick-red-dark: #87251d;
+  --color-brick-red-light: #d64a40;
+  
+  --color-gold: #d9b239;
+  --color-gold-bright: #f5d469;
+  --color-gold-dark: #a17f1f;
+  
+  --color-white: #ffffff;
+  --color-cream-subtle: #fcfbfa;
+  --color-cream-warm: #f6f3ee;
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+}
+
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: #1c1917;
+    font-family: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+  }
+
+  .font-editorial,
+  .font-cinzel,
+  .font-almarai,
+  .font-montserrat {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+  }
+}
+
+/* White & Brick Red Luxury Framing Helpers */
+.text-brick-red {
+  color: #b4362d;
+}
+
+.bg-brick-red {
+  background-color: #b4362d;
+}
+
+.border-brick-red {
+  border-color: #b4362d;
+}
+
+.text-gold {
+  color: #d9b239;
+}
+
+.bg-gold {
+  background-color: #d9b239;
+}
+
+.border-gold {
+  border-color: #d9b239;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #b4362d 0%, #d9b239 60%, #a17f1f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brick-gold-gradient {
+  background: linear-gradient(135deg, #b4362d 0%, #942921 100%);
+}
+
+/* Clean White Paper Subtle Grid */
+.white-paper-grid {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(180, 54, 45, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Corner Brackets in Gold for Classical Luxury */
+.corner-brackets {
+  position: relative;
+}
+
+.corner-brackets::before,
+.corner-brackets::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: #d9b239;
+  pointer-events: none;
+}
+
+.corner-brackets::before {
+  top: 0;
+  right: 0;
+  border-top: 2px solid #d9b239;
+  border-right: 2px solid #d9b239;
+}
+
+.corner-brackets::after {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid #d9b239;
+  border-left: 2px solid #d9b239;
+}

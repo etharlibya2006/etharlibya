@@ -1,0 +1,6 @@
+{
+  "name": "البوابة الرسمية للشركة - CBL Corporate Portal",
+  "description": "الموقع الرسمي للشركة المعتمدة لدى مصرف ليبيا المركزي (CBL)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

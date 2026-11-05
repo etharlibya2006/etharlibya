@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Red background square with rounded corners -->
+  <rect width="500" height="500" rx="40" fill="#cc1417" />
+  
+  <!-- Outer thin gold ring -->
+  <circle cx="250" cy="250" r="225" fill="none" stroke="#eab308" stroke-width="4" opacity="0.4" />
+  
+  <!-- Central white circle -->
+  <circle cx="250" cy="250" r="218" fill="#ffffff" />
+  
+  <!-- Curved Red Ribbon / Banner -->
+  <g>
+    <!-- Shadow for ribbon -->
+    <path d="M 45 200 Q 250 230 455 200 L 440 315 Q 250 280 60 315 Z" fill="#990f12" opacity="0.3" transform="translate(0, 6)" />
+    
+    <!-- Main Ribbon Shape -->
+    <!-- Top edge is concave curve (dips down), bottom is convex curve -->
+    <path d="M 48 190 Q 250 215 452 190 L 434 305 Q 250 280 66 305 Z" fill="#cc1417" stroke="#fab814" stroke-width="8" stroke-linejoin="round" />
+    
+    <!-- BAKEMATE Typography -->
+    <text x="250" y="272" 
+          text-anchor="middle" 
+          font-family="'Times New Roman', 'Georgia', serif" 
+          font-weight="900" 
+          font-style="italic" 
+          font-size="64" 
+          fill="#ffffff" 
+          letter-spacing="2"
+          style="text-shadow: 0 2px 4px rgba(0,0,0,0.4);">
+      BAKEMATE
+    </text>
+  </g>
+</svg>

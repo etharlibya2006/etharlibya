@@ -10,11 +10,45 @@ import { GlobalSourcing } from './components/GlobalSourcing';
 import { B2BPartnership } from './components/B2BPartnership';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { AdminDashboard } from './components/AdminDashboard';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ar');
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [selectedBrandFilter, setSelectedBrandFilter] = useState<string>('all');
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+
+  // Check URL hash for #admin or #/admin
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#admin' || hash === '#/admin' || hash.startsWith('#/admin')) {
+        setIsAdminOpen(true);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
+
+  // Secret keyboard shortcut: Ctrl+Shift+A or Cmd+Shift+A
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setIsAdminOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleCloseAdmin = () => {
+    setIsAdminOpen(false);
+    if (window.location.hash.toLowerCase().includes('admin')) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  };
 
   // Toggle Language and synchronize document attributes
   const toggleLanguage = () => {
@@ -103,8 +137,16 @@ export default function App() {
         <ContactSection t={t} lang={lang} />
       </main>
 
-      {/* Quiet Institutional Footer */}
-      <Footer t={t} lang={lang} onNavigate={handleNavigate} />
+      {/* Quiet Institutional Footer with Secret 5-Click Admin Trigger */}
+      <Footer
+        t={t}
+        lang={lang}
+        onNavigate={handleNavigate}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+      />
+
+      {/* Secret In-Browser Admin Dashboard */}
+      <AdminDashboard isOpen={isAdminOpen} onClose={handleCloseAdmin} />
     </div>
   );
 }

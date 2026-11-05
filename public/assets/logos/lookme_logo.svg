@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <!-- Solid Black Background -->
+  <rect width="800" height="300" fill="#000000" rx="16" />
+  
+  <!-- Flowing cursive typography for LookMe -->
+  <g fill="#ffffff">
+    <!-- Stylized cursive text -->
+    <text x="400" y="195" 
+          text-anchor="middle" 
+          font-family="'Brush Script MT', 'Dancing Script', 'Caveat', 'Great Vibes', 'Allura', 'Pacifico', cursive" 
+          font-weight="700" 
+          font-size="140" 
+          letter-spacing="2">
+      LookMe
+    </text>
+  </g>
+  
+  <!-- Subtle decorative spark / star accent in gold -->
+  <path d="M 660 75 Q 675 75 675 60 Q 675 75 690 75 Q 675 75 675 90 Q 675 75 660 75 Z" fill="#eab308" opacity="0.8" />
+</svg>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Translations, Language } from '../data/translations';
 import { Sparkles, Check, ArrowRight, ArrowLeft } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
+import { Product } from '../data/products';
+import { getStoredProducts } from '../data/store';
 
 interface BrandsShowcaseProps {
   t: Translations;
@@ -17,18 +18,29 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
-  const monalisaProducts = PRODUCTS.filter((p) => p.brand === 'MONALISA').slice(0, 6);
+  const [allProducts, setAllProducts] = useState<Product[]>(getStoredProducts());
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setAllProducts(getStoredProducts());
+    };
+    window.addEventListener('ethar_data_updated', handleUpdate);
+    return () => window.removeEventListener('ethar_data_updated', handleUpdate);
+  }, []);
+
+  const monalisaProducts = allProducts.filter((p) => p.brand === 'MONALISA').slice(0, 6);
 
   const partnerBrands = [
     {
       name: 'BAKEMATE',
       brandKey: 'BAKEMATE',
+      logo: './assets/logos/bakemate_seal.svg',
       origin: 'Global FMCG Bakery Lines',
       categoryAr: 'بسكويت دايجستيف القمح الكامل، كريسبي كوكيز، وبون تون رولز',
       categoryEn: 'Whole Wheat Digestives, Cookies & Wafer Rolls',
       descAr: 'علامة بسكويت عالمية عريقة تمتاز بجودة الحبوب الكاملة والقرمشة الذهبية الموثوقة لدى المستهلك الليبي.',
       descEn: 'Renowned international bakery brand famous for whole-wheat digestives, rich cookies, and wafer rolls.',
-      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_59_PM-4_3d6a1144.png',
+      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_59_PM-4_3d6a1144.webp',
     },
     {
       name: 'غذائي (Nutri-Food)',
@@ -38,17 +50,18 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
       categoryEn: 'Gourmet Tiramisu Waffles & Mellow Cakes',
       descAr: 'تشكيلة كيك الوافل الإيطالي ومخبوزات الشوكولاتة والمارشميلو المصممة كوجبات خفيفة يومية غنية بالطاقة.',
       descEn: 'Gourmet soft waffles, marshmallow cakes, and chocolate treats crafted with European recipes.',
-      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_33_07_PM-2_6735f79b.png',
+      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_33_07_PM-2_6735f79b.webp',
     },
     {
       name: 'LookMe (لوك مي)',
       brandKey: 'LookMe',
+      logo: './assets/logos/lookme_logo.svg',
       origin: 'French Style Viennoiserie',
       categoryAr: 'بريوش كواسون محشو بكريمة الشوكولاتة الذائبة',
       categoryEn: 'Choco Croissant Brioche (24 Pce)',
       descAr: 'عجينة بريوش مورقة وهشة محشوة بالشوكولاتة الكثيفة، عبوة عملية 24 قطعة مخصصة للمقاهي والمدارس.',
       descEn: 'Flaky French-style brioche croissant pastry filled with rich cocoa cream in 24-piece cartons.',
-      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_24_PM-8_f18a1faa.png',
+      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_24_PM-8_f18a1faa.webp',
     },
     {
       name: 'BOLANTY (بولانتي)',
@@ -58,7 +71,7 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
       categoryEn: 'Natural Coconut Bars in Milk Chocolate (2x24 Pcs)',
       descAr: 'ألواح جوز الهند الطبيعي الطازج المغطاة بطبقة سميكة من شوكولاتة الحليب الفاخرة بطعم استوائي لا يُنسى.',
       descEn: 'Pure shredded tropical coconut bars enrobed in smooth milk chocolate, double packed 2x24 pcs.',
-      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_50_PM-1_f04aa489.png',
+      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_50_PM-1_f04aa489.webp',
     },
     {
       name: 'LIBRA (ليبرا بركة)',
@@ -68,7 +81,7 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
       categoryEn: 'Halal Roasted Coffee Biscuits',
       descAr: 'بسكويت مقرمش وخفيف مع نكهة البن المحمص الأصيل والشهادات الصحية المعتمدة لرفيق القهوة الأمثل.',
       descEn: 'Aromatic crispy biscuits infused with roasted coffee aroma, officially Halal-certified.',
-      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_34_PM-6_23596e29.png',
+      image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_34_PM-6_23596e29.webp',
     },
   ];
 
@@ -157,8 +170,10 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
             <div className="lg:col-span-5 grid grid-cols-2 gap-4">
               <div className="rounded-xl bg-white p-4 border-2 border-[#d9b239] text-center shadow-xl text-stone-900">
                 <img
-                  src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_20_PM-1_5ebf1232.png"
+                  src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_20_PM-1_5ebf1232.webp"
                   alt="MONALISA Biscotti Spread Studio"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-40 object-contain rounded-lg mb-2 filter drop-shadow-md"
                 />
                 <span className="text-xs font-bold text-stone-900 block">
@@ -169,8 +184,10 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
 
               <div className="rounded-xl bg-white p-4 border-2 border-[#d9b239] text-center shadow-xl text-stone-900">
                 <img
-                  src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_09_PM-9_7877b288.png"
+                  src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_09_PM-9_7877b288.webp"
                   alt="MONALISA Sweetened Condensed Milk"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-40 object-contain rounded-lg mb-2 filter drop-shadow-md"
                 />
                 <span className="text-xs font-bold text-stone-900 block">
@@ -234,14 +251,23 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
                     <img
                       src={brand.image}
                       alt={brand.name}
+                      loading="lazy"
+                      decoding="async"
                       className="max-h-full max-w-full object-contain filter drop-shadow hover:scale-105 transition-transform duration-300"
                     />
                   </div>
 
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <h4 className="text-lg font-bold text-stone-900 font-cinzel">
-                      {brand.name}
-                    </h4>
+                    <div className="flex items-center gap-2">
+                      {brand.logo && (
+                        <div className="w-8 h-8 rounded-lg overflow-hidden border border-stone-200 bg-white p-0.5 shrink-0 flex items-center justify-center shadow-xs">
+                          <img src={brand.logo} alt={brand.name} className="max-h-full max-w-full object-contain" />
+                        </div>
+                      )}
+                      <h4 className="text-lg font-bold text-stone-900 font-cinzel">
+                        {brand.name}
+                      </h4>
+                    </div>
                     <span className="text-[10px] font-bold text-white bg-[#b4362d] px-2.5 py-0.5 rounded font-mono">
                       {brand.origin}
                     </span>

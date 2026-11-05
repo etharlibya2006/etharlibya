@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Translations, Language } from '../data/translations';
 import { ShieldCheck, MessageCircle, ArrowUp } from 'lucide-react';
 
@@ -6,9 +6,28 @@ interface FooterProps {
   t: Translations;
   lang: Language;
   onNavigate: (sectionId: string) => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate, onOpenAdmin }) => {
+  const [clickCount, setClickCount] = useState(0);
+  const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleLogoClick = () => {
+    setClickCount((prev) => {
+      const next = prev + 1;
+      if (next >= 5) {
+        if (onOpenAdmin) onOpenAdmin();
+        return 0;
+      }
+      if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+      clickTimerRef.current = setTimeout(() => {
+        setClickCount(0);
+      }, 3000);
+      return next;
+    });
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -21,7 +40,11 @@ export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate }) => {
           {/* Brand info with Vector Primary SVG logo.svg */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="h-14 w-auto rounded overflow-hidden bg-white/10 p-1 border border-[#d9b239]/50 shadow-sm">
+              <div
+                onClick={handleLogoClick}
+                className="h-14 w-auto rounded overflow-hidden bg-white/10 p-1 border border-[#d9b239]/50 shadow-sm cursor-pointer select-none active:scale-95 transition-transform"
+                title="Ethar Libya"
+              >
                 <img
                   src="./assets/aistudio/logo_d6d6ec2d.svg"
                   alt="Ethar Libya Logo"

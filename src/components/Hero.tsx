@@ -137,8 +137,10 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="group rounded-xl bg-[#fcfbfa] p-3 border border-stone-200 hover:border-[#b4362d] transition-all text-center shadow-sm">
                   <div className="h-32 w-full flex items-center justify-center p-1 mb-2">
                     <img
-                      src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_11_PM-2_b91814cf.png"
+                      src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_11_PM-2_b91814cf.webp"
                       alt="MONALISA Choco Biscuit"
+                      loading="eager"
+                      decoding="async"
                       className="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform"
                     />
                   </div>
@@ -152,8 +154,10 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="group rounded-xl bg-[#fcfbfa] p-3 border border-stone-200 hover:border-[#b4362d] transition-all text-center shadow-sm">
                   <div className="h-32 w-full flex items-center justify-center p-1 mb-2">
                     <img
-                      src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_09_PM-9_7877b288.png"
+                      src="./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_09_PM-9_7877b288.webp"
                       alt="MONALISA Sweetened Condensed Milk"
+                      loading="eager"
+                      decoding="async"
                       className="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform"
                     />
                   </div>

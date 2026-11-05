@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Translations, Language } from '../data/translations';
 import { MapPin, Phone, Mail, Clock, ExternalLink, MessageCircle } from 'lucide-react';
+import { getStoredSettings, AppSettings } from '../data/store';
 
 interface ContactSectionProps {
   t: Translations;
@@ -8,6 +9,15 @@ interface ContactSectionProps {
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
+  const [settings, setSettings] = useState<AppSettings>(getStoredSettings());
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setSettings(getStoredSettings());
+    };
+    window.addEventListener('ethar_data_updated', handleUpdate);
+    return () => window.removeEventListener('ethar_data_updated', handleUpdate);
+  }, []);
   return (
     <section id="contact" className="py-24 bg-[#fbf9f6] border-t-2 border-[#d9b239] text-stone-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,10 +76,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2 p-2.5 rounded bg-[#fbf9f6] border border-stone-200">
                     <span className="text-xs text-stone-800 font-mono font-bold" dir="ltr">
-                      0925062360
+                      {settings.phoneDisplay || '0925062360'}
                     </span>
                     <a
-                      href="https://wa.me/218925062360"
+                      href={`https://wa.me/${settings.whatsappNumber || '218925062360'}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-emerald-600 px-2.5 py-1 rounded hover:bg-emerald-700 shadow-sm"
@@ -195,13 +205,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                   : 'Import and sales offices open Saturday through Thursday'}
               </span>
               <a
-                href="https://wa.me/218925062360"
+                href={`https://wa.me/${settings.whatsappNumber || '218925062360'}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 font-bold text-[#b4362d] hover:text-black font-mono"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-600" />
-                <span>+218 92 506 2360</span>
+                <span>{settings.phoneDisplay || '+218 92 506 2360'}</span>
               </a>
             </div>
           </div>

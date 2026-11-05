@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Product, PRODUCTS, CATEGORIES, BRANDS } from '../data/products';
+import { Product, CATEGORIES, BRANDS } from '../data/products';
 import { Translations, Language } from '../data/translations';
 import { Search, Eye, MessageCircle, X, Check, Package, Sparkles } from 'lucide-react';
+import { OptimizedImage } from './OptimizedImage';
+import { getStoredProducts, getStoredSettings } from '../data/store';
 
 interface ProductsCatalogProps {
   t: Translations;
@@ -10,10 +12,20 @@ interface ProductsCatalogProps {
 }
 
 export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, externalBrandFilter }) => {
+  const [productsList, setProductsList] = useState<Product[]>(getStoredProducts());
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedBrand, setSelectedBrand] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
+
+  // Listen for data updates from admin dashboard
+  useEffect(() => {
+    const handleDataUpdate = () => {
+      setProductsList(getStoredProducts());
+    };
+    window.addEventListener('ethar_data_updated', handleDataUpdate);
+    return () => window.removeEventListener('ethar_data_updated', handleDataUpdate);
+  }, []);
 
   useEffect(() => {
     if (externalBrandFilter) {
@@ -22,7 +34,7 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
   }, [externalBrandFilter]);
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((item) => {
+    return productsList.filter((item) => {
       const matchCategory = selectedCategory === 'all' || item.category === selectedCategory;
       const matchBrand = selectedBrand === 'all' || item.brand === selectedBrand;
       const q = searchQuery.toLowerCase().trim();
@@ -35,15 +47,17 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
 
       return matchCategory && matchBrand && matchSearch;
     });
-  }, [selectedCategory, selectedBrand, searchQuery]);
+  }, [productsList, selectedCategory, selectedBrand, searchQuery]);
 
   const openWhatsAppOrder = (product: Product) => {
+    const settings = getStoredSettings();
+    const phone = settings.whatsappNumber || '218925062360';
     const text =
       lang === 'ar'
         ? `السلام عليكم، أود الاستفسار عن طلب جملة وتوريد لمنتج: ${product.nameAr} (${product.brand}) من شركة إيثار ليبيا.`
         : `Hello, I would like to inquire about wholesale distribution for: ${product.nameEn} (${product.brand}) from Ethar Libya.`;
     const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/218925062360?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/${phone}?text=${encoded}`, '_blank');
   };
 
   return (
@@ -145,12 +159,13 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
               >
                 {/* Physical Packaging Showcase Tray with Clean Background */}
                 <div className="relative aspect-[4/3] bg-gradient-to-b from-[#faf8f5] to-[#f4efe8] p-4 flex items-center justify-center overflow-hidden border-b border-stone-100">
-                  <img
+                  <OptimizedImage
                     src={product.image}
                     alt={lang === 'ar' ? product.nameAr : product.nameEn}
                     referrerPolicy="no-referrer"
                     className="max-h-full max-w-full object-contain filter drop-shadow-[0_6px_12px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                   {/* Brand Tag */}
                   <div className="absolute top-3 left-3 rtl:right-3 rtl:left-auto">
@@ -239,10 +254,12 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
             {/* Modal Content */}
             <div className="p-6 overflow-y-auto space-y-6">
               <div className="aspect-[16/9] w-full bg-[#fbf9f6] rounded-xl overflow-hidden flex items-center justify-center p-4 border border-stone-200">
-                <img
+                <OptimizedImage
                   src={activeModalProduct.image}
                   alt={lang === 'ar' ? activeModalProduct.nameAr : activeModalProduct.nameEn}
                   className="max-h-full max-w-full object-contain filter drop-shadow-lg"
+                  loading="eager"
+                  decoding="async"
                 />
               </div>
 

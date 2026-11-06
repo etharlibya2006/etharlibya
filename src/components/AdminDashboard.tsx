@@ -832,8 +832,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                       className="rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-[#b4362d] transition-all flex flex-col justify-between"
                     >
                       <div>
-                        {/* Image Preview */}
-                        <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
+                        {/* Image Preview - Aspect-Square (1:1) */}
+                        <div className="relative aspect-square w-full bg-stone-100 overflow-hidden flex items-center justify-center">
                           <img
                             src={item.src}
                             alt={item.titleAr}
@@ -1442,12 +1442,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
 
               {/* Image Preview & Upload */}
               <div>
-                <label className="block font-bold text-stone-700 mb-1">صورة المخازن / الشاحنة</label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block font-bold text-stone-700">صورة المخازن / الشاحنة</label>
+                  <span className="text-[11px] font-mono text-[#b4362d] font-bold">مهيأ للمقاس المربع 1:1</span>
+                </div>
                 <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#fbf9f6] p-3 rounded-xl border border-stone-200">
-                  <div className="w-32 h-24 rounded-lg bg-stone-200 border border-stone-300 overflow-hidden shrink-0 flex items-center justify-center">
+                  <div className="w-28 h-28 aspect-square rounded-xl bg-stone-200 border-2 border-stone-300 overflow-hidden shrink-0 flex items-center justify-center shadow-inner">
                     <img
                       src={editingGalleryItem.src}
-                      alt="معاينة"
+                      alt="معاينة مربعة 1:1"
                       className="w-full h-full object-cover"
                     />
                   </div>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Translations, Language } from '../data/translations';
-import { Compass, Landmark, ShieldCheck, CheckCircle2, Warehouse, Truck, Sparkles } from 'lucide-react';
-import { GalleryItem, getStoredGalleryItems, BrandItem, getStoredBrands } from '../data/store';
+import { Compass, Landmark, ShieldCheck, CheckCircle2, Warehouse, Truck } from 'lucide-react';
+import { GalleryItem, getStoredGalleryItems } from '../data/store';
 
 interface AboutSectionProps {
   t: Translations;
@@ -10,15 +10,6 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
-  const [brands, setBrands] = useState<BrandItem[]>(() => getStoredBrands());
-
-  useEffect(() => {
-    const handleUpdate = () => {
-      setBrands(getStoredBrands());
-    };
-    window.addEventListener('ethar_data_updated', handleUpdate);
-    return () => window.removeEventListener('ethar_data_updated', handleUpdate);
-  }, []);
 
   return (
     <section id="about" className="py-24 bg-[#fbf9f6] border-t-2 border-[#d9b239] text-stone-900 relative overflow-hidden">
@@ -183,84 +174,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
           </div>
         </div>
 
-        {/* Authorized Brand Logos Banner (الشعارات والوكالات الحصرية المعتمدة) */}
-        <div className="mb-20">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-xs font-black text-[#b4362d] uppercase tracking-widest font-mono block mb-2">
-              {lang === 'ar' ? 'العلامات التجارية المعتمدة والشعارات الحصرية' : 'AUTHORIZED BRANDS & EXCLUSIVE LOGOS'}
-            </span>
-            <h3 className="text-2xl sm:text-4xl font-black text-stone-900 font-cinzel">
-              {lang === 'ar' ? 'شعارات العلامات التجارية الرائدة' : 'Official Authorized Brand Identities'}
-            </h3>
-            <p className="mt-2 text-xs sm:text-sm text-stone-600">
-              {lang === 'ar'
-                ? 'علامات غذائية دولية ومحلية موثوقة تستوردها وتوزعها شركة إيثار ليبيا وفق أعلى مواصفات الجودة'
-                : 'International and regional flagship food brands exclusively imported and distributed by Ethar Libya'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {brands.map((brand) => (
-              <div
-                key={brand.id}
-                className={`p-6 rounded-2xl border-2 transition-all shadow-sm flex flex-col items-center text-center group ${
-                  brand.isDarkCard
-                    ? 'bg-stone-950 border-stone-800 hover:border-[#d9b239] text-white'
-                    : 'bg-white border-stone-200 hover:border-[#b4362d] text-stone-900'
-                }`}
-              >
-                <div
-                  className={`w-full h-36 flex items-center justify-center p-3 mb-4 rounded-xl overflow-hidden group-hover:scale-105 transition-transform duration-300 ${
-                    brand.isDarkCard ? 'bg-black' : 'bg-stone-50'
-                  }`}
-                >
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => {
-                      if (brand.fallbackLogo && e.currentTarget.src !== brand.fallbackLogo) {
-                        e.currentTarget.src = brand.fallbackLogo;
-                      }
-                    }}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
-                <div
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold mb-2 ${
-                    brand.isDarkCard
-                      ? 'bg-stone-800 text-stone-300'
-                      : brand.badgeColor === 'emerald'
-                      ? 'bg-emerald-50 text-emerald-800'
-                      : 'bg-amber-50 text-amber-800'
-                  }`}
-                >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full ${
-                      brand.isDarkCard
-                        ? 'bg-amber-400'
-                        : brand.badgeColor === 'emerald'
-                        ? 'bg-emerald-600 animate-pulse'
-                        : 'bg-[#d9b239]'
-                    }`}
-                  />
-                  <span>{lang === 'ar' ? brand.badgeAr : brand.badgeEn}</span>
-                </div>
-                <h4 className={`text-lg font-bold font-cinzel ${brand.isDarkCard ? 'text-white' : 'text-stone-900'}`}>
-                  {brand.name}
-                </h4>
-                <p
-                  className={`text-xs mt-1 leading-relaxed ${
-                    brand.isDarkCard ? 'text-stone-400' : 'text-stone-600'
-                  }`}
-                >
-                  {lang === 'ar' ? brand.descAr : brand.descEn}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Operational Infrastructure (Warehouses & Fleet Gallery) */}
         <OperationalShowcase t={t} lang={lang} />
@@ -352,11 +265,11 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
       </div>
 
-      {/* Main Highlights: 2 Macro Overview Cards */}
+      {/* Main Highlights: 2 Macro Overview Cards (Square 1:1 Native) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         {/* Warehouse Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md">
-          <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
+          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
             <img
               src={warehouseCover}
               alt="Ethar Libya FMCG Warehouses"
@@ -369,18 +282,18 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               }}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
             <div className="absolute top-4 right-4 bg-[#b4362d] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
               {lang === 'ar' ? 'المقر وسوق الكريمية' : 'Karimiyah HQ & Wholesale'}
             </div>
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Warehouse className="w-5 h-5 text-[#d9b239]" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white">
+              <Warehouse className="w-5 h-5 text-[#d9b239] shrink-0" />
+              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
                 {lang === 'ar' ? 'المستودعات المركزية وسلاسل التخزين' : 'Central Logistics & Warehousing Hub'}
               </span>
             </div>
           </div>
-          <div className="p-6">
+          <div className="p-6 flex-1 flex flex-col justify-between">
             <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
               {t.about.facilityWarehouse}
             </p>
@@ -397,8 +310,8 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
 
         {/* Distribution Fleet Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md">
-          <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
+          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
             <img
               src={fleetCover}
               alt="Ethar Libya Distribution Fleet"
@@ -411,18 +324,18 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               }}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
             <div className="absolute top-4 right-4 bg-[#d9b239] text-stone-900 text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
               {lang === 'ar' ? 'أسطول الشاحنات' : 'Distribution Fleet'}
             </div>
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Truck className="w-5 h-5 text-[#d9b239]" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white">
+              <Truck className="w-5 h-5 text-[#d9b239] shrink-0" />
+              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
                 {lang === 'ar' ? 'أسطول شاحنات التوزيع المجهزة' : 'Nationwide Commercial Distribution Fleet'}
               </span>
             </div>
           </div>
-          <div className="p-6">
+          <div className="p-6 flex-1 flex flex-col justify-between">
             <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
               {t.about.facilityFleet}
             </p>
@@ -439,7 +352,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
       </div>
 
-      {/* 6 Real Operations Visual Gallery Grid */}
+      {/* 6 Real Operations Visual Gallery Grid (Aspect-Square 1:1) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
           <div
@@ -447,8 +360,8 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
             onClick={() => setSelectedItem(item)}
             className="group cursor-pointer rounded-2xl bg-white border border-stone-200 hover:border-[#b4362d] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
           >
-            {/* Image Box */}
-            <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
+            {/* Image Box - Aspect-Square (1:1 Ratio) */}
+            <div className="relative aspect-square w-full bg-stone-100 overflow-hidden flex items-center justify-center">
               <img
                 src={item.src}
                 alt={lang === 'ar' ? item.titleAr : item.titleEn}
@@ -459,16 +372,16 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
                     e.currentTarget.src = item.fallbackSrc;
                   }
                 }}
-                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
 
               {/* Tag / Badge */}
               <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold border border-white/20">
                 <span>{lang === 'ar' ? item.tagAr : item.tagEn}</span>
               </div>
 
-              {/* Location pin */}
+              {/* Location pin & Title on photo */}
               <div className="absolute bottom-3 left-3 right-3 text-white">
                 <span className="text-[11px] font-mono text-[#d9b239] block mb-0.5">
                   {lang === 'ar' ? item.badgeAr : item.badgeEn}
@@ -481,14 +394,14 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
 
             {/* Description */}
             <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-              <p className="text-xs text-stone-600 leading-relaxed mb-3">
+              <p className="text-xs text-stone-600 leading-relaxed mb-3 line-clamp-2">
                 {lang === 'ar' ? item.descAr : item.descEn}
               </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
-                <span className="font-mono text-stone-700">
+              <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-2 text-xs text-stone-500">
+                <span className="font-mono text-stone-700 truncate max-w-[65%]">
                   {lang === 'ar' ? item.locationAr : item.locationEn}
                 </span>
-                <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1">
+                <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1 shrink-0">
                   {lang === 'ar' ? 'عرض الصورة المكبرة' : 'Expand Photo'}
                 </span>
               </div>
@@ -497,7 +410,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         ))}
       </div>
 
-      {/* Full-Screen Lightbox Modal */}
+      {/* Full-Screen Lightbox Modal - Optimized for Square 1:1 Images */}
       {selectedItem && (
         <div
           role="dialog"
@@ -506,7 +419,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl relative"
+            className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -518,12 +431,12 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               ✕
             </button>
 
-            {/* Modal Image */}
-            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-black overflow-hidden">
+            {/* Modal Image Frame */}
+            <div className="relative w-full max-h-[68vh] bg-stone-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
               <img
                 src={selectedItem.src}
                 alt={lang === 'ar' ? selectedItem.titleAr : selectedItem.titleEn}
-                className="w-full h-full object-contain"
+                className="max-h-[64vh] max-w-full aspect-square sm:aspect-auto object-contain mx-auto rounded-xl shadow-2xl"
               />
               <div className="absolute top-4 left-4 bg-[#b4362d] text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                 {lang === 'ar' ? selectedItem.tagAr : selectedItem.tagEn}

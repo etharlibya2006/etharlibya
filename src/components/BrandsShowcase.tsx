@@ -112,7 +112,7 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
               {/* MONALISA Italian Flag Logo */}
               <div className="h-20 sm:h-24 px-5 py-2.5 bg-white rounded-xl shadow-xl border-2 border-[#d9b239] flex items-center justify-center">
                 <img
-                  src="./assets/aistudio/WhatsApp_Image_2026-11-03_at_6.00.52_PM_da0e5670.jpeg"
+                  src="./assets/logos/monalisa_italy_flag.webp"
                   alt="MONALISA Brand Logo"
                   className="max-h-full w-auto object-contain"
                 />
@@ -121,7 +121,7 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
               {/* MONALISA Classic Badge Logo */}
               <div className="h-20 sm:h-24 px-5 py-2.5 bg-stone-900 rounded-xl border-2 border-[#d9b239] flex items-center justify-center shadow-lg">
                 <img
-                  src="./assets/aistudio/WhatsApp_Image_2026-11-03_at_6.00.49_PM_0b3b858e.jpeg"
+                  src="./assets/logos/monalisa_italy_flag.webp"
                   alt="MONALISA Emblem Badge"
                   className="max-h-full w-auto object-contain"
                 />

@@ -368,22 +368,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     badgeAr: 'معاينة وطلب فوري',
     badgeEn: 'On-Demand Wholesale Orders',
   },
-  {
-    id: 'karimiyah_wholesale_shelves',
-    category: 'warehouses',
-    src: './assets/facilities/karimiyah_wholesale_shelves.webp',
-    fallbackSrc: './assets/facilities/karimiyah_wholesale_shelves.jpg',
-    titleAr: 'صالات العرض والبيع بالجملة - سوق الكريمية',
-    titleEn: 'Al-Karimiyah Wholesale Hub - Mona Lisa Aisles',
-    tagAr: 'قلب تجارة الأغذية الليبية',
-    tagEn: 'Libya FMCG Wholesale Epicenter',
-    descAr: 'أجنحة ورفوف العرض المكتظة بمنتجات مونا ليسا بسوق الكريمية تتيح لتجار الجملة والتجزئة المعاينة والشراء المباشر بالكراتين والحاويات.',
-    descEn: 'Fully stocked wholesale aisles in Al-Karimiyah providing wholesale buyers with instant bulk availability.',
-    locationAr: 'طرابلس - سوق الكريمية المركزي',
-    locationEn: 'Tripoli - Al-Karimiyah Wholesale District',
-    badgeAr: 'متاح للطلب الفوري بالجملة',
-    badgeEn: 'In Stock for Bulk Orders',
-  },
+
   {
     id: 'consumer_moments_wafers',
     category: 'distribution',
@@ -479,7 +464,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md">
           <div className="relative h-64 sm:h-72 w-full overflow-hidden">
             <img
-              src="./assets/facilities/karimiyah_wholesale_shelves.webp"
+              src="./assets/facilities/karimiyah_showroom_shelf.webp"
               alt="Ethar Libya FMCG Warehouses"
               loading="lazy"
               decoding="async"

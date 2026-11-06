@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Translations, Language } from '../data/translations';
-import { Compass, Landmark, ShieldCheck, CheckCircle2, Warehouse, Truck } from 'lucide-react';
-import { GalleryItem, getStoredGalleryItems } from '../data/store';
+import { Compass, Landmark, ShieldCheck, CheckCircle2, Warehouse, Truck, Sparkles } from 'lucide-react';
+import { GalleryItem, getStoredGalleryItems, BrandItem, getStoredBrands } from '../data/store';
 
 interface AboutSectionProps {
   t: Translations;
@@ -10,6 +10,15 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
+  const [brands, setBrands] = useState<BrandItem[]>(() => getStoredBrands());
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setBrands(getStoredBrands());
+    };
+    window.addEventListener('ethar_data_updated', handleUpdate);
+    return () => window.removeEventListener('ethar_data_updated', handleUpdate);
+  }, []);
 
   return (
     <section id="about" className="py-24 bg-[#fbf9f6] border-t-2 border-[#d9b239] text-stone-900 relative overflow-hidden">
@@ -174,6 +183,84 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
           </div>
         </div>
 
+        {/* Authorized Brand Logos Banner (الشعارات والوكالات الحصرية المعتمدة) */}
+        <div className="mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-xs font-black text-[#b4362d] uppercase tracking-widest font-mono block mb-2">
+              {lang === 'ar' ? 'العلامات التجارية المعتمدة والشعارات الحصرية' : 'AUTHORIZED BRANDS & EXCLUSIVE LOGOS'}
+            </span>
+            <h3 className="text-2xl sm:text-4xl font-black text-stone-900 font-cinzel">
+              {lang === 'ar' ? 'شعارات العلامات التجارية الرائدة' : 'Official Authorized Brand Identities'}
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-stone-600">
+              {lang === 'ar'
+                ? 'علامات غذائية دولية ومحلية موثوقة تستوردها وتوزعها شركة إيثار ليبيا وفق أعلى مواصفات الجودة'
+                : 'International and regional flagship food brands exclusively imported and distributed by Ethar Libya'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {brands.map((brand) => (
+              <div
+                key={brand.id}
+                className={`p-6 rounded-2xl border-2 transition-all shadow-sm flex flex-col items-center text-center group ${
+                  brand.isDarkCard
+                    ? 'bg-stone-950 border-stone-800 hover:border-[#d9b239] text-white'
+                    : 'bg-white border-stone-200 hover:border-[#b4362d] text-stone-900'
+                }`}
+              >
+                <div
+                  className={`w-full h-36 flex items-center justify-center p-3 mb-4 rounded-xl overflow-hidden group-hover:scale-105 transition-transform duration-300 ${
+                    brand.isDarkCard ? 'bg-black' : 'bg-stone-50'
+                  }`}
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      if (brand.fallbackLogo && e.currentTarget.src !== brand.fallbackLogo) {
+                        e.currentTarget.src = brand.fallbackLogo;
+                      }
+                    }}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <div
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold mb-2 ${
+                    brand.isDarkCard
+                      ? 'bg-stone-800 text-stone-300'
+                      : brand.badgeColor === 'emerald'
+                      ? 'bg-emerald-50 text-emerald-800'
+                      : 'bg-amber-50 text-amber-800'
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      brand.isDarkCard
+                        ? 'bg-amber-400'
+                        : brand.badgeColor === 'emerald'
+                        ? 'bg-emerald-600 animate-pulse'
+                        : 'bg-[#d9b239]'
+                    }`}
+                  />
+                  <span>{lang === 'ar' ? brand.badgeAr : brand.badgeEn}</span>
+                </div>
+                <h4 className={`text-lg font-bold font-cinzel ${brand.isDarkCard ? 'text-white' : 'text-stone-900'}`}>
+                  {brand.name}
+                </h4>
+                <p
+                  className={`text-xs mt-1 leading-relaxed ${
+                    brand.isDarkCard ? 'text-stone-400' : 'text-stone-600'
+                  }`}
+                >
+                  {lang === 'ar' ? brand.descAr : brand.descEn}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Operational Infrastructure (Warehouses & Fleet Gallery) */}
         <OperationalShowcase t={t} lang={lang} />

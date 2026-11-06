@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Translations, Language } from '../data/translations';
 import { Sparkles, Check, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Product } from '../data/products';
-import { getStoredProducts, getStoredBrands, BrandItem } from '../data/store';
+import { getStoredProducts } from '../data/store';
 
 interface BrandsShowcaseProps {
   t: Translations;
@@ -19,23 +19,14 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   const [allProducts, setAllProducts] = useState<Product[]>(getStoredProducts());
-  const [storedBrands, setStoredBrands] = useState<BrandItem[]>(() => getStoredBrands());
 
   useEffect(() => {
     const handleUpdate = () => {
       setAllProducts(getStoredProducts());
-      setStoredBrands(getStoredBrands());
     };
     window.addEventListener('ethar_data_updated', handleUpdate);
     return () => window.removeEventListener('ethar_data_updated', handleUpdate);
   }, []);
-
-  const monalisaLogo = storedBrands.find((b) => b.brandKey === 'MONALISA')?.logo || './assets/logos/monalisa_italy_flag.webp';
-
-  const getBrandLogo = (brandKey: string, defaultLogo?: string) => {
-    const found = storedBrands.find((b) => b.brandKey === brandKey);
-    return found?.logo || defaultLogo;
-  };
 
   const monalisaProducts = allProducts.filter((p) => p.brand === 'MONALISA').slice(0, 6);
 
@@ -118,11 +109,20 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
           {/* Top Brand Banner Lockup */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-10 border-b-2 border-white/20">
             <div className="flex flex-wrap items-center gap-6">
-              {/* Single Authoritative MONALISA Brand Logo */}
-              <div className="h-20 sm:h-24 px-6 py-2.5 bg-white rounded-xl shadow-xl border-2 border-[#d9b239] flex items-center justify-center">
+              {/* MONALISA Italian Flag Logo */}
+              <div className="h-20 sm:h-24 px-5 py-2.5 bg-white rounded-xl shadow-xl border-2 border-[#d9b239] flex items-center justify-center">
                 <img
-                  src={monalisaLogo}
+                  src="./assets/logos/monalisa_italy_flag.webp"
                   alt="MONALISA Brand Logo"
+                  className="max-h-full w-auto object-contain"
+                />
+              </div>
+
+              {/* MONALISA Classic Badge Logo */}
+              <div className="h-20 sm:h-24 px-5 py-2.5 bg-stone-900 rounded-xl border-2 border-[#d9b239] flex items-center justify-center shadow-lg">
+                <img
+                  src="./assets/logos/monalisa_italy_flag.webp"
+                  alt="MONALISA Emblem Badge"
                   className="max-h-full w-auto object-contain"
                 />
               </div>
@@ -259,13 +259,9 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
 
                   <div className="flex items-center justify-between gap-2 mb-2">
                     <div className="flex items-center gap-2">
-                      {getBrandLogo(brand.brandKey, brand.logo) && (
+                      {brand.logo && (
                         <div className="w-8 h-8 rounded-lg overflow-hidden border border-stone-200 bg-white p-0.5 shrink-0 flex items-center justify-center shadow-xs">
-                          <img
-                            src={getBrandLogo(brand.brandKey, brand.logo)}
-                            alt={brand.name}
-                            className="max-h-full max-w-full object-contain"
-                          />
+                          <img src={brand.logo} alt={brand.name} className="max-h-full max-w-full object-contain" />
                         </div>
                       )}
                       <h4 className="text-lg font-bold text-stone-900 font-cinzel">

@@ -265,11 +265,11 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
       </div>
 
-      {/* Main Highlights: 2 Macro Overview Cards (Square 1:1 Native) */}
+      {/* Main Highlights: 2 Macro Overview Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         {/* Warehouse Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
-          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
+        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md">
+          <div className="relative h-64 sm:h-72 w-full overflow-hidden">
             <img
               src={warehouseCover}
               alt="Ethar Libya FMCG Warehouses"
@@ -282,18 +282,18 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               }}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
             <div className="absolute top-4 right-4 bg-[#b4362d] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
               {lang === 'ar' ? 'المقر وسوق الكريمية' : 'Karimiyah HQ & Wholesale'}
             </div>
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Warehouse className="w-5 h-5 text-[#d9b239] shrink-0" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
+              <Warehouse className="w-5 h-5 text-[#d9b239]" />
+              <span className="font-bold text-base sm:text-lg font-cinzel text-white">
                 {lang === 'ar' ? 'المستودعات المركزية وسلاسل التخزين' : 'Central Logistics & Warehousing Hub'}
               </span>
             </div>
           </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
+          <div className="p-6">
             <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
               {t.about.facilityWarehouse}
             </p>
@@ -310,8 +310,8 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
 
         {/* Distribution Fleet Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
-          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
+        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md">
+          <div className="relative h-64 sm:h-72 w-full overflow-hidden">
             <img
               src={fleetCover}
               alt="Ethar Libya Distribution Fleet"
@@ -324,18 +324,18 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               }}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
             <div className="absolute top-4 right-4 bg-[#d9b239] text-stone-900 text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
               {lang === 'ar' ? 'أسطول الشاحنات' : 'Distribution Fleet'}
             </div>
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Truck className="w-5 h-5 text-[#d9b239] shrink-0" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
+              <Truck className="w-5 h-5 text-[#d9b239]" />
+              <span className="font-bold text-base sm:text-lg font-cinzel text-white">
                 {lang === 'ar' ? 'أسطول شاحنات التوزيع المجهزة' : 'Nationwide Commercial Distribution Fleet'}
               </span>
             </div>
           </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
+          <div className="p-6">
             <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
               {t.about.facilityFleet}
             </p>
@@ -352,7 +352,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
       </div>
 
-      {/* 6 Real Operations Visual Gallery Grid (Aspect-Square 1:1) */}
+      {/* 6 Real Operations Visual Gallery Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
           <div
@@ -360,8 +360,8 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
             onClick={() => setSelectedItem(item)}
             className="group cursor-pointer rounded-2xl bg-white border border-stone-200 hover:border-[#b4362d] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
           >
-            {/* Image Box - Aspect-Square (1:1 Ratio) */}
-            <div className="relative aspect-square w-full bg-stone-100 overflow-hidden flex items-center justify-center">
+            {/* Image Box */}
+            <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
               <img
                 src={item.src}
                 alt={lang === 'ar' ? item.titleAr : item.titleEn}
@@ -372,16 +372,16 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
                     e.currentTarget.src = item.fallbackSrc;
                   }
                 }}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
 
               {/* Tag / Badge */}
               <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold border border-white/20">
                 <span>{lang === 'ar' ? item.tagAr : item.tagEn}</span>
               </div>
 
-              {/* Location pin & Title on photo */}
+              {/* Location pin */}
               <div className="absolute bottom-3 left-3 right-3 text-white">
                 <span className="text-[11px] font-mono text-[#d9b239] block mb-0.5">
                   {lang === 'ar' ? item.badgeAr : item.badgeEn}
@@ -394,14 +394,14 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
 
             {/* Description */}
             <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-              <p className="text-xs text-stone-600 leading-relaxed mb-3 line-clamp-2">
+              <p className="text-xs text-stone-600 leading-relaxed mb-3">
                 {lang === 'ar' ? item.descAr : item.descEn}
               </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-2 text-xs text-stone-500">
-                <span className="font-mono text-stone-700 truncate max-w-[65%]">
+              <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
+                <span className="font-mono text-stone-700">
                   {lang === 'ar' ? item.locationAr : item.locationEn}
                 </span>
-                <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1 shrink-0">
+                <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1">
                   {lang === 'ar' ? 'عرض الصورة المكبرة' : 'Expand Photo'}
                 </span>
               </div>
@@ -410,7 +410,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         ))}
       </div>
 
-      {/* Full-Screen Lightbox Modal - Optimized for Square 1:1 Images */}
+      {/* Full-Screen Lightbox Modal */}
       {selectedItem && (
         <div
           role="dialog"
@@ -419,7 +419,7 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative"
+            className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -431,12 +431,12 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
               ✕
             </button>
 
-            {/* Modal Image Frame */}
-            <div className="relative w-full max-h-[68vh] bg-stone-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+            {/* Modal Image */}
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-black overflow-hidden">
               <img
                 src={selectedItem.src}
                 alt={lang === 'ar' ? selectedItem.titleAr : selectedItem.titleEn}
-                className="max-h-[64vh] max-w-full aspect-square sm:aspect-auto object-contain mx-auto rounded-xl shadow-2xl"
+                className="w-full h-full object-contain"
               />
               <div className="absolute top-4 left-4 bg-[#b4362d] text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                 {lang === 'ar' ? selectedItem.tagAr : selectedItem.tagEn}

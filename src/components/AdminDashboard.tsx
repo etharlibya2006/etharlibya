@@ -17,6 +17,8 @@ import {
   getStoredBrands,
   saveStoredBrands,
   resetStoredBrands,
+  downloadSiteDataFile,
+  syncSiteDataToDisk,
 } from '../data/store';
 import {
   Lock,
@@ -89,6 +91,39 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
   const [toastMessage, setToastMessage] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const jsonImportRef = useRef<HTMLInputElement>(null);
+
+  // GitHub Deployment & Sync State
+  const [showGitHubGuide, setShowGitHubGuide] = useState<boolean>(false);
+  const [syncStatus, setSyncStatus] = useState<{ loading: boolean; message: string | null; type: 'success' | 'error' | null }>({
+    loading: false,
+    message: null,
+    type: null,
+  });
+
+  const handleSaveToWorkspace = async () => {
+    setSyncStatus({ loading: true, message: 'جاري الحفظ في ملفات المشروع...', type: null });
+    const res = await syncSiteDataToDisk();
+    setSyncStatus({
+      loading: false,
+      message: res.message,
+      type: res.success ? 'success' : 'error',
+    });
+    setTimeout(() => {
+      setSyncStatus({ loading: false, message: null, type: null });
+    }, 5000);
+  };
+
+  const handleDownloadSiteData = () => {
+    downloadSiteDataFile();
+    setSyncStatus({
+      loading: false,
+      message: 'تم تنزيل ملف site_data.json بنجاح! ارفعه إلى مجلد public/data في مستودعك على GitHub ليظهر لجميع الزوار.',
+      type: 'success',
+    });
+    setTimeout(() => {
+      setSyncStatus({ loading: false, message: null, type: null });
+    }, 6000);
+  };
 
   // Load products, settings, gallery & brands on mount / open
   useEffect(() => {
@@ -633,6 +668,105 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             </div>
           </div>
 
+          {/* GitHub Live Deployment & Synchronization Action Bar */}
+          <div className="bg-gradient-to-r from-stone-900 via-[#221c1a] to-stone-900 text-white px-6 py-3.5 border-b-2 border-[#d9b239]/50 shadow-md">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shrink-0 ring-4 ring-emerald-400/20" />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black text-white">
+                      نشر التعديلات على مستودع GitHub لجميع الزوار
+                    </span>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono font-bold border border-emerald-500/40">
+                      GitHub Pages Sync
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-stone-300 mt-0.5">
+                    أي تعديل هنا يُحفظ للمعاينة الفورية. لتحديث موقعك العام (<code className="text-[#d9b239] font-mono">etharlibya2006.github.io</code>) نزل الملف وارفعه لمستودعك.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <button
+                  type="button"
+                  onClick={handleSaveToWorkspace}
+                  disabled={syncStatus.loading}
+                  className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
+                  title="حفظ مباشر في ملفات المشروع"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 text-[#d9b239] ${syncStatus.loading ? 'animate-spin' : ''}`} />
+                  <span>حفظ في ملفات المشروع</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleDownloadSiteData}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d9b239] to-[#c79e28] text-stone-950 text-xs font-black hover:brightness-110 shadow-md transition-all flex items-center gap-1.5 border border-[#f5e396]"
+                  title="تحميل ملف site_data.json لنشره على GitHub"
+                >
+                  <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span>تحميل site_data.json لـ GitHub</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowGitHubGuide((prev) => !prev)}
+                  className="px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-[#d9b239] text-xs font-bold transition-all border border-[#d9b239]/30 flex items-center gap-1"
+                >
+                  <span>{showGitHubGuide ? 'إخفاء الشرح' : 'طريقة النشر؟'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Status Alert */}
+            {syncStatus.message && (
+              <div className={`mt-3 p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 ${
+                syncStatus.type === 'success'
+                  ? 'bg-emerald-950/80 text-emerald-200 border border-emerald-500/50'
+                  : 'bg-amber-950/80 text-amber-200 border border-amber-500/50'
+              }`}>
+                <Check className="w-4 h-4 shrink-0 text-emerald-400" />
+                <span>{syncStatus.message}</span>
+              </div>
+            )}
+
+            {/* Expandable Step-by-Step GitHub Guide */}
+            {showGitHubGuide && (
+              <div className="mt-3 p-4 rounded-2xl bg-black/40 border border-[#d9b239]/40 text-xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-bold text-[#d9b239] flex items-center gap-1.5">
+                    <span>📌 خطوات بسيطة لنشر تعديلاتك لجميع الزوار على الإنترنت:</span>
+                  </h4>
+                  <button
+                    onClick={() => setShowGitHubGuide(false)}
+                    className="text-stone-400 hover:text-white"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-stone-200">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                    <span className="inline-block w-5 h-5 rounded-full bg-[#d9b239] text-stone-900 font-bold text-center leading-5 text-[11px]">1</span>
+                    <h5 className="font-bold text-white">تنزيل ملف البيانات</h5>
+                    <p className="text-[11px] text-stone-400">اضغط على الزر الذهبي "تحميل site_data.json لـ GitHub" وسيتم حفظ الملف في جهازك فوراً.</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                    <span className="inline-block w-5 h-5 rounded-full bg-[#d9b239] text-stone-900 font-bold text-center leading-5 text-[11px]">2</span>
+                    <h5 className="font-bold text-white">رفعه لمستودع GitHub</h5>
+                    <p className="text-[11px] text-stone-400">افتح مستودعك على GitHub، توجه إلى مجلد <code className="text-[#d9b239] font-mono">public/data/</code> واضغط <b>Add file &gt; Upload files</b> واختر الملف.</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                    <span className="inline-block w-5 h-5 rounded-full bg-[#d9b239] text-stone-900 font-bold text-center leading-5 text-[11px]">3</span>
+                    <h5 className="font-bold text-white">حفظ التغييرات (Commit)</h5>
+                    <p className="text-[11px] text-stone-400">اضغط <b>Commit changes</b> وسيقوم GitHub بنشر الموقع تلقائياً في ثوانٍ لجميع زوار موقعك!</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Main Body Content */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-white">
             {/* TAB 1: PRODUCTS MANAGEMENT */}
@@ -1127,6 +1261,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             {/* TAB 3: BACKUP, EXPORT & RESET */}
             {activeTab === 'backup' && (
               <div className="max-w-2xl mx-auto space-y-6 py-4">
+                {/* GitHub Deployment Card */}
+                <div className="bg-stone-900 text-white p-6 rounded-2xl border-2 border-[#d9b239] space-y-4 shadow-lg">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <h4 className="text-sm font-bold text-white">نشر التعديلات لجميع الزوار عبر GitHub</h4>
+                      </div>
+                      <p className="text-xs text-stone-300 leading-relaxed">
+                        نزل ملف <code className="text-[#d9b239] font-mono">site_data.json</code> وارفعه لمجلد <code className="text-[#d9b239] font-mono">public/data/</code> بمستودعك على GitHub لتظهر التعديلات لكافة زوار الموقع تلقائياً في ثوانٍ معدودة.
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleDownloadSiteData}
+                      className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#d9b239] to-[#c79e28] text-stone-950 font-black text-xs hover:brightness-110 transition-all flex items-center gap-2 shrink-0 shadow-md"
+                    >
+                      <Download className="w-4 h-4 stroke-[2.5]" />
+                      <span>تحميل site_data.json</span>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Download Backup */}
                 <div className="bg-[#fbf9f6] p-6 rounded-2xl border border-stone-200 flex items-center justify-between gap-4">
                   <div>

@@ -11,12 +11,18 @@ import { B2BPartnership } from './components/B2BPartnership';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { AdminDashboard } from './components/AdminDashboard';
+import { initRemoteOrStaticData } from './data/store';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ar');
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [selectedBrandFilter, setSelectedBrandFilter] = useState<string>('all');
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+
+  // Initialize data from public/data/site_data.json on mount
+  useEffect(() => {
+    initRemoteOrStaticData();
+  }, []);
 
   // Check URL hash for #admin or #/admin
   useEffect(() => {

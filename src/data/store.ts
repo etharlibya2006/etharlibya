@@ -333,16 +333,101 @@ export function saveStoredSettings(settings: AppSettings): void {
 
 // Export all data as downloadable JSON
 export function exportDataAsJSON(): string {
-  const data = {
-    products: getStoredProducts(),
-    settings: getStoredSettings(),
-    gallery: getStoredGalleryItems(),
-    brands: getStoredBrands(),
-    exportedAt: new Date().toISOString(),
+  const data = getCurrentSiteDataPayload();
+  return JSON.stringify(data, null, 2);
+}
+
+// Get current full site data payload
+export function getCurrentSiteDataPayload() {
+  return {
     version: '2.0',
     app: 'Ethar Libya Corporate Portal',
+    updatedAt: new Date().toISOString(),
+    products: getStoredProducts(),
+    gallery: getStoredGalleryItems(),
+    brands: getStoredBrands(),
+    settings: getStoredSettings(),
   };
-  return JSON.stringify(data, null, 2);
+}
+
+// Download site_data.json directly for GitHub commit
+export function downloadSiteDataFile(): void {
+  try {
+    const payload = getCurrentSiteDataPayload();
+    const jsonString = JSON.stringify(payload, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'site_data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('Failed to download site_data.json:', err);
+  }
+}
+
+// Attempt direct save to workspace/disk if running via dev server
+export async function syncSiteDataToDisk(): Promise<{ success: boolean; message: string }> {
+  try {
+    const payload = getCurrentSiteDataPayload();
+    const res = await fetch('./api/save-site-data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return { success: true, message: data.message || 'تم حفظ التحديثات بنجاح في ملفات المشروع' };
+    }
+    return { success: false, message: 'تعذر الحفظ المباشر على الخادم؛ يرجى تنزيل ملف site_data.json ورفعه لمستودع GitHub' };
+  } catch {
+    return { success: false, message: 'بيئة الاستضافة ثابتة؛ يمكنك تحميل ملف site_data.json ورفعه لمستودع GitHub بنقرة واحدة' };
+  }
+}
+
+// Asynchronously load public/data/site_data.json on initial load without breaking or blocking UI
+let isDataInitialized = false;
+export async function initRemoteOrStaticData(): Promise<void> {
+  if (isDataInitialized) return;
+  isDataInitialized = true;
+
+  try {
+    const res = await fetch('./data/site_data.json?t=' + Date.now(), { cache: 'no-cache' });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && typeof data === 'object') {
+        let changed = false;
+
+        // If local storage has never been customized, or to keep fresh with GitHub repository:
+        const hasCustomProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY) !== null;
+        if (!hasCustomProducts && Array.isArray(data.products) && data.products.length > 0) {
+          localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products));
+          changed = true;
+        }
+
+        const hasCustomGallery = localStorage.getItem(GALLERY_STORAGE_KEY) !== null;
+        if (!hasCustomGallery && Array.isArray(data.gallery) && data.gallery.length > 0) {
+          localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(data.gallery));
+          changed = true;
+        }
+
+        const hasCustomBrands = localStorage.getItem(BRANDS_STORAGE_KEY) !== null;
+        if (!hasCustomBrands && Array.isArray(data.brands) && data.brands.length > 0) {
+          localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(data.brands));
+          changed = true;
+        }
+
+        if (changed) {
+          window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'all' } }));
+        }
+      }
+    }
+  } catch (err) {
+    console.debug('Static site_data.json not loaded, using embedded code defaults.', err);
+  }
 }
 
 // Import data from JSON

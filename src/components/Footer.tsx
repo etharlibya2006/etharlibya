@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Translations, Language } from '../data/translations';
 import { ShieldCheck, MessageCircle, ArrowUp } from 'lucide-react';
 
@@ -10,22 +10,27 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate, onOpenAdmin }) => {
-  const [clickCount, setClickCount] = useState(0);
-  const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleLogoClick = () => {
-    setClickCount((prev) => {
-      const next = prev + 1;
-      if (next >= 5) {
-        if (onOpenAdmin) onOpenAdmin();
-        return 0;
+    clickCountRef.current += 1;
+    if (clickCountRef.current >= 5) {
+      clickCountRef.current = 0;
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current);
+        clickTimerRef.current = null;
       }
-      if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
-      clickTimerRef.current = setTimeout(() => {
-        setClickCount(0);
-      }, 3000);
-      return next;
-    });
+      onOpenAdmin?.();
+      return;
+    }
+
+    if (clickTimerRef.current) {
+      clearTimeout(clickTimerRef.current);
+    }
+    clickTimerRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 3000);
   };
 
   const scrollToTop = () => {

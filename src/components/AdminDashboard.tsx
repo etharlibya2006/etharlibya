@@ -19,7 +19,14 @@ import {
   resetStoredBrands,
   downloadSiteDataFile,
   syncSiteDataToDisk,
+  getCurrentSiteDataPayload,
 } from '../data/store';
+import {
+  GitHubConfig,
+  getStoredGitHubConfig,
+  saveStoredGitHubConfig,
+  publishSiteDataToGitHub,
+} from '../services/githubApi';
 import {
   Lock,
   Unlock,
@@ -48,6 +55,12 @@ import {
   Warehouse,
   Truck,
   Award,
+  Send,
+  Settings,
+  GitBranch,
+  Globe,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react';
 
 interface AdminDashboardProps {
@@ -94,11 +107,53 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
 
   // GitHub Deployment & Sync State
   const [showGitHubGuide, setShowGitHubGuide] = useState<boolean>(false);
+  const [gitHubConfig, setGitHubConfig] = useState<GitHubConfig>(() => getStoredGitHubConfig());
+  const [showGitHubSettingsModal, setShowGitHubSettingsModal] = useState<boolean>(false);
+  const [isPublishingToGitHub, setIsPublishingToGitHub] = useState<boolean>(false);
+  const [publishSuccessCommitUrl, setPublishSuccessCommitUrl] = useState<string | null>(null);
+
   const [syncStatus, setSyncStatus] = useState<{ loading: boolean; message: string | null; type: 'success' | 'error' | null }>({
     loading: false,
     message: null,
     type: null,
   });
+
+  // Automated 1-Click Publish to GitHub via REST API
+  const handleAutoPublishToGitHub = async () => {
+    if (!gitHubConfig.token || !gitHubConfig.token.trim()) {
+      setShowGitHubSettingsModal(true);
+      return;
+    }
+
+    setIsPublishingToGitHub(true);
+    setPublishSuccessCommitUrl(null);
+    setSyncStatus({ loading: true, message: 'جاري الحفظ والنشر التلقائي في مستودع GitHub...', type: null });
+
+    const payload = getCurrentSiteDataPayload();
+    const result = await publishSiteDataToGitHub(payload, gitHubConfig);
+
+    setIsPublishingToGitHub(false);
+    setSyncStatus({
+      loading: false,
+      message: result.message,
+      type: result.success ? 'success' : 'error',
+    });
+
+    if (result.success && result.commitUrl) {
+      setPublishSuccessCommitUrl(result.commitUrl);
+    }
+
+    setTimeout(() => {
+      setSyncStatus((prev) => ({ ...prev, loading: false }));
+    }, 10000);
+  };
+
+  const handleSaveGitHubConfig = (e: React.FormEvent) => {
+    e.preventDefault();
+    saveStoredGitHubConfig(gitHubConfig);
+    setShowGitHubSettingsModal(false);
+    showToast('تم حفظ إعدادات GitHub بنجاح! يمكنك الآن النشر التلقائي بضغطة زر واحدة.');
+  };
 
   const handleSaveToWorkspace = async () => {
     setSyncStatus({ loading: true, message: 'جاري الحفظ في ملفات المشروع...', type: null });
@@ -672,63 +727,87 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
           <div className="bg-gradient-to-r from-stone-900 via-[#221c1a] to-stone-900 text-white px-6 py-3.5 border-b-2 border-[#d9b239]/50 shadow-md">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shrink-0 ring-4 ring-emerald-400/20" />
+                <span className={`w-3 h-3 rounded-full shrink-0 ring-4 ${
+                  gitHubConfig.token ? 'bg-emerald-400 animate-pulse ring-emerald-400/20' : 'bg-amber-400 ring-amber-400/20'
+                }`} />
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-black text-white">
-                      نشر التعديلات على مستودع GitHub لجميع الزوار
+                      النشر التلقائي عبر GitHub API لجميع الزوار
                     </span>
-                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono font-bold border border-emerald-500/40">
-                      GitHub Pages Sync
+                    <span className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold border ${
+                      gitHubConfig.token
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                        : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    }`}>
+                      {gitHubConfig.token ? 'جاهز للنشر التلقائي' : 'يلزم إدخال Token مرة واحدة'}
                     </span>
                   </div>
                   <p className="text-[11px] text-stone-300 mt-0.5">
-                    أي تعديل هنا يُحفظ للمعاينة الفورية. لتحديث موقعك العام (<code className="text-[#d9b239] font-mono">etharlibya2006.github.io</code>) نزل الملف وارفعه لمستودعك.
+                    احفظ تعديلاتك محلياً أو انشرها فوراً لجميع الزوار على رابط موقعك العام (<code className="text-[#d9b239] font-mono">etharlibya2006.github.io</code>) بضغطة زر.
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                {/* 1-Click Automated GitHub API Publish */}
                 <button
                   type="button"
-                  onClick={handleSaveToWorkspace}
-                  disabled={syncStatus.loading}
-                  className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
-                  title="حفظ مباشر في ملفات المشروع"
+                  onClick={handleAutoPublishToGitHub}
+                  disabled={isPublishingToGitHub}
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white text-xs font-black hover:brightness-110 shadow-lg transition-all flex items-center gap-2 border border-emerald-300 active:scale-98"
+                  title="نشر التعديلات فوراً لجميع الزوار عبر GitHub API"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 text-[#d9b239] ${syncStatus.loading ? 'animate-spin' : ''}`} />
-                  <span>حفظ في ملفات المشروع</span>
+                  <Send className={`w-4 h-4 text-white ${isPublishingToGitHub ? 'animate-bounce' : ''}`} />
+                  <span>{isPublishingToGitHub ? 'جاري النشر لجميع الزوار...' : '🚀 حفظ ونشر التعديلات فوراً للجميع'}</span>
                 </button>
 
+                {/* Settings for GitHub Token */}
+                <button
+                  type="button"
+                  onClick={() => setShowGitHubSettingsModal(true)}
+                  className="p-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-[#d9b239] border border-[#d9b239]/40 transition-colors shadow-sm flex items-center gap-1.5 text-xs font-bold"
+                  title="إعدادات مفتاح GitHub Token للربط التلقائي"
+                >
+                  <Settings className="w-4 h-4" />
+                  <span className="hidden sm:inline">إعدادات GitHub</span>
+                </button>
+
+                {/* Manual File Download Fallback */}
                 <button
                   type="button"
                   onClick={handleDownloadSiteData}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d9b239] to-[#c79e28] text-stone-950 text-xs font-black hover:brightness-110 shadow-md transition-all flex items-center gap-1.5 border border-[#f5e396]"
-                  title="تحميل ملف site_data.json لنشره على GitHub"
+                  className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-300 hover:text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
+                  title="تحميل ملف البيانات يدوياً كنسخة احتياطية"
                 >
-                  <Download className="w-3.5 h-3.5 stroke-[2.5]" />
-                  <span>تحميل site_data.json لـ GitHub</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setShowGitHubGuide((prev) => !prev)}
-                  className="px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-[#d9b239] text-xs font-bold transition-all border border-[#d9b239]/30 flex items-center gap-1"
-                >
-                  <span>{showGitHubGuide ? 'إخفاء الشرح' : 'طريقة النشر؟'}</span>
+                  <Download className="w-3.5 h-3.5 text-[#d9b239]" />
+                  <span>تنزيل نسخة</span>
                 </button>
               </div>
             </div>
 
             {/* Status Alert */}
             {syncStatus.message && (
-              <div className={`mt-3 p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 ${
+              <div className={`mt-3 p-3 rounded-xl text-xs font-bold flex flex-wrap items-center justify-between gap-2 ${
                 syncStatus.type === 'success'
                   ? 'bg-emerald-950/80 text-emerald-200 border border-emerald-500/50'
                   : 'bg-amber-950/80 text-amber-200 border border-amber-500/50'
               }`}>
-                <Check className="w-4 h-4 shrink-0 text-emerald-400" />
-                <span>{syncStatus.message}</span>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 shrink-0 text-emerald-400" />
+                  <span>{syncStatus.message}</span>
+                </div>
+                {publishSuccessCommitUrl && (
+                  <a
+                    href={publishSuccessCommitUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[#d9b239] hover:underline shrink-0"
+                  >
+                    <span>عرض التعديل في GitHub</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
               </div>
             )}
 
@@ -1893,6 +1972,131 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                   className="px-6 py-2 rounded-xl bg-[#b4362d] text-white font-bold hover:brightness-110 shadow-md"
                 >
                   حفظ العلامة التجارية
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* GitHub API Connection & Auto-Publish Settings Modal */}
+      {showGitHubSettingsModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 animate-fadeIn"
+        >
+          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6 border-2 border-stone-300">
+            <div className="flex items-center justify-between border-b border-stone-200 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-stone-900 text-white flex items-center justify-center">
+                  <GitBranch className="w-5 h-5 text-[#d9b239]" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-stone-900">إعدادات الربط التلقائي مع GitHub API</h3>
+                  <p className="text-xs text-stone-500">تفعيل النشر المباشر بضغطة زر واحدة بدون أي خطوات يدوية</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowGitHubSettingsModal(false)}
+                className="text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveGitHubConfig} className="space-y-4 text-xs">
+              <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl space-y-1.5 text-stone-700">
+                <div className="flex items-center gap-1.5 font-bold text-amber-900">
+                  <Key className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>تُضبط هذه الإعدادات مرة واحدة فقط لعميلك:</span>
+                </div>
+                <p className="text-[11px] leading-relaxed text-amber-950">
+                  بعد إدخال رمز الوصول (GitHub Personal Access Token)، سيتمكن العميل من الضغط على زر <b>🚀 حفظ ونشر التعديلات فوراً للجميع</b> ليتم تحديث الموقع العام فوراً في ثوانٍ دون الحاجة لأي رفع يدوي.
+                </p>
+              </div>
+
+              <div>
+                <label className="block font-bold text-stone-800 mb-1">
+                  رمز الوصول (GitHub Personal Access Token) *
+                </label>
+                <input
+                  type="password"
+                  required
+                  dir="ltr"
+                  value={gitHubConfig.token}
+                  onChange={(e) => setGitHubConfig({ ...gitHubConfig, token: e.target.value })}
+                  placeholder="ghp_xxxxxxxxxxxx أو github_pat_xxxxxxxxxxxx"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 font-mono text-xs outline-none focus:border-[#b4362d]"
+                />
+                <div className="mt-1 flex items-center justify-between text-[11px] text-stone-500">
+                  <span>الصلاحية المطلوبة: <code className="font-bold text-stone-700">Contents: Read & Write</code></span>
+                  <a
+                    href="https://github.com/settings/tokens?type=beta"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#b4362d] font-bold underline inline-flex items-center gap-1"
+                  >
+                    <span>إنشاء Token جديد من GitHub</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block font-bold text-stone-700 mb-1">اسم الحساب (Owner)</label>
+                  <input
+                    type="text"
+                    required
+                    dir="ltr"
+                    value={gitHubConfig.owner}
+                    onChange={(e) => setGitHubConfig({ ...gitHubConfig, owner: e.target.value })}
+                    placeholder="etharlibya2006"
+                    className="w-full px-3 py-2 rounded-xl border border-stone-300 font-mono text-xs outline-none focus:border-[#b4362d]"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-stone-700 mb-1">المستودع (Repo)</label>
+                  <input
+                    type="text"
+                    required
+                    dir="ltr"
+                    value={gitHubConfig.repo}
+                    onChange={(e) => setGitHubConfig({ ...gitHubConfig, repo: e.target.value })}
+                    placeholder="etharlibya"
+                    className="w-full px-3 py-2 rounded-xl border border-stone-300 font-mono text-xs outline-none focus:border-[#b4362d]"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-stone-700 mb-1">الفرع (Branch)</label>
+                  <input
+                    type="text"
+                    required
+                    dir="ltr"
+                    value={gitHubConfig.branch}
+                    onChange={(e) => setGitHubConfig({ ...gitHubConfig, branch: e.target.value })}
+                    placeholder="main"
+                    className="w-full px-3 py-2 rounded-xl border border-stone-300 font-mono text-xs outline-none focus:border-[#b4362d]"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowGitHubSettingsModal(false)}
+                  className="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-bold"
+                >
+                  إلغاء
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#b4362d] to-[#8f2119] text-white font-bold hover:brightness-110 shadow-md flex items-center gap-1.5"
+                >
+                  <Check className="w-4 h-4 text-[#d9b239]" />
+                  <span>حفظ إعدادات الربط التلقائي</span>
                 </button>
               </div>
             </form>

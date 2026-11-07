@@ -394,39 +394,69 @@ export async function initRemoteOrStaticData(): Promise<void> {
   if (isDataInitialized) return;
   isDataInitialized = true;
 
-  try {
-    const res = await fetch('./data/site_data.json?t=' + Date.now(), { cache: 'no-cache' });
-    if (res.ok) {
-      const data = await res.json();
-      if (data && typeof data === 'object') {
-        let changed = false;
+  const candidateUrls = [
+    './data/site_data.json',
+    '/etharlibya/data/site_data.json',
+    'data/site_data.json',
+  ];
 
-        // If local storage has never been customized, or to keep fresh with GitHub repository:
-        const hasCustomProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY) !== null;
-        if (!hasCustomProducts && Array.isArray(data.products) && data.products.length > 0) {
-          localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products));
-          changed = true;
+  for (const baseUrl of candidateUrls) {
+    try {
+      const res = await fetch(`${baseUrl}?t=${Date.now()}`, { cache: 'no-cache' });
+      if (res.ok) {
+        const contentType = res.headers.get('content-type') || '';
+        // Only parse if server actually returned JSON (prevents HTML 404 pages from crashing JSON parser)
+        if (!contentType.includes('application/json') && !contentType.includes('text/plain') && contentType !== '') {
+          continue;
         }
 
-        const hasCustomGallery = localStorage.getItem(GALLERY_STORAGE_KEY) !== null;
-        if (!hasCustomGallery && Array.isArray(data.gallery) && data.gallery.length > 0) {
-          localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(data.gallery));
-          changed = true;
+        const text = await res.text();
+        // Guard against HTML error pages that returned 200
+        if (!text || text.trim().startsWith('<')) {
+          continue;
         }
 
-        const hasCustomBrands = localStorage.getItem(BRANDS_STORAGE_KEY) !== null;
-        if (!hasCustomBrands && Array.isArray(data.brands) && data.brands.length > 0) {
-          localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(data.brands));
-          changed = true;
-        }
+        const data = JSON.parse(text);
+        if (data && typeof data === 'object') {
+          let changed = false;
 
-        if (changed) {
-          window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'all' } }));
+          if (Array.isArray(data.products) && data.products.length > 0) {
+            try {
+              localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products));
+              changed = true;
+            } catch {
+              // Ignore storage quota
+            }
+          }
+
+          if (Array.isArray(data.gallery) && data.gallery.length > 0) {
+            try {
+              localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(data.gallery));
+              changed = true;
+            } catch {
+              // Ignore storage quota
+            }
+          }
+
+          if (Array.isArray(data.brands) && data.brands.length > 0) {
+            try {
+              localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(data.brands));
+              changed = true;
+            } catch {
+              // Ignore storage quota
+            }
+          }
+
+          if (changed) {
+            window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'all' } }));
+          }
+          // Successfully loaded from remote site_data.json
+          break;
         }
       }
+    } catch {
+      // Continue to next candidate
     }
-  } catch (err) {
-    console.debug('Static site_data.json not loaded, using embedded code defaults.', err);
   }
 }
 

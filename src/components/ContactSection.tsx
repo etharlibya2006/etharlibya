@@ -74,33 +74,39 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                   {t.contact.phoneTitle}
                 </h4>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2 p-2.5 rounded bg-[#fbf9f6] border border-stone-200">
-                    <span className="text-xs text-stone-800 font-mono font-bold" dir="ltr">
-                      {settings.phoneDisplay || '0925062360'}
-                    </span>
+                  <div className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#fbf9f6] border border-stone-200">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                      <span className="text-xs sm:text-sm text-stone-900 font-mono font-bold tracking-wider" dir="ltr">
+                        092 506 2360
+                      </span>
+                    </div>
                     <a
-                      href={`https://wa.me/${settings.whatsappNumber || '218925062360'}`}
+                      href="https://wa.me/218925062360"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-emerald-600 px-2.5 py-1 rounded hover:bg-emerald-700 shadow-sm"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-sm transition-all"
                     >
-                      <MessageCircle className="w-3 h-3" />
-                      <span>WhatsApp</span>
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>واتساب</span>
                     </a>
                   </div>
 
-                  <div className="flex items-center justify-between gap-2 p-2.5 rounded bg-[#fbf9f6] border border-stone-200">
-                    <span className="text-xs text-stone-800 font-mono font-bold" dir="ltr">
-                      0913253515
-                    </span>
+                  <div className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#fbf9f6] border border-stone-200">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                      <span className="text-xs sm:text-sm text-stone-900 font-mono font-bold tracking-wider" dir="ltr">
+                        091 325 3515
+                      </span>
+                    </div>
                     <a
                       href="https://wa.me/218913253515"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-emerald-600 px-2.5 py-1 rounded hover:bg-emerald-700 shadow-sm"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-sm transition-all"
                     >
-                      <MessageCircle className="w-3 h-3" />
-                      <span>WhatsApp</span>
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>واتساب</span>
                     </a>
                   </div>
                 </div>
@@ -118,38 +124,71 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                 </h4>
                 <a
                   href={`mailto:${t.contact.emailValue}`}
-                  className="text-sm font-semibold text-stone-900 hover:text-[#b4362d] font-mono tracking-wide"
+                  className="text-sm font-bold text-stone-900 hover:text-[#b4362d] font-mono tracking-wide"
+                  dir="ltr"
                 >
                   {t.contact.emailValue}
                 </a>
               </div>
             </div>
 
-            {/* Official Social Media */}
+            {/* Official Social Media with Icons */}
             <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm">
               <h4 className="text-xs font-bold text-[#b4362d] uppercase tracking-wider mb-3 font-cinzel">
                 {t.contact.socialTitle}
               </h4>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-2.5">
+                {/* Facebook */}
                 <a
                   href="https://www.facebook.com/share/1HXcNcEXPs/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-[#fbf9f6] hover:bg-[#b4362d] hover:text-white border border-stone-200 text-stone-800 text-xs font-bold transition-all shadow-sm"
+                  className="flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl bg-[#fbf9f6] hover:bg-[#1877F2] hover:text-white border border-stone-200 text-stone-800 text-xs font-bold transition-all shadow-sm group"
                 >
-                  <span>Facebook</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#d9b239]" />
+                  <svg className="w-5 h-5 fill-current text-[#1877F2] group-hover:text-white" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  <span className="text-[11px]">فيسبوك</span>
                 </a>
 
+                {/* TikTok */}
                 <a
                   href="https://www.tiktok.com/@etharlibya?_r=1&_t=ZS-9B54eWdwjyg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-[#fbf9f6] hover:bg-[#b4362d] hover:text-white border border-stone-200 text-stone-800 text-xs font-bold transition-all shadow-sm"
+                  className="flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl bg-[#fbf9f6] hover:bg-black hover:text-white border border-stone-200 text-stone-800 text-xs font-bold transition-all shadow-sm group"
                 >
-                  <span>TikTok</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#d9b239]" />
+                  <svg className="w-5 h-5 fill-current text-black group-hover:text-white" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                  <span className="text-[11px]">تيك توك</span>
                 </a>
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/etharlibya/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl bg-[#fbf9f6] hover:bg-[#E4405F] hover:text-white border border-stone-200 text-stone-800 text-xs font-bold transition-all shadow-sm group"
+                >
+                  <svg className="w-5 h-5 fill-current text-[#E4405F] group-hover:text-white" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                  <span className="text-[11px]">إنستغرام</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Official Registration Badges */}
+            <div className="p-4 rounded-2xl bg-stone-100 border border-stone-200 text-xs space-y-1.5 font-mono">
+              <div className="flex items-center justify-between text-stone-700">
+                <span className="font-bold">{t.contact.commercialLicense}</span>
+              </div>
+              <div className="flex items-center justify-between text-stone-700">
+                <span className="font-bold">{t.contact.taxNumber}</span>
+              </div>
+              <div className="flex items-center justify-between text-[#b4362d]">
+                <span className="font-bold">{t.contact.chamberReg}</span>
               </div>
             </div>
           </div>
@@ -179,10 +218,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                     <MapPin className="w-8 h-8 stroke-[2.2]" />
                   </div>
                   <h4 className="text-base font-bold text-stone-900 mb-1 font-cinzel">
-                    {lang === 'ar' ? 'شركة إيثار ليبيا - المقر الرسمي' : 'Ethar Libya Headquarters'}
+                    {lang === 'ar' ? 'شركة إيثار ليبيا لاستيراد المواد الغذائية' : 'Ethar Libya for Food Import'}
                   </h4>
                   <p className="text-xs text-stone-600 mb-4 font-mono">
-                    {lang === 'ar' ? 'طرابلس، الكريمية - شارع الثانوية' : 'Tripoli, Al-Karimiyah - Al-Thanawiya St'}
+                    {lang === 'ar' ? 'طرابلس، الكريمية - شارع الثانوية والعسل' : 'Tripoli, Al-Karimiyah - Al-Thanawiya & Honey St'}
                   </p>
                   <a
                     href="https://maps.app.goo.gl/wvbivb9d5qGedRRu6?g_st=iwb"
@@ -204,15 +243,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ t, lang }) => {
                   ? 'مكتب الاستيراد والمبيعات متاح طيلة أيام الأسبوع للموردين والتجار'
                   : 'Import and sales offices open Saturday through Thursday'}
               </span>
-              <a
-                href={`https://wa.me/${settings.whatsappNumber || '218925062360'}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-bold text-[#b4362d] hover:text-black font-mono"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600" />
-                <span>{settings.phoneDisplay || '+218 92 506 2360'}</span>
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://wa.me/218925062360"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-bold text-[#b4362d] hover:text-black font-mono tracking-wider"
+                  dir="ltr"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span>092 506 2360</span>
+                </a>
+                <span className="text-stone-300">/</span>
+                <a
+                  href="https://wa.me/218913253515"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-bold text-[#b4362d] hover:text-black font-mono tracking-wider"
+                  dir="ltr"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span>091 325 3515</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

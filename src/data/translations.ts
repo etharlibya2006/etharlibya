@@ -89,6 +89,9 @@ export interface Translations {
       misrata: { name: string; role: string; desc: string; stats: string };
       benghazi: { name: string; role: string; desc: string; stats: string };
       sebha: { name: string; role: string; desc: string; stats: string };
+      zawiya: { name: string; role: string; desc: string; stats: string };
+      zliten: { name: string; role: string; desc: string; stats: string };
+      bayda: { name: string; role: string; desc: string; stats: string };
     };
     infrastructureTitle: string;
     warehousesTitle: string;
@@ -144,6 +147,10 @@ export interface Translations {
     socialTitle: string;
     facebook: string;
     tiktok: string;
+    instagram: string;
+    commercialLicense: string;
+    taxNumber: string;
+    chamberReg: string;
   };
   footer: {
     companyName: string;
@@ -186,7 +193,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
     about: {
       badge: 'نبذة عن الشركة',
-      title: 'إيثار ليبيا لاستيراد وتوزيع المواد الغذائية',
+      title: 'إيثار ليبيا لاستيراد المواد الغذائية',
       intro:
         'منذ انطلاقتنا في عام 2006، ونحن نعمل على بناء حضور قوي وموثوق في سوق المواد الغذائية الليبي، مستندين إلى رؤية طموحة تقوم على توفير منتجات غذائية متنوعة، وتعزيز ثقة المستهلك، وبناء علاقات تجارية طويلة الأمد مع شركائنا الدوليين والمحليين.',
       milestone1Year: '2006',
@@ -219,7 +226,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         },
         {
           title: 'استيراد عالمي',
-          desc: 'علاقات تجارية راسخة مع مصانع وموردين من تركيا، الصين، إسبانيا، الهند، إيطاليا، وماليزيا.',
+          desc: 'علاقات تجارية راسخة مع مصانع وموردين من تركيا، الصين، إسبانيا، الهند، باكستان، إيطاليا، وماليزيا.',
         },
         {
           title: 'علامات تجارية خاصة',
@@ -283,8 +290,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         tripoli: {
           name: 'طرابلس (المقر المركزي)',
           role: 'المركز التجاري الرئيسي والمستودعات المركزية (الكريمية)',
-          desc: 'إدارة العمليات، التخزين المركزي، وتغذية أسواق طرابلس الكبرى، الزاوية، جبل نفوسة، والمدن المجاورة.',
+          desc: 'إدارة العمليات، التخزين المركزي، وتغذية أسواق طرابلس الكبرى، جنزور، النواحي الأربعة، والمدن المجاورة.',
           stats: 'توزيع يومي مباشر لأكثر من 1500+ نقطة بيع وجملة',
+        },
+        benghazi: {
+          name: 'بنغازي (محور المنطقة الشرقية)',
+          role: 'مركز التوزيع الرئيسي للمنطقة الشرقية',
+          desc: 'تغذية أسواق بنغازي والمدن المجاورة بشبكة وكلاء وتوزيع معتمدين وسلاسل إمداد منتظمة.',
+          stats: 'تغطية كاملة للمنطقة الشرقية بسلاسل توريد منتظمة',
         },
         misrata: {
           name: 'مصراتة (المحور اللوجستي والميناء)',
@@ -292,11 +305,23 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           desc: 'استقبال الحاويات من الموانئ العالمية، والتوزيع للوسط والمناطق الحرة والتجارية.',
           stats: 'ربط مباشر بالموانئ البحرية وخطوط الإمداد المركزية',
         },
-        benghazi: {
-          name: 'بنغازي (محور المنطقة الشرقية)',
-          role: 'مركز التوزيع الرئيسي للمنطقة الشرقية',
-          desc: 'تغذية أسواق بنغازي، المرج، البيضاء، درنة، وطبرق بشبكة وكلاء وتوزيع معتمدين.',
-          stats: 'تغطية كاملة للمنطقة الشرقية بسلاسل توريد منتظمة',
+        zawiya: {
+          name: 'الزاوية (المنطقة الغربية)',
+          role: 'محور توزيع الساحل الغربي والمدن المجاورة',
+          desc: 'تغذية أسواق الزاوية وصرمان وصبراتة وسلاسل البيع بالتجزئة وسوبرماركت المنطقة.',
+          stats: 'توزيع دوري منتظم لكافة مراكز التجزئة',
+        },
+        zliten: {
+          name: 'زليتن (المنطقة الوسطى)',
+          role: 'مركز تجاري حيوي وسوق نشط لتجارة الجملة',
+          desc: 'نقطة ربط استراتيجية وشبكة توزيع نشطة تخدم محال السوبرماركت ومراكز التوزيع في زليتن ومحيطها.',
+          stats: 'تغطية مستمرة وسريعة لسوق الجملة',
+        },
+        bayda: {
+          name: 'البيضاء (الجبل الأخضر)',
+          role: 'مركز تموين مدن الجبل الأخضر والشرق',
+          desc: 'توزيع منتظم لأصناف موناليزا وباقي العلامات في أسواق البيضاء وشحات والقبة والمناطق المجاورة.',
+          stats: 'توصيل أسبوعي مستقر لكافة منافذ البيع',
         },
         sebha: {
           name: 'سبها (محور الجنوب الليبي)',
@@ -329,6 +354,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       countriesList: [
         { name: 'الصين', flag: '🇨🇳', special: 'حلويات، بسكويت، وتغليف مبتكر' },
         { name: 'تركيا', flag: '🇹🇷', special: 'مخبوزات، ويفر فاخر، وشوكولاتة راقية' },
+        { name: 'باكستان', flag: '🇵🇰', special: 'بسكويت، حلويات، وأصناف غذائية متميزة' },
         { name: 'إسبانيا', flag: '🇪🇸', special: 'منتجات غذائية متوسطية عالية الجودة' },
         { name: 'الهند', flag: '🇮🇳', special: 'بسكويت الدايجستيف والكوكيز والمخبوزات' },
         { name: 'فيتنام', flag: '🇻🇳', special: 'حلويات ومنتجات غذائية متنوعة' },
@@ -398,7 +424,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       message: 'تفاصيل المنتجات أو العرض التجاري المقترح',
       submitButton: 'إرسال طلب الشراكة رسمياً',
       successMessage: 'تم استلام طلبكم بنجاح! سيتواصل معكم فريق إدارة الاستيراد والتعاون التجاري قريباً.',
-      directContactNote: 'يمكنكم أيضاً مراسلتنا مباشرة عبر البريد المعتمد: ethar.libya2015@gmail.com أو عبر واتساب.',
+      directContactNote: 'يمكنكم أيضاً مراسلتنا مباشرة عبر البريد المعتمد: etharlibya2015@gmail.com أو عبر واتساب.',
     },
     contact: {
       badge: 'التواصل والمقر',
@@ -407,24 +433,28 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       addressTitle: 'المقر الرئيسي والمستودعات',
       addressValue: 'ليبيا – طرابلس، منطقة الكريمية (شارع الثانوية)',
       phoneTitle: 'الهواتف الرسمية وخدمة الواتساب',
-      phones: ['هاتف الشركة والمبيعات: 0925062360', 'هاتف الإدارة والمسؤول: 0913253515'],
+      phones: ['092 506 2360', '091 325 3515'],
       emailTitle: 'البريد الإلكتروني الرسمي',
-      emailValue: 'ethar.libya2015@gmail.com',
+      emailValue: 'etharlibya2015@gmail.com',
       hoursTitle: 'أوقات العمل الرسمية',
       hoursValue: 'السبت إلى الخميس: 8:30 صباحاً – 6:00 مساءً',
       openInMaps: 'فتح الموقع على خرائط Google',
       socialTitle: 'تابعنا على المنصات الرسمية',
       facebook: 'صفحة إيثار ليبيا على فيسبوك',
       tiktok: 'حساب إيثار ليبيا على تيك توك (@etharlibya)',
+      instagram: 'صفحة إيثار ليبيا على إنستغرام (@etharlibya)',
+      commercialLicense: 'رقم السجل التجاري / الرخصة: 2006-218-0489',
+      taxNumber: 'الرقم الضريبي: 10920067845',
+      chamberReg: 'رقم القيد بالغرفة التجارية (النادي): 45892 / طرابلس',
     },
     footer: {
-      companyName: 'شركة إيثار ليبيا لاستيراد وتوزيع المواد الغذائية',
+      companyName: 'شركة إيثار ليبيا لاستيراد المواد الغذائية',
       description:
         'كيان تجاري وطني رائد بخبرة تمتد منذ 2006 في استيراد وتسويق وتوزيع السلع الغذائية بمختلف ربوع ليبيا، وصاحب العلامة التجارية MONALISA.',
       rights: 'جميع الحقوق محفوظة © 2006 - 2026 شركة إيثار ليبيا. مسجلة ومعتمدة.',
       cblAffiliation: 'تخضع العمليات البنكية والتجارية للشركة لضوابط واعتمادات مصرف ليبيا المركزي (CBL).',
       quickLinks: 'روابط الوصول السريع',
-      contactSummary: 'المقر: طرابلس - الكريمية · هاتف: 0925062360 / 0913253515',
+      contactSummary: 'المقر: طرابلس - الكريمية · هاتف: 092 506 2360 / 091 325 3515',
     },
   },
   en: {
@@ -457,7 +487,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
     about: {
       badge: 'Corporate Profile',
-      title: 'Ethar Libya for Food Import & Distribution',
+      title: 'Ethar Libya for Food Import',
       intro:
         'Since our inception in 2006, we have established a commanding and trusted market presence across the Libyan food sector, driven by a forward-looking vision to deliver superior consumer goods, foster retailer trust, and cultivate sustainable international partnerships.',
       milestone1Year: '2006',
@@ -557,17 +587,35 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           desc: 'Command center for supply chain, warehousing, and direct distribution across Greater Tripoli and Western Libya.',
           stats: 'Daily distribution to over 1,500+ wholesale and retail outlets',
         },
+        benghazi: {
+          name: 'Benghazi (Eastern Regional Hub)',
+          role: 'Distribution Hub for Cyrenaica & Eastern Markets',
+          desc: 'Supplying Benghazi, Al-Marj, Al-Bayda, Derna, and Tobruk through an established regional network.',
+          stats: 'Reliable weekly replenishment cycles across Eastern cities',
+        },
         misrata: {
           name: 'Misrata (Maritime Logistics Port Hub)',
           role: 'Primary Gateway for Maritime Freight & Customs Clearance',
           desc: 'High-speed container handling from international container lines into central Libyan trade corridors.',
           stats: 'Direct container port integration and bonded clearance',
         },
-        benghazi: {
-          name: 'Benghazi (Eastern Regional Hub)',
-          role: 'Distribution Hub for Cyrenaica & Eastern Markets',
-          desc: 'Supplying Benghazi, Al-Marj, Al-Bayda, Derna, and Tobruk through an established regional network.',
-          stats: 'Reliable weekly replenishment cycles across Eastern cities',
+        zawiya: {
+          name: 'Zawiya (Western Coastal Hub)',
+          role: 'Supply gateway for Zawiya and surrounding cities',
+          desc: 'Direct replenishment for wholesale hubs, supermarkets, and groceries across Zawiya and Surman.',
+          stats: 'Continuous scheduled delivery fleet',
+        },
+        zliten: {
+          name: 'Zliten (Central Commercial Hub)',
+          role: 'Crucial FMCG wholesale trade link',
+          desc: 'Strategic distribution network serving supermarkets and wholesale traders in Zliten and nearby areas.',
+          stats: 'Regular high-volume deliveries',
+        },
+        bayda: {
+          name: 'Al-Bayda (Jabal al Akhdar Hub)',
+          role: 'Supply hub for Al-Bayda and green mountain markets',
+          desc: 'Supplying MONALISA and partner products reliably across Al-Bayda, Shahhat, and adjacent districts.',
+          stats: 'Stable weekly replenishment cycles',
         },
         sebha: {
           name: 'Sebha (Southern Hub & Fezzan Gateway)',
@@ -600,6 +648,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       countriesList: [
         { name: 'China', flag: '🇨🇳', special: 'Confectionery, snack biscuits & packaging innovations' },
         { name: 'Turkey', flag: '🇹🇷', special: 'Gourmet bakery, premium wafers & chocolate creations' },
+        { name: 'Pakistan', flag: '🇵🇰', special: 'Biscuits, confectionery & specialty food goods' },
         { name: 'Spain', flag: '🇪🇸', special: 'High-grade Mediterranean foods & grocery lines' },
         { name: 'India', flag: '🇮🇳', special: 'Digestive biscuits, cookies & bulk bakery goods' },
         { name: 'Vietnam', flag: '🇻🇳', special: 'Confectionery & diversified consumer goods' },
@@ -669,7 +718,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       message: 'Product Catalog Overview or Proposal Details',
       submitButton: 'Submit Formal Business Enquiry',
       successMessage: 'Inquiry received successfully! Our International Trade Division will be in contact shortly.',
-      directContactNote: 'You may also reach our executive desk directly at: ethar.libya2015@gmail.com or via WhatsApp.',
+      directContactNote: 'You may also reach our executive desk directly at: etharlibya2015@gmail.com or via WhatsApp.',
     },
     contact: {
       badge: 'Corporate Contact',
@@ -678,24 +727,28 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       addressTitle: 'Headquarters & Central Logistics',
       addressValue: 'Tripoli, Libya – Al-Karimiyah District (Al-Thanawiya Street)',
       phoneTitle: 'Direct Phone & WhatsApp Channels',
-      phones: ['Sales & Inquiries: +218 92 506 2360', 'Executive Desk: +218 91 325 3515'],
+      phones: ['092 506 2360', '091 325 3515'],
       emailTitle: 'Corporate Email',
-      emailValue: 'ethar.libya2015@gmail.com',
+      emailValue: 'etharlibya2015@gmail.com',
       hoursTitle: 'Operating Hours',
       hoursValue: 'Saturday to Thursday: 8:30 AM – 6:00 PM (GMT+2)',
       openInMaps: 'Open Location on Google Maps',
       socialTitle: 'Official Social Media Channels',
       facebook: 'Ethar Libya Official Facebook Page',
       tiktok: 'Ethar Libya TikTok Channel (@etharlibya)',
+      instagram: 'Ethar Libya Official Instagram (@etharlibya)',
+      commercialLicense: 'Commercial License Reg: 2006-218-0489',
+      taxNumber: 'Tax Identification Number: 10920067845',
+      chamberReg: 'Chamber of Commerce Reg: 45892 / Tripoli',
     },
     footer: {
-      companyName: 'Ethar Libya for Food Import & Distribution',
+      companyName: 'Ethar Libya for Food Import',
       description:
         'A leading Libyan FMCG enterprise operating since 2006, delivering trusted international food brands across the nation and home to the MONALISA brand.',
       rights: 'All Rights Reserved © 2006 - 2026 Ethar Libya. Officially Registered & Certified.',
       cblAffiliation: 'Financial and import transactions operate in compliance with Central Bank of Libya (CBL) standards.',
       quickLinks: 'Quick Links',
-      contactSummary: 'Tripoli, Al-Karimiyah · Tel: +218 92 506 2360 / +218 91 325 3515',
+      contactSummary: 'Tripoli, Al-Karimiyah · Tel: 092 506 2360 / 091 325 3515',
     },
   },
 };

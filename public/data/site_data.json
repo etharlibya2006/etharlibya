@@ -1,11 +1,11 @@
 {
-  "version": "2.0",
+  "version": "2.2",
   "app": "Ethar Libya Corporate Portal",
-  "updatedAt": "2026-11-07T08:21:31.399Z",
+  "updatedAt": "2026-11-12T09:10:51.760Z",
   "products": [
     {
       "id": "monalisa-choco-biscuit-dark",
-      "nameAr": "بسكويت مونا ليزا شوكو بيسكويت بالشوكولاتة الداكنة",
+      "nameAr": "بسكويت موناليزا شوكو بيسكويت بالشوكولاتة الداكنة",
       "nameEn": "MONALISA Choco Biscuit (Dark Chocolate & Petit Beurre)",
       "brand": "MONALISA",
       "category": "biscuits",
@@ -28,7 +28,7 @@
     },
     {
       "id": "monalisa-choco-biscuit-milk",
-      "nameAr": "بسكويت مونا ليزا شوكو بيسكويت بشوكولاتة الحليب والبيتي بور",
+      "nameAr": "بسكويت موناليزا شوكو بيسكويت بشوكولاتة الحليب والبيتي بور",
       "nameEn": "MONALISA Choco Biscuit (Milk Chocolate & Petit Beurre)",
       "brand": "MONALISA",
       "category": "biscuits",
@@ -51,7 +51,7 @@
     },
     {
       "id": "monalisa-choco-biscuit-cocoa",
-      "nameAr": "بسكويت مونا ليزا شوكو بيسكويت بالكاكاو وشوكولاتة الحليب",
+      "nameAr": "بسكويت موناليزا شوكو بيسكويت بالكاكاو وشوكولاتة الحليب",
       "nameEn": "MONALISA Choco Biscuit (Milk Chocolate & Cocoa Biscuit)",
       "brand": "MONALISA",
       "category": "biscuits",
@@ -74,7 +74,7 @@
     },
     {
       "id": "monalisa-mini-biscuits-strawberry",
-      "nameAr": "ميني بسكويت مونا ليزا بنكهة الفراولة",
+      "nameAr": "ميني بسكويت موناليزا بنكهة الفراولة",
       "nameEn": "MONALISA Mini Biscuits (Strawberry Flavor)",
       "brand": "MONALISA",
       "category": "biscuits",
@@ -96,7 +96,7 @@
     },
     {
       "id": "monalisa-chocolate-tiger-pouch",
-      "nameAr": "بسكويت كرات مونا ليزا المحشوة بالشوكولاتة",
+      "nameAr": "بسكويت كرات موناليزا المحشوة بالشوكولاتة",
       "nameEn": "MONALISA Chocolate Filled Snack Biscuits (Pouch)",
       "brand": "MONALISA",
       "category": "biscuits",
@@ -118,7 +118,7 @@
     },
     {
       "id": "monalisa-wafers-milky",
-      "nameAr": "ويفر مونا ليزا إكسترا - حليب",
+      "nameAr": "ويفر موناليزا إكسترا - حليب",
       "nameEn": "MONALISA Wafers Extra (Milky Cream)",
       "brand": "MONALISA",
       "category": "wafers",
@@ -141,7 +141,7 @@
     },
     {
       "id": "monalisa-wafers-coconut",
-      "nameAr": "ويفر مونا ليزا إكسترا - جوز الهند",
+      "nameAr": "ويفر موناليزا إكسترا - جوز الهند",
       "nameEn": "MONALISA Wafers Extra (Coconut Cream)",
       "brand": "MONALISA",
       "category": "wafers",
@@ -164,15 +164,15 @@
     },
     {
       "id": "monalisa-wafers-chocolate-50g",
-      "nameAr": "ويفر مونا ليزا إكسترا بالشوكولاتة 50g",
+      "nameAr": "ويفر موناليزا إكسترا بالشوكولاتة 50g",
       "nameEn": "MONALISA Wafers Extra Chocolate 50g",
       "brand": "MONALISA",
       "category": "wafers",
       "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_29_PM-4_8dc7156e.webp",
       "weight": "50 جرام (50g e)",
       "cartonSpec": "علب عرض تجارية مخصصة",
-      "descriptionAr": "ويفر الشوكولاتة الأيقوني من مونا ليزا بوزن 50 جرام، قرمشة متوازنة مع كريمة الكاكاو الإيطالية.",
-      "descriptionEn": "The iconic 50g chocolate wafer bar from Mona Lisa, layered with decadent Italian-style cocoa cream.",
+      "descriptionAr": "ويفر الشوكولاتة الأيقوني من موناليزا بوزن 50 جرام، قرمشة متوازنة مع كريمة الكاكاو الإيطالية.",
+      "descriptionEn": "The iconic 50g chocolate wafer bar from Monalisa, layered with decadent Italian-style cocoa cream.",
       "featuresAr": [
         "وزن مثالي 50 جرام للوجبات السريعة",
         "شوكولاتة بنكهة إيطالية أصيلة",
@@ -186,30 +186,31 @@
       "isFlagship": true
     },
     {
-      "id": "monalisa-wafers-display-box",
-      "nameAr": "تشكيلة ويفر مونا ليزا إكسترا (صناديق العرض الفاخرة)",
-      "nameEn": "MONALISA Wafers Extra Display Pack (Chocolate & Hazelnut)",
+      "id": "monalisa-wafer-hazelnut-50g",
+      "nameAr": "ويفر موناليزا إكسترا بالبندق 50g",
+      "nameEn": "MONALISA Wafers Extra Hazelnut 50g",
       "brand": "MONALISA",
       "category": "wafers",
-      "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_31_PM-5_4ed75563.webp",
-      "weight": "علب عرض مزدوجة",
-      "cartonSpec": "صناديق حمراء وخضراء لنقاط البيع والسوبرماركت",
-      "descriptionAr": "صناديق عرض كرتونية جاهزة للرفوف تضم ويفر مونا ليزا إكسترا بنكهتي الشوكولاتة والبندق.",
-      "descriptionEn": "Ready-to-display retail counter boxes showcasing Mona Lisa Extra wafers in Chocolate and Hazelnut.",
+      "image": "./assets/products/monalisa_wafer_hazelnut_50g.webp",
+      "weight": "50 جرام (50g e)",
+      "cartonSpec": "كرتون شحن جملة ونقاط بيع خضراء",
+      "descriptionAr": "ويفر إكسترا بحشوة كريمة البندق الإيطالية الفاخرة، طبقات مقرمشة هشة وتغليف محكم يحفظ الطراوة والنكهة الأصيلة.",
+      "descriptionEn": "MONALISA Wafers Extra Hazelnut 50g with rich creamy hazelnut layers and delicate crispiness.",
       "featuresAr": [
-        "صناديق عرض بصرية جذابة",
-        "نكهتا الشوكولاتة والبندق",
-        "مجهزة مباشرة للعرض في نقاط البيع"
+        "كريمة بندق طبيعية غنية",
+        "طبقات ويفر ذهبية مقرمشة",
+        "وزن عملي 50 جرام ونكهة إيطالية أصيلة"
       ],
       "featuresEn": [
-        "Vibrant shelf-ready packaging",
-        "Chocolate and hazelnut varieties",
-        "Instant point-of-sale appeal"
-      ]
+        "Rich natural hazelnut cream",
+        "Crispy golden wafer sheets",
+        "Convenient 50g single-serve pack"
+      ],
+      "isFlagship": true
     },
     {
       "id": "monalisa-swiss-roll",
-      "nameAr": "سويس رول مونا ليزا (بندق - كراميل - شوكولاتة)",
+      "nameAr": "سويس رول موناليزا (بندق - كراميل - شوكولاتة)",
       "nameEn": "MONALISA Swiss Roll (Hazelnut, Caramel & Chocolate)",
       "brand": "MONALISA",
       "category": "cakes",
@@ -231,15 +232,38 @@
       "isFlagship": true
     },
     {
+      "id": "monalisa-mabella-chocolate-cake",
+      "nameAr": "كيك موناليزا مابيلا بالشوكولاتة الفاخرة",
+      "nameEn": "MONALISA Ma Bella Chocolate Cake",
+      "brand": "MONALISA",
+      "category": "cakes",
+      "image": "./assets/products/monalisa_mabella_cake_chocolate.webp",
+      "weight": "قطعة كيك مغلفة فردياً",
+      "cartonSpec": "علبة عرض كرتونية تجارية أنيقة",
+      "descriptionAr": "كيك إسفنجي شوكولاتة ناعم محشو بقلب شوكولاتة كريمية سائلة ومغطى بطبقة شوكولاتة فاخرة مع خطوط تزيين الشوكولاتة، متعة ساحرة مع كل قضمة.",
+      "descriptionEn": "MONALISA Ma Bella soft chocolate cake filled with flowing molten chocolate cream and gourmet chocolate enrobing.",
+      "featuresAr": [
+        "قلب شوكولاتة ذائبة كثيفة",
+        "كيك إسفنجي طري ولذيذ",
+        "تغطية شوكولاتة فاخرة بالكامل"
+      ],
+      "featuresEn": [
+        "Flowing molten chocolate core",
+        "Moist tender sponge texture",
+        "Full chocolate enrobing"
+      ],
+      "isFlagship": true
+    },
+    {
       "id": "monalisa-snowflake-pistachio",
-      "nameAr": "كيك مونا ليزا سنو فليك بطعم الفستق الحلبي",
+      "nameAr": "كيك موناليزا سنو فليك بطعم الفستق الحلبي",
       "nameEn": "MONALISA SNOWFLAKE (Pistachio Cream Cake)",
       "brand": "MONALISA",
       "category": "cakes",
       "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_01_PM-5_e07aa92b.webp",
       "weight": "قطعة كيك مغلفة فاخرة",
       "cartonSpec": "كرتون شحن نقاط البيع الفاخرة",
-      "descriptionAr": "تحفة حلويات من مونا ليزا: كيكة هشة محشوة بكريمة الحليب ومغلفة بطبقة غنية من الفستق الحلبي المحمص.",
+      "descriptionAr": "تحفة حلويات من موناليزا: كيكة هشة محشوة بكريمة الحليب ومغلفة بطبقة غنية من الفستق الحلبي المحمص.",
       "descriptionEn": "Gourmet dome cake filled with smooth milk cream and generously enrobed in crushed roasted pistachios.",
       "featuresAr": [
         "فستق حلبي فاخر ومطحون",
@@ -254,30 +278,8 @@
       "isFlagship": true
     },
     {
-      "id": "monalisa-snowflake-duo",
-      "nameAr": "كيك مونا ليزا سنو فليك (جوز الهند والحليب)",
-      "nameEn": "MONALISA SNOWFLAKE (Coconut & Milk Flavors)",
-      "brand": "MONALISA",
-      "category": "cakes",
-      "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_08_PM-1_f1b5f11e.webp",
-      "weight": "عبوة فردية مميزة",
-      "cartonSpec": "علبة عرض ثنائية النكهات",
-      "descriptionAr": "نكهتان لذيذتان: سنو فليك جوز الهند الأزرق وسنو فليك الحليب الأحمر مع طعم متوازن يذوب في الفم.",
-      "descriptionEn": "Two signature flavors: Snowflake Coconut (Blue) and Snowflake Milk (Red) with melt-in-mouth balance.",
-      "featuresAr": [
-        "نكهتان رئيسيتان: جوز هند وحليب",
-        "طبقة تغطية كريمة ناعمة",
-        "قوام كيك طازج وهش"
-      ],
-      "featuresEn": [
-        "Two signature flavors",
-        "Soft cream enrobing",
-        "Melt-in-mouth balance"
-      ]
-    },
-    {
       "id": "monalisa-spekuloos",
-      "nameAr": "كيك مونا ليزا سبيكولوس لوتس كرنش",
+      "nameAr": "كيك موناليزا سبيكولوس لوتس كرنش",
       "nameEn": "MONALISA Spekuloos Lotus Crunch Cake",
       "brand": "MONALISA",
       "category": "cakes",
@@ -300,7 +302,7 @@
     },
     {
       "id": "monalisa-oreo-dream",
-      "nameAr": "كيك مونا ليزا أوريو دريم كوكيز آند كريم",
+      "nameAr": "كيك موناليزا أوريو دريم كوكيز آند كريم",
       "nameEn": "MONALISA Oreo Dream (Cookies & Cream Cake)",
       "brand": "MONALISA",
       "category": "cakes",
@@ -322,7 +324,7 @@
     },
     {
       "id": "monalisa-biscotti-spread",
-      "nameAr": "كريمة بسكوت مونا ليزا بيسكوتي سبريد",
+      "nameAr": "كريمة بسكوت موناليزا بيسكوتي سبريد",
       "nameEn": "MONALISA Biscotti Spread (Caramelized Biscuit Butter)",
       "brand": "MONALISA",
       "category": "confectionery",
@@ -344,30 +346,8 @@
       "isFlagship": true
     },
     {
-      "id": "monalisa-biscotti-spread-table",
-      "nameAr": "كريمة بسكوت مونا ليزا متعددة الاستخدامات",
-      "nameEn": "MONALISA Biscotti Spread Gourmet Serving",
-      "brand": "MONALISA",
-      "category": "confectionery",
-      "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_57_PM-3_3ace99f6.webp",
-      "weight": "برطمان مع تقديم حلويات",
-      "cartonSpec": "مخصص للمقاهي والمخابز والفنادق",
-      "descriptionAr": "كريمة بسكوت مونا ليزا المعتمدة من كبار الطهاة والمخابز، مثالية لتزيين الكيك والتشيز كيك وتوست الإفطار.",
-      "descriptionEn": "Multi-use Mona Lisa biscuit spread for hospitality, specialty cafes, cake decorating, and bakeries.",
-      "featuresAr": [
-        "متعددة الاستخدامات للحلويات",
-        "ثبات ممتاز عند درجات الحرارة المختلفة",
-        "طعم غني يرفع قيمة المنتج النهائي"
-      ],
-      "featuresEn": [
-        "Multi-purpose dessert ingredient",
-        "Temperature stable",
-        "Elevates finished dessert value"
-      ]
-    },
-    {
       "id": "monalisa-condensed-milk",
-      "nameAr": "مونا ليزا حليب مكثف محلى فاخر 397g",
+      "nameAr": "موناليزا حليب مكثف محلى فاخر 397g",
       "nameEn": "MONALISA Sweetened Condensed Milk (Gold Edition 397g)",
       "brand": "MONALISA",
       "category": "other",
@@ -390,14 +370,14 @@
     },
     {
       "id": "monalisa-chocolate-powder-yellow",
-      "nameAr": "مسحوق الشوكولاتة مونا ليزا مع الحليب 420g",
+      "nameAr": "مسحوق الشوكولاتة موناليزا مع الحليب 420g",
       "nameEn": "MONALISA Chocolate Powder (Add Milk Yellow Tub 420g)",
       "brand": "MONALISA",
-      "category": "beverages",
+      "category": "candy_juices",
       "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_36_PM-7_60ef5a4c.webp",
       "weight": "الوزن الصافي 420 جرام (420g e)",
       "cartonSpec": "علبة أسطوانية محكمة الإغلاق",
-      "descriptionAr": "مسحوق شوكولاتة مونا ليزا سريع الذوبان مع الحليب، طعم محبوب للأطفال وغني بالطاقة لبداية يوم نشيطة.",
+      "descriptionAr": "مسحوق شوكولاتة موناليزا سريع الذوبان مع الحليب، طعم محبوب للأطفال وغني بالطاقة لبداية يوم نشيطة.",
       "descriptionEn": "Instant cocoa drink powder with real chocolate taste, fast dissolving in warm or cold milk.",
       "featuresAr": [
         "يذوب فوراً في الحليب",
@@ -410,28 +390,6 @@
         "Moisture-tight storage tub"
       ],
       "isFlagship": true
-    },
-    {
-      "id": "monalisa-chocolate-powder-red",
-      "nameAr": "مسحوق الشوكولاتة والكاكاو مونا ليزا (فيتامين د)",
-      "nameEn": "MONALISA Chocolate Powder (Real Cocoa & Vitamin D 420g)",
-      "brand": "MONALISA",
-      "category": "beverages",
-      "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_05_PM-7_038f11ea.webp",
-      "weight": "الوزن الصافي 420 جرام (420g e)",
-      "cartonSpec": "كاكاو حقيقي Real Cocoa · فيتامين D",
-      "descriptionAr": "مسحوق الكاكاو الطبيعي المدعم بفيتامين د وخالٍ من المواد الحافظة والألوان الصناعية لبناء صحي للأطفال.",
-      "descriptionEn": "Fortified chocolate powder with real natural cocoa and Vitamin D, zero artificial additives.",
-      "featuresAr": [
-        "كاكاو طبيعي حقيقي Real Cocoa",
-        "معزز بفيتامين د النشط",
-        "خالٍ من الإضافات والألوان الصناعية"
-      ],
-      "featuresEn": [
-        "Real natural cocoa",
-        "Fortified with Vitamin D",
-        "No artificial colors or additives"
-      ]
     },
     {
       "id": "bakemate-digestive-cookies",
@@ -497,28 +455,6 @@
         "4 customer-favorite flavors",
         "Rich cream filling",
         "Fast-moving commercial retail product"
-      ]
-    },
-    {
-      "id": "bakemate-kreme-c-tower",
-      "nameAr": "تشكيلة بسكويت ساندويتش كريم-أو بيكميت المتكاملة",
-      "nameEn": "BAKEMATE Kreme-C Flavoured Sandwich Tower",
-      "brand": "BAKEMATE",
-      "category": "biscuits",
-      "image": "./assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_55_PM-2_af23689d.webp",
-      "weight": "برج النكهات الأربعة",
-      "cartonSpec": "كرتون شحن جملة مخصص",
-      "descriptionAr": "بسكويت كريم-أو بشخصيات مبتسمة مرحة، أربع نكهات متعة لا تنتهي لتلبية طلبات التجزئة والجملة.",
-      "descriptionEn": "Kreme-C iconic cream sandwich biscuits packaged in vibrant retail wraps for grocery shelves.",
-      "featuresAr": [
-        "تصميم مرح بشخصيات مبتسمة",
-        "تنوع واسع يرضي أذواق العائلات",
-        "تغليف جذاب لرفوف المتاجر"
-      ],
-      "featuresEn": [
-        "Cheerful smiley embossed faces",
-        "Family variety pack",
-        "High-impact shelf presentation"
       ]
     },
     {
@@ -787,39 +723,246 @@
         "Certified Halal product"
       ],
       "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-pineapple",
+      "nameAr": "شراب الأناناس الطبيعي موناليزا (كانز)",
+      "nameEn": "MONA LISA Pineapple Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_pineapple.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة مبرد 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب الأناناس الطبيعي المنعش من موناليزا بطعم الفاكهة الغني ونكهة استوائية نقية، مزيد من الفواكه لمزيد من المذاق الأصيل.",
+      "descriptionEn": "MONA LISA canned Pineapple Drink bursting with authentic tropical flavor and pure fruit goodness (More Fruit, More Taste).",
+      "featuresAr": [
+        "طعم أناناس استوائي طبيعي غني",
+        "عبوة كانز سهلة الفتح وسريعة التبريد",
+        "انتعاش فائق بدون نكهات صناعية ضارة"
+      ],
+      "featuresEn": [
+        "Rich tropical pineapple flavor",
+        "Quick-chill sleek aluminum can",
+        "Ultimate fruit refreshment"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-peach",
+      "nameAr": "شراب الخوخ الطبيعي موناليزا (كانز)",
+      "nameEn": "MONA LISA Peach Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_peach.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب الخوخ الفاخر من موناليزا بمذاق الخوخ الصيفي الناضج ونكهة مخملية منعشة ترضي جميع الأذواق في كل الأوقات.",
+      "descriptionEn": "MONA LISA Peach Drink crafted with ripe juicy peaches delivering superior fruity taste and refreshing aroma.",
+      "featuresAr": [
+        "مذاق الخوخ الصيفي الطبيعي الطازج",
+        "نسبة فاكهة مركزة ومذاق مخملي",
+        "مثالي للأيام الحارة والمناسبات العائلية"
+      ],
+      "featuresEn": [
+        "Fresh ripe summer peach taste",
+        "High fruit concentration",
+        "Ideal chilled refreshment for all seasons"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-blood-orange",
+      "nameAr": "شراب البرتقال الأحمر موناليزا (كانز)",
+      "nameEn": "MONA LISA Blood Orange Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_blood_orange.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب البرتقال الأحمر (Blood Orange) المميز من موناليزا، توليفة فريدة بين حلاوة البرتقال وانتعاشه الفاكهي المكثف ولونه الياقوتي الجذاب.",
+      "descriptionEn": "MONA LISA Blood Orange Drink with deep ruby color and an exquisite sweet-tart Mediterranean citrus profile.",
+      "featuresAr": [
+        "نكهة البرتقال الأحمر الإيطالي الفريدة",
+        "لون ياقوتي طبيعي رائع",
+        "غني بالطاقة والانتعاش"
+      ],
+      "featuresEn": [
+        "Unique Mediterranean blood orange",
+        "Striking natural ruby color",
+        "Invigorating citrus notes"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-orange",
+      "nameAr": "شراب البرتقال الطبيعي موناليزا (كانز)",
+      "nameEn": "MONA LISA Orange Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_orange.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب البرتقال الكلاسيكي من موناليزا من ثمار البرتقال الذهبية المنتقاة بعناية، حيوية وانتعاش لا يضاهى لكل العائلة.",
+      "descriptionEn": "MONA LISA classic Orange Drink made from premium sun-ripened oranges packed with vibrant sunshine flavor.",
+      "featuresAr": [
+        "برتقال طبيعي ذهبي مشرق",
+        "توازن مثالي للحلاوة والانتعاش",
+        "الخيار اليومي المفضل لجميع أفراد الأسرة"
+      ],
+      "featuresEn": [
+        "Golden ripe citrus taste",
+        "Balanced sweetness & zest",
+        "Everyday family favorite"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-red-grape",
+      "nameAr": "شراب العنب الأحمر موناليزا (كانز)",
+      "nameEn": "MONA LISA Red Grape Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_red_grape.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب العنب الأحمر الملكي من موناليزا بعصير عناقيد العنب الفاخرة، طعم غني ومكثف يمنحك تجربة انتعاش راقية.",
+      "descriptionEn": "MONA LISA Red Grape Drink with deep, royal fruity notes and pure refreshing grape aroma.",
+      "featuresAr": [
+        "طعم عناقيد العنب الأحمر الفاخر",
+        "مذاق غني وقوام منعش",
+        "لون أرجواني ملكي جذاب"
+      ],
+      "featuresEn": [
+        "Rich cluster red grape flavor",
+        "Full-bodied fruit taste",
+        "Royal purple presentation"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-pear",
+      "nameAr": "شراب الكمثرى الطبيعي موناليزا (كانز)",
+      "nameEn": "MONA LISA Pear Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_pear.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب الكمثرى المنعش من موناليزا بعبير الإجاص الناعم، مذاق هادئ وراقٍ يجسد روعة الفواكه الطبيعية المنتقاة.",
+      "descriptionEn": "MONA LISA Pear Drink with delicate, aromatic natural pear sweetness and silky smooth refreshment.",
+      "featuresAr": [
+        "عبير الكمثرى الطبيعي الناعم",
+        "مذاق أوروبي هادئ ولطيف",
+        "خفيف ومنعش للمعدة"
+      ],
+      "featuresEn": [
+        "Delicate sweet pear aroma",
+        "Refined European fruit taste",
+        "Gentle & hydrating"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "monalisa-drink-mango",
+      "nameAr": "شراب المانجو الاستوائي موناليزا (كانز)",
+      "nameEn": "MONA LISA Mango Drink (More Fruit, More Taste)",
+      "brand": "MONALISA",
+      "category": "candy_juices",
+      "image": "./assets/products/monalisa_drink_mango.webp",
+      "weight": "عبوة كانز معدنية منعشة",
+      "cartonSpec": "كرتون شحن جملة 24 عبوة · More Fruit, More Taste",
+      "descriptionAr": "شراب المانجو الاستوائي الكثيف من موناليزا بعبق المانجو الناضجة ولونها الذهبي الساحر، متعة استوائية حقيقية.",
+      "descriptionEn": "MONA LISA Mango Drink delivering a rich tropical sensation with sweet velvety mango flavor.",
+      "featuresAr": [
+        "نكهة المانجو الاستوائية الكثيفة",
+        "قوام مخملي غني بالفاكهة",
+        "مذاق صيفي منعش يدوم طويلاً"
+      ],
+      "featuresEn": [
+        "Dense tropical mango essence",
+        "Velvety smooth mouthfeel",
+        "Long-lasting refreshing finish"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "bakemate-fruitz-pop",
+      "nameAr": "مصاصات بيك ميت فروتز بوب محشوة بالعلكة",
+      "nameEn": "BAKEMATE Fruitz Pop (Lollipop with Bubble Gum)",
+      "brand": "BAKEMATE",
+      "category": "candy_juices",
+      "image": "./assets/products/bakemate_fruitz_pop.webp",
+      "weight": "أكياس وعلب عرض مشكلة",
+      "cartonSpec": "تشكيلة نكهات الفواكه: فراولة، مانجو، برتقال",
+      "descriptionAr": "مصاصات فروتز بوب اللذيذة من بيك ميت بنكهات الفواكه الطبيعية ومفاجأة علكة الفقاعات بالداخل، نكهة فاكهية في كل مصاصة وحاصلة على علامة أفضل العلامات التجارية.",
+      "descriptionEn": "BAKEMATE Fruitz Pop lollipops filled with fun chewy bubble gum in Strawberry, Mango, and Orange flavors (Best Brands 2025).",
+      "featuresAr": [
+        "محشوة بعلكة الفقاعات اللذيذة",
+        "3 نكهات فواكه محبوبة: فراولة ومانجو وبرتقال",
+        "حائزة على علامة الجودة Best Brands 2025"
+      ],
+      "featuresEn": [
+        "Filled with chewy bubble gum",
+        "3 kid-favorite fruit flavors",
+        "Award-winning Best Brands 2025 quality"
+      ],
+      "isFlagship": true
+    },
+    {
+      "id": "bakemate-pop-and-joy",
+      "nameAr": "مصاصات بيك ميت بوب آند جوي بالفواكه والعلكة",
+      "nameEn": "BAKEMATE Pop & Joy (Filled Lollipop with Bubble Gum)",
+      "brand": "BAKEMATE",
+      "category": "candy_juices",
+      "image": "./assets/products/bakemate_pop_and_joy.webp",
+      "weight": "عبوات تجارية ملونة وجذابة",
+      "cartonSpec": "4 نكهات منعشة: تفاح أخضر، فراولة، برتقال، بطيخ",
+      "descriptionAr": "مصاصات بوب آند جوي المبهجة من بيك ميت بأربعة ألوان ونكهات منعشة محشوة بقلب من العلكة، تصميم مرح جذاب لنقاط البيع والسوبرماركت.",
+      "descriptionEn": "BAKEMATE Pop & Joy vibrant bubble gum filled lollipops in Green Apple, Strawberry, Orange, and Watermelon.",
+      "featuresAr": [
+        "4 ألوان ونكهات منعشة مع علكة بالداخل",
+        "تصميم مرح وملفت على رفوف المتاجر",
+        "سعر اقتصادي مناسب للإقبال اليومي"
+      ],
+      "featuresEn": [
+        "4 fruit flavors with bubble gum center",
+        "High-impact colorful packaging",
+        "Fast-moving impulse buy product"
+      ],
+      "isFlagship": true
     }
   ],
   "gallery": [
     {
-      "id": "bonton_fleet_dispatch",
-      "category": "trucks",
-      "src": "./assets/facilities/bonton_fleet_dispatch.webp",
-      "fallbackSrc": "./assets/facilities/bonton_fleet_dispatch.jpg",
-      "titleAr": "تفريغ وشحن بون تون وشوكو بي آر (شاحنة ليبيا 25-53205)",
-      "titleEn": "Bakemate Freight Handling (Libya Plate 25-53205)",
-      "tagAr": "مناولة لوجستية متخصصة",
-      "tagEn": "Professional Freight Handling",
-      "descAr": "فريق العمل اللوجستي داخل الشاحنة لتفريغ وترتيب كراتين رولات بون تون (Bon Ton)، وبسكويت شوكو بي آر (Choco BR)، ويم وان (Wim Wan).",
-      "descEn": "Logistics handling crew inside the commercial transport vehicle unloading cartons of Bon Ton rolls and Choco BR biscuits for scheduled store distribution.",
-      "locationAr": "طرابلس - الكريمية · رصيف شحن الجملة",
-      "locationEn": "Tripoli Karimiyah Wholesale Dispatch Bay",
-      "badgeAr": "لوحة الشاحنة: ليبيا 25-53205",
-      "badgeEn": "Vehicle Plate: Libya 25-53205"
+      "id": "karimiyah_showroom_shelf",
+      "category": "warehouses",
+      "src": "./assets/facilities/karimiyah_showroom_shelf.webp",
+      "fallbackSrc": "./assets/facilities/karimiyah_showroom_shelf.jpg",
+      "titleAr": "صالة ومعرض المنتجات ونقطة التوزيع المركزية بالكريمية",
+      "titleEn": "Al-Karimiyah Central Showroom & Distribution Hub",
+      "tagAr": "المستودع الرئيسي وصالة العرض",
+      "tagEn": "HQ Showroom & Hub",
+      "descAr": "معرض ومركز التوزيع الرئيسي الذي يضم كافة أصناف موناليزا، بيك ميت، لوك مي، وباقي الوكالات لتسهيل المعاينة وتجهيز طلبيات الجملة للتجار.",
+      "descEn": "Master showroom and wholesale fulfillment center exhibiting full brand portfolios of MONALISA, BAKEMATE, LookMe, and partner lines.",
+      "locationAr": "طرابلس - الكريمية · شارع العسل والثانوية",
+      "locationEn": "Tripoli - Al-Karimiyah, Honey St & High School St",
+      "badgeAr": "معاينة واستلام جملة فوري",
+      "badgeEn": "Immediate Wholesale Pickup"
     },
     {
       "id": "truck_loading_dock",
       "category": "trucks",
       "src": "./assets/facilities/truck_loading_dock.webp",
       "fallbackSrc": "./assets/facilities/truck_loading_dock.jpg",
-      "titleAr": "تفريغ وتوريد شحنات مونا ليسا سويس رول",
-      "titleEn": "Container Dock Unloading - Mona Lisa Swiss Rolls",
-      "tagAr": "رصيف التحميل المباشر",
-      "tagEn": "Direct Logistics Loading Dock",
-      "descAr": "وصول الشاحنات المحملة بكراتين سويس رول مونا ليسا إلى رصيف التحميل المجهز بالمستودع المركزي بالكريمية، لتصنيفها وتوزيعها المباشر.",
-      "descEn": "Heavy logistics trailers docking at Tripoli Karimiyah hub unloading pallets of Mona Lisa Swiss Roll cartons for direct dispatch.",
+      "titleAr": "أرصفة الاستلام والتفريغ المباشر للحاويات وشحنات الكيك والويفر",
+      "titleEn": "Inbound Freight Logistics & Container Receiving Dock",
+      "tagAr": "رصيف الشحن والتفريغ المباشر",
+      "tagEn": "Direct Inbound Dock",
+      "descAr": "وصول الشاحنات الثقيلة والمقطورات المحملة بكراتين موناليزا وبضائع الاستيراد إلى رصيف التحميل المجهز بالمستودع المركزي بالكريمية لتفريغها وفرزها.",
+      "descEn": "Heavy logistics trailers docking at Tripoli Karimiyah master warehouse unloading pallets of MONALISA products for immediate sorting.",
       "locationAr": "طرابلس - الكريمية · مستودع الاستلام المركزي",
       "locationEn": "Tripoli - Al-Karimiyah Central Logistics Hub",
-      "badgeAr": "شحنات يومية منتظمة",
+      "badgeAr": "استقبال وتفريغ يومي منتظم",
       "badgeEn": "Daily Scheduled Inbound"
     },
     {
@@ -827,64 +970,48 @@
       "category": "trucks",
       "src": "./assets/facilities/refrigerated_fleet_worker.webp",
       "fallbackSrc": "./assets/facilities/refrigerated_fleet_worker.jpg",
-      "titleAr": "أسطول شاحنات التبريد المجهزة (لوحة طرابلس ن 34 - 2)",
-      "titleEn": "Insulated Refrigerated Fleet (Tripoli Plate 34-2 N)",
+      "titleAr": "مستودعات التبريد وشحن البضائع الحساسة بالأسطول المبرد",
+      "titleEn": "Insulated Refrigerated Transport Fleet (Tripoli Plate 34-2 N)",
       "tagAr": "نقل مبرد ومكيف 100%",
-      "tagEn": "Temperature-Controlled Logistics",
-      "descAr": "تحميل كراتين ويفر مونا ليسا سنوفليك واكسترا داخل مقصورة التبريد المعزولة لضمان ثبات القوام وجودة الشوكولاتة في مختلف فصول السنة.",
-      "descEn": "Logistics crew loading Mona Lisa Snowflake and Extra wafers into modern insulated refrigerated cargo bays preserving crispiness.",
+      "tagEn": "Temperature-Controlled Fleet",
+      "descAr": "تحميل كراتين ويفر وشوكولاتة موناليزا داخل مقصورات التبريد المعزولة لضمان ثبات القوام وجودة المنتج الفائقة في حرارة الصيف ومختلف فصول السنة.",
+      "descEn": "Logistics crew loading MONALISA chocolate and wafer products into modern insulated refrigerated cargo bays preserving optimum quality.",
       "locationAr": "مستودعات الكريمية · رصيف شاحنات التبريد",
       "locationEn": "Karimiyah Warehousing · Refrigerated Fleet Bay",
       "badgeAr": "لوحة نقل معتمدة: ن 34 - 2",
       "badgeEn": "Official Plate: 34-2 N"
     },
     {
+      "id": "bonton_fleet_dispatch",
+      "category": "warehouses",
+      "src": "./assets/facilities/bonton_fleet_dispatch.webp",
+      "fallbackSrc": "./assets/facilities/bonton_fleet_dispatch.jpg",
+      "titleAr": "مناولة بضائع الجملة وتجهيز شاحنات التوزيع للمدن والمحافظات",
+      "titleEn": "Bakemate & Confectionery Freight Dispatch (Libya 25-53205)",
+      "tagAr": "مناولة لوجستية متخصصة",
+      "tagEn": "Professional Freight Handling",
+      "descAr": "فريق العمل اللوجستي داخل الشاحنة لتفريغ وترتيب كراتين رولات بون تون (Bon Ton)، وبسكويت شوكو بي آر (Choco BR) لتسليمها لمتاجر الجملة والموزعين.",
+      "descEn": "Logistics handling crew inside commercial transport vehicles preparing cartons of Bon Ton rolls and Choco BR biscuits for scheduled retail deliveries.",
+      "locationAr": "طرابلس - الكريمية · رصيف شحن الجملة",
+      "locationEn": "Tripoli Karimiyah Wholesale Dispatch Bay",
+      "badgeAr": "شاحنة توزيع: ليبيا 25-53205",
+      "badgeEn": "Vehicle Plate: Libya 25-53205"
+    },
+    {
       "id": "pickup_distribution_road",
       "category": "distribution",
       "src": "./assets/facilities/pickup_distribution_road.webp",
       "fallbackSrc": "./assets/facilities/pickup_distribution_road.jpg",
-      "titleAr": "شاحنات التوزيع التجاري السريع على الطرق الليبية",
+      "titleAr": "شاحنات التوزيع التجاري السريع تجوب المدن والطرق الليبية",
       "titleEn": "Commercial Highway Express Delivery (Mona Lisa Wafers)",
-      "tagAr": "تغذية الأسواق والمحال",
+      "tagAr": "تغذية الأسواق والمحال يومياً",
       "tagEn": "Rapid Retail Replenishment",
-      "descAr": "شاحنات النقل الخفيف تنطلق يومياً محملة بكراتين ويفر مونا ليسا اكسترا (أزرق، أحمر، أخضر) لتوصيلها فورياً لمحلات التجزئة والسوبرماركت.",
-      "descEn": "Commercial delivery pickup transporting stacked secured Mona Lisa cartons across Libyan arterial highways directly to retailers.",
+      "descAr": "شاحنات النقل الخفيف تنطلق يومياً محملة بكراتين ويفر موناليزا اكسترا وباقي الأصناف لتوصيلها فورياً لمحلات التجزئة والسوبرماركت عبر كافة المدن.",
+      "descEn": "Commercial delivery pickup transporting stacked secured MONALISA cartons across Libyan arterial highways directly to retailers.",
       "locationAr": "الطريق الساحلي وشرايين النقل بين المدن",
       "locationEn": "Tripoli Arterial Expressways & Regional Routes",
-      "badgeAr": "توصيل خلال 24 ساعة",
-      "badgeEn": "24h Fast Fulfillment"
-    },
-    {
-      "id": "karimiyah_showroom_shelf",
-      "category": "warehouses",
-      "src": "./assets/facilities/karimiyah_showroom_shelf.webp",
-      "fallbackSrc": "./assets/facilities/karimiyah_showroom_shelf.jpg",
-      "titleAr": "صالة عرض المنتجات النموذجية بالكريمية",
-      "titleEn": "Al-Karimiyah Showroom Unit (Honey St & High School St)",
-      "tagAr": "الكريمية شارع العسل والثانوية",
-      "tagEn": "Al-Karimiyah Honey St & High School St",
-      "descAr": "جناح وخزانة العرض النموذجية التي تضم أصناف ويفر مونا ليسا، بورتو بيلو، وبسكويت الشوكولاتة لتسهيل معاينة الأصناف واختيار طلبيات الجملة.",
-      "descEn": "Dedicated retail showroom display cabinet exhibiting the full portfolio of Mona Lisa wafers, Porto Bello snacks, and biscuits in Al-Karimiyah.",
-      "locationAr": "الكريمية · شارع العسل وشارع الثانوية",
-      "locationEn": "Al-Karimiyah, Honey St & High School St, Tripoli",
-      "badgeAr": "معاينة وطلب فوري",
-      "badgeEn": "On-Demand Wholesale Orders"
-    },
-    {
-      "id": "consumer_moments_wafers",
-      "category": "distribution",
-      "src": "./assets/facilities/consumer_moments_wafers.webp",
-      "fallbackSrc": "./assets/facilities/consumer_moments_wafers.jpg",
-      "titleAr": "اختيار العائلة الليبية الأول ولمسات السعادة",
-      "titleEn": "The Libyan Household Favorite - Pure Crispiness",
-      "tagAr": "ثقة المستهلك وجودة المذاق",
-      "tagEn": "Household Consumer Trust",
-      "descAr": "حضور منتجات مونا ليسا وبيك ميت في كل بيت ليبي؛ طعم الويفر الهش والمكونات النقية التي تمنح الأطفال والعائلات لحظات لا تُنسى.",
-      "descEn": "Mona Lisa wafers bring smiles to Libyan homes every day, renowned for rich cream, authentic Italian wafer recipe, and wholesome quality.",
-      "locationAr": "في كل بيت ليبي · من طرابلس إلى بنغازي وسبها",
-      "locationEn": "Across Libyan Homes from Tripoli to Benghazi",
-      "badgeAr": "جودة معتمدة ومرخصة",
-      "badgeEn": "FDA & Health Certified"
+      "badgeAr": "توصيل وتغذية مستمرة للأسواق",
+      "badgeEn": "Continuous Market Replenishment"
     }
   ],
   "brands": [
@@ -932,11 +1059,18 @@
     }
   ],
   "settings": {
-    "whatsappNumber": "218925062360",
-    "phoneDisplay": "+218 92 506 2360",
-    "email": "info@ethar-libya.ly",
-    "tripoliAddressAr": "ليبيا، طرابلس - طريق السواني / الكريمية - مجمع المستودعات المركزية",
-    "tripoliAddressEn": "Tripoli, Libya - Al-Sawani Road / Al-Karimiyah Hub",
-    "adminPin": "ethar2026"
+    "whatsappNumber": "0925062360",
+    "phoneDisplay": "092 506 2360",
+    "phoneSecondary": "091 325 3515",
+    "email": "etharlibya2015@gmail.com",
+    "tripoliAddressAr": "ليبيا، طرابلس - طريق السواني / الكريمية - مجمع المستودعات المركزية (شارع الثانوية والعسل)",
+    "tripoliAddressEn": "Tripoli, Libya - Al-Karimiyah Central Logistics Hub (Al-Thanawiya & Honey St)",
+    "adminPin": "ethar2026",
+    "commercialLicenseNo": "2006-218-0489",
+    "taxNumber": "10920067845",
+    "chamberRegNo": "45892 / طرابلس",
+    "facebookUrl": "https://facebook.com",
+    "tiktokUrl": "https://tiktok.com/@etharlibya",
+    "instagramUrl": "https://instagram.com/etharlibya"
   }
 }

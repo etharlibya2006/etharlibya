@@ -3,7 +3,7 @@ export interface Product {
   nameAr: string;
   nameEn: string;
   brand: 'MONALISA' | 'BAKEMATE' | 'Nutri-Food' | 'LookMe' | 'BOLANTY' | 'LIBRA';
-  category: 'biscuits' | 'wafers' | 'cakes' | 'confectionery' | 'beverages' | 'other';
+  category: 'biscuits' | 'wafers' | 'cakes' | 'confectionery' | 'beverages' | 'candy_juices' | 'other';
   image: string;
   weight: string;
   cartonSpec: string;
@@ -16,13 +16,13 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   // ==========================================
-  // --- MONALISA FLAGSHIP BRAND (مونا ليزا) ---
+  // --- MONALISA FLAGSHIP BRAND (موناليزا) ---
   // ==========================================
 
   // 1. Choco Biscuit Dark Chocolate
   {
     id: 'monalisa-choco-biscuit-dark',
-    nameAr: 'بسكويت مونا ليزا شوكو بيسكويت بالشوكولاتة الداكنة',
+    nameAr: 'بسكويت موناليزا شوكو بيسكويت بالشوكولاتة الداكنة',
     nameEn: 'MONALISA Choco Biscuit (Dark Chocolate & Petit Beurre)',
     brand: 'MONALISA',
     category: 'biscuits',
@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
   // 2. Choco Biscuit Milk & Petit Beurre (Blue Box)
   {
     id: 'monalisa-choco-biscuit-milk',
-    nameAr: 'بسكويت مونا ليزا شوكو بيسكويت بشوكولاتة الحليب والبيتي بور',
+    nameAr: 'بسكويت موناليزا شوكو بيسكويت بشوكولاتة الحليب والبيتي بور',
     nameEn: 'MONALISA Choco Biscuit (Milk Chocolate & Petit Beurre)',
     brand: 'MONALISA',
     category: 'biscuits',
@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
   // 3. Choco Biscuit Cocoa Biscuit with Milk Chocolate (Green Box)
   {
     id: 'monalisa-choco-biscuit-cocoa',
-    nameAr: 'بسكويت مونا ليزا شوكو بيسكويت بالكاكاو وشوكولاتة الحليب',
+    nameAr: 'بسكويت موناليزا شوكو بيسكويت بالكاكاو وشوكولاتة الحليب',
     nameEn: 'MONALISA Choco Biscuit (Milk Chocolate & Cocoa Biscuit)',
     brand: 'MONALISA',
     category: 'biscuits',
@@ -73,7 +73,7 @@ export const PRODUCTS: Product[] = [
   // 4. Mini Biscuits Strawberry 30g
   {
     id: 'monalisa-mini-biscuits-strawberry',
-    nameAr: 'ميني بسكويت مونا ليزا بنكهة الفراولة',
+    nameAr: 'ميني بسكويت موناليزا بنكهة الفراولة',
     nameEn: 'MONALISA Mini Biscuits (Strawberry Flavor)',
     brand: 'MONALISA',
     category: 'biscuits',
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
   // 5. Chocolate Tiger Filled Biscuit Pouch
   {
     id: 'monalisa-chocolate-tiger-pouch',
-    nameAr: 'بسكويت كرات مونا ليزا المحشوة بالشوكولاتة',
+    nameAr: 'بسكويت كرات موناليزا المحشوة بالشوكولاتة',
     nameEn: 'MONALISA Chocolate Filled Snack Biscuits (Pouch)',
     brand: 'MONALISA',
     category: 'biscuits',
@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
   // 6. Wafers Extra Milky
   {
     id: 'monalisa-wafers-milky',
-    nameAr: 'ويفر مونا ليزا إكسترا - حليب',
+    nameAr: 'ويفر موناليزا إكسترا - حليب',
     nameEn: 'MONALISA Wafers Extra (Milky Cream)',
     brand: 'MONALISA',
     category: 'wafers',
@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
   // 7. Wafers Extra Coconut
   {
     id: 'monalisa-wafers-coconut',
-    nameAr: 'ويفر مونا ليزا إكسترا - جوز الهند',
+    nameAr: 'ويفر موناليزا إكسترا - جوز الهند',
     nameEn: 'MONALISA Wafers Extra (Coconut Cream)',
     brand: 'MONALISA',
     category: 'wafers',
@@ -139,40 +139,41 @@ export const PRODUCTS: Product[] = [
   // 8. Wafers Extra Chocolate 50g
   {
     id: 'monalisa-wafers-chocolate-50g',
-    nameAr: 'ويفر مونا ليزا إكسترا بالشوكولاتة 50g',
+    nameAr: 'ويفر موناليزا إكسترا بالشوكولاتة 50g',
     nameEn: 'MONALISA Wafers Extra Chocolate 50g',
     brand: 'MONALISA',
     category: 'wafers',
     image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_29_PM-4_8dc7156e.webp',
     weight: '50 جرام (50g e)',
     cartonSpec: 'علب عرض تجارية مخصصة',
-    descriptionAr: 'ويفر الشوكولاتة الأيقوني من مونا ليزا بوزن 50 جرام، قرمشة متوازنة مع كريمة الكاكاو الإيطالية.',
-    descriptionEn: 'The iconic 50g chocolate wafer bar from Mona Lisa, layered with decadent Italian-style cocoa cream.',
+    descriptionAr: 'ويفر الشوكولاتة الأيقوني من موناليزا بوزن 50 جرام، قرمشة متوازنة مع كريمة الكاكاو الإيطالية.',
+    descriptionEn: 'The iconic 50g chocolate wafer bar from Monalisa, layered with decadent Italian-style cocoa cream.',
     featuresAr: ['وزن مثالي 50 جرام للوجبات السريعة', 'شوكولاتة بنكهة إيطالية أصيلة', 'تغليف عالي الجودة'],
     featuresEn: ['Ideal 50g snack weight', 'Authentic Italian chocolate style', 'Premium sealed wrapper'],
     isFlagship: true,
   },
 
-  // 9. Wafers Extra Display Box (Red & Green)
+  // 8b. Wafers Extra Hazelnut 50g (Green Pack)
   {
-    id: 'monalisa-wafers-display-box',
-    nameAr: 'تشكيلة ويفر مونا ليزا إكسترا (صناديق العرض الفاخرة)',
-    nameEn: 'MONALISA Wafers Extra Display Pack (Chocolate & Hazelnut)',
+    id: 'monalisa-wafer-hazelnut-50g',
+    nameAr: 'ويفر موناليزا إكسترا بالبندق 50g',
+    nameEn: 'MONALISA Wafers Extra Hazelnut 50g',
     brand: 'MONALISA',
     category: 'wafers',
-    image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_31_PM-5_4ed75563.webp',
-    weight: 'علب عرض مزدوجة',
-    cartonSpec: 'صناديق حمراء وخضراء لنقاط البيع والسوبرماركت',
-    descriptionAr: 'صناديق عرض كرتونية جاهزة للرفوف تضم ويفر مونا ليزا إكسترا بنكهتي الشوكولاتة والبندق.',
-    descriptionEn: 'Ready-to-display retail counter boxes showcasing Mona Lisa Extra wafers in Chocolate and Hazelnut.',
-    featuresAr: ['صناديق عرض بصرية جذابة', 'نكهتا الشوكولاتة والبندق', 'مجهزة مباشرة للعرض في نقاط البيع'],
-    featuresEn: ['Vibrant shelf-ready packaging', 'Chocolate and hazelnut varieties', 'Instant point-of-sale appeal'],
+    image: './assets/products/monalisa_wafer_hazelnut_50g.webp',
+    weight: '50 جرام (50g e)',
+    cartonSpec: 'كرتون شحن جملة ونقاط بيع خضراء',
+    descriptionAr: 'ويفر إكسترا بحشوة كريمة البندق الإيطالية الفاخرة، طبقات مقرمشة هشة وتغليف محكم يحفظ الطراوة والنكهة الأصيلة.',
+    descriptionEn: 'MONALISA Wafers Extra Hazelnut 50g with rich creamy hazelnut layers and delicate crispiness.',
+    featuresAr: ['كريمة بندق طبيعية غنية', 'طبقات ويفر ذهبية مقرمشة', 'وزن عملي 50 جرام ونكهة إيطالية أصيلة'],
+    featuresEn: ['Rich natural hazelnut cream', 'Crispy golden wafer sheets', 'Convenient 50g single-serve pack'],
+    isFlagship: true,
   },
 
   // 10. Swiss Roll (Hazelnut, Caramel, Chocolate)
   {
     id: 'monalisa-swiss-roll',
-    nameAr: 'سويس رول مونا ليزا (بندق - كراميل - شوكولاتة)',
+    nameAr: 'سويس رول موناليزا (بندق - كراميل - شوكولاتة)',
     nameEn: 'MONALISA Swiss Roll (Hazelnut, Caramel & Chocolate)',
     brand: 'MONALISA',
     category: 'cakes',
@@ -186,43 +187,44 @@ export const PRODUCTS: Product[] = [
     isFlagship: true,
   },
 
+  // 10b. Ma Bella Chocolate Cake
+  {
+    id: 'monalisa-mabella-chocolate-cake',
+    nameAr: 'كيك موناليزا مابيلا بالشوكولاتة الفاخرة',
+    nameEn: 'MONALISA Ma Bella Chocolate Cake',
+    brand: 'MONALISA',
+    category: 'cakes',
+    image: './assets/products/monalisa_mabella_cake_chocolate.webp',
+    weight: 'قطعة كيك مغلفة فردياً',
+    cartonSpec: 'علبة عرض كرتونية تجارية أنيقة',
+    descriptionAr: 'كيك إسفنجي شوكولاتة ناعم محشو بقلب شوكولاتة كريمية سائلة ومغطى بطبقة شوكولاتة فاخرة مع خطوط تزيين الشوكولاتة، متعة ساحرة مع كل قضمة.',
+    descriptionEn: 'MONALISA Ma Bella soft chocolate cake filled with flowing molten chocolate cream and gourmet chocolate enrobing.',
+    featuresAr: ['قلب شوكولاتة ذائبة كثيفة', 'كيك إسفنجي طري ولذيذ', 'تغطية شوكولاتة فاخرة بالكامل'],
+    featuresEn: ['Flowing molten chocolate core', 'Moist tender sponge texture', 'Full chocolate enrobing'],
+    isFlagship: true,
+  },
+
   // 11. Snowflake Pistachio
   {
     id: 'monalisa-snowflake-pistachio',
-    nameAr: 'كيك مونا ليزا سنو فليك بطعم الفستق الحلبي',
+    nameAr: 'كيك موناليزا سنو فليك بطعم الفستق الحلبي',
     nameEn: 'MONALISA SNOWFLAKE (Pistachio Cream Cake)',
     brand: 'MONALISA',
     category: 'cakes',
     image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_01_PM-5_e07aa92b.webp',
     weight: 'قطعة كيك مغلفة فاخرة',
     cartonSpec: 'كرتون شحن نقاط البيع الفاخرة',
-    descriptionAr: 'تحفة حلويات من مونا ليزا: كيكة هشة محشوة بكريمة الحليب ومغلفة بطبقة غنية من الفستق الحلبي المحمص.',
+    descriptionAr: 'تحفة حلويات من موناليزا: كيكة هشة محشوة بكريمة الحليب ومغلفة بطبقة غنية من الفستق الحلبي المحمص.',
     descriptionEn: 'Gourmet dome cake filled with smooth milk cream and generously enrobed in crushed roasted pistachios.',
     featuresAr: ['فستق حلبي فاخر ومطحون', 'حشوة كريمة حليبية مركزة', 'مظهر أنيق ومذاق ملكي'],
     featuresEn: ['Premium crushed pistachios', 'Dense milk cream center', 'Royal gourmet presentation'],
     isFlagship: true,
   },
 
-  // 12. Snowflake Coconut & Milk Duo
-  {
-    id: 'monalisa-snowflake-duo',
-    nameAr: 'كيك مونا ليزا سنو فليك (جوز الهند والحليب)',
-    nameEn: 'MONALISA SNOWFLAKE (Coconut & Milk Flavors)',
-    brand: 'MONALISA',
-    category: 'cakes',
-    image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_59_08_PM-1_f1b5f11e.webp',
-    weight: 'عبوة فردية مميزة',
-    cartonSpec: 'علبة عرض ثنائية النكهات',
-    descriptionAr: 'نكهتان لذيذتان: سنو فليك جوز الهند الأزرق وسنو فليك الحليب الأحمر مع طعم متوازن يذوب في الفم.',
-    descriptionEn: 'Two signature flavors: Snowflake Coconut (Blue) and Snowflake Milk (Red) with melt-in-mouth balance.',
-    featuresAr: ['نكهتان رئيسيتان: جوز هند وحليب', 'طبقة تغطية كريمة ناعمة', 'قوام كيك طازج وهش'],
-    featuresEn: ['Two signature flavors', 'Soft cream enrobing', 'Melt-in-mouth balance'],
-  },
-
   // 13. Spekuloos Lotus Crunch
   {
     id: 'monalisa-spekuloos',
-    nameAr: 'كيك مونا ليزا سبيكولوس لوتس كرنش',
+    nameAr: 'كيك موناليزا سبيكولوس لوتس كرنش',
     nameEn: 'MONALISA Spekuloos Lotus Crunch Cake',
     brand: 'MONALISA',
     category: 'cakes',
@@ -239,7 +241,7 @@ export const PRODUCTS: Product[] = [
   // 14. Oreo Dream Cookies & Cream
   {
     id: 'monalisa-oreo-dream',
-    nameAr: 'كيك مونا ليزا أوريو دريم كوكيز آند كريم',
+    nameAr: 'كيك موناليزا أوريو دريم كوكيز آند كريم',
     nameEn: 'MONALISA Oreo Dream (Cookies & Cream Cake)',
     brand: 'MONALISA',
     category: 'cakes',
@@ -255,7 +257,7 @@ export const PRODUCTS: Product[] = [
   // 15. Biscotti Spread
   {
     id: 'monalisa-biscotti-spread',
-    nameAr: 'كريمة بسكوت مونا ليزا بيسكوتي سبريد',
+    nameAr: 'كريمة بسكوت موناليزا بيسكوتي سبريد',
     nameEn: 'MONALISA Biscotti Spread (Caramelized Biscuit Butter)',
     brand: 'MONALISA',
     category: 'confectionery',
@@ -269,26 +271,10 @@ export const PRODUCTS: Product[] = [
     isFlagship: true,
   },
 
-  // 16. Biscotti Spread Gourmet Table
-  {
-    id: 'monalisa-biscotti-spread-table',
-    nameAr: 'كريمة بسكوت مونا ليزا متعددة الاستخدامات',
-    nameEn: 'MONALISA Biscotti Spread Gourmet Serving',
-    brand: 'MONALISA',
-    category: 'confectionery',
-    image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_57_PM-3_3ace99f6.webp',
-    weight: 'برطمان مع تقديم حلويات',
-    cartonSpec: 'مخصص للمقاهي والمخابز والفنادق',
-    descriptionAr: 'كريمة بسكوت مونا ليزا المعتمدة من كبار الطهاة والمخابز، مثالية لتزيين الكيك والتشيز كيك وتوست الإفطار.',
-    descriptionEn: 'Multi-use Mona Lisa biscuit spread for hospitality, specialty cafes, cake decorating, and bakeries.',
-    featuresAr: ['متعددة الاستخدامات للحلويات', 'ثبات ممتاز عند درجات الحرارة المختلفة', 'طعم غني يرفع قيمة المنتج النهائي'],
-    featuresEn: ['Multi-purpose dessert ingredient', 'Temperature stable', 'Elevates finished dessert value'],
-  },
-
   // 17. Sweetened Condensed Milk 397g
   {
     id: 'monalisa-condensed-milk',
-    nameAr: 'مونا ليزا حليب مكثف محلى فاخر 397g',
+    nameAr: 'موناليزا حليب مكثف محلى فاخر 397g',
     nameEn: 'MONALISA Sweetened Condensed Milk (Gold Edition 397g)',
     brand: 'MONALISA',
     category: 'other',
@@ -305,34 +291,18 @@ export const PRODUCTS: Product[] = [
   // 18. Chocolate Powder Yellow Tub 420g
   {
     id: 'monalisa-chocolate-powder-yellow',
-    nameAr: 'مسحوق الشوكولاتة مونا ليزا مع الحليب 420g',
+    nameAr: 'مسحوق الشوكولاتة موناليزا مع الحليب 420g',
     nameEn: 'MONALISA Chocolate Powder (Add Milk Yellow Tub 420g)',
     brand: 'MONALISA',
-    category: 'beverages',
+    category: 'candy_juices',
     image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_51_36_PM-7_60ef5a4c.webp',
     weight: 'الوزن الصافي 420 جرام (420g e)',
     cartonSpec: 'علبة أسطوانية محكمة الإغلاق',
-    descriptionAr: 'مسحوق شوكولاتة مونا ليزا سريع الذوبان مع الحليب، طعم محبوب للأطفال وغني بالطاقة لبداية يوم نشيطة.',
+    descriptionAr: 'مسحوق شوكولاتة موناليزا سريع الذوبان مع الحليب، طعم محبوب للأطفال وغني بالطاقة لبداية يوم نشيطة.',
     descriptionEn: 'Instant cocoa drink powder with real chocolate taste, fast dissolving in warm or cold milk.',
     featuresAr: ['يذوب فوراً في الحليب', 'حجم اقتصادي 420 جرام', 'علبة بلاستيكية محكمة الإغلاق'],
     featuresEn: ['Instant dissolve in milk', 'Economic 420g tub', 'Moisture-tight storage tub'],
     isFlagship: true,
-  },
-
-  // 19. Chocolate Powder Red Edition 420g
-  {
-    id: 'monalisa-chocolate-powder-red',
-    nameAr: 'مسحوق الشوكولاتة والكاكاو مونا ليزا (فيتامين د)',
-    nameEn: 'MONALISA Chocolate Powder (Real Cocoa & Vitamin D 420g)',
-    brand: 'MONALISA',
-    category: 'beverages',
-    image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_29_05_PM-7_038f11ea.webp',
-    weight: 'الوزن الصافي 420 جرام (420g e)',
-    cartonSpec: 'كاكاو حقيقي Real Cocoa · فيتامين D',
-    descriptionAr: 'مسحوق الكاكاو الطبيعي المدعم بفيتامين د وخالٍ من المواد الحافظة والألوان الصناعية لبناء صحي للأطفال.',
-    descriptionEn: 'Fortified chocolate powder with real natural cocoa and Vitamin D, zero artificial additives.',
-    featuresAr: ['كاكاو طبيعي حقيقي Real Cocoa', 'معزز بفيتامين د النشط', 'خالٍ من الإضافات والألوان الصناعية'],
-    featuresEn: ['Real natural cocoa', 'Fortified with Vitamin D', 'No artificial colors or additives'],
   },
 
   // ==========================================
@@ -385,22 +355,6 @@ export const PRODUCTS: Product[] = [
     descriptionEn: 'Assorted sandwich biscuits filled with rich cream available in Vanilla, Strawberry, Orange, and Chocolate.',
     featuresAr: ['4 نكهات محبوبة لجميع الأذواق', 'حشوة كريمة كثيفة ومبهجة', 'سعر اقتصادي مناسب للتوزيع الواسع'],
     featuresEn: ['4 customer-favorite flavors', 'Rich cream filling', 'Fast-moving commercial retail product'],
-  },
-
-  // 23. Kreme-C Sandwich Tower
-  {
-    id: 'bakemate-kreme-c-tower',
-    nameAr: 'تشكيلة بسكويت ساندويتش كريم-أو بيكميت المتكاملة',
-    nameEn: 'BAKEMATE Kreme-C Flavoured Sandwich Tower',
-    brand: 'BAKEMATE',
-    category: 'biscuits',
-    image: './assets/aistudio/ChatGPT_Image_Nov_4__2026__01_28_55_PM-2_af23689d.webp',
-    weight: 'برج النكهات الأربعة',
-    cartonSpec: 'كرتون شحن جملة مخصص',
-    descriptionAr: 'بسكويت كريم-أو بشخصيات مبتسمة مرحة، أربع نكهات متعة لا تنتهي لتلبية طلبات التجزئة والجملة.',
-    descriptionEn: 'Kreme-C iconic cream sandwich biscuits packaged in vibrant retail wraps for grocery shelves.',
-    featuresAr: ['تصميم مرح بشخصيات مبتسمة', 'تنوع واسع يرضي أذواق العائلات', 'تغليف جذاب لرفوف المتاجر'],
-    featuresEn: ['Cheerful smiley embossed faces', 'Family variety pack', 'High-impact shelf presentation'],
   },
 
   // 24. Duo-Fun Double Cream Sandwich
@@ -613,16 +567,173 @@ export const PRODUCTS: Product[] = [
     featuresEn: ['Authentic roasted coffee aroma', 'Extra crispy and light', 'Certified Halal product'],
     isFlagship: true,
   },
+
+  // ==========================================
+  // --- CANDY & JUICES (حلوى وعصائر) ---
+  // ==========================================
+
+  // 38. MONA LISA Pineapple Drink Can
+  {
+    id: 'monalisa-drink-pineapple',
+    nameAr: 'شراب الأناناس الطبيعي موناليزا (كانز)',
+    nameEn: 'MONA LISA Pineapple Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_pineapple.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة مبرد 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب الأناناس الطبيعي المنعش من موناليزا بطعم الفاكهة الغني ونكهة استوائية نقية، مزيد من الفواكه لمزيد من المذاق الأصيل.',
+    descriptionEn: 'MONA LISA canned Pineapple Drink bursting with authentic tropical flavor and pure fruit goodness (More Fruit, More Taste).',
+    featuresAr: ['طعم أناناس استوائي طبيعي غني', 'عبوة كانز سهلة الفتح وسريعة التبريد', 'انتعاش فائق بدون نكهات صناعية ضارة'],
+    featuresEn: ['Rich tropical pineapple flavor', 'Quick-chill sleek aluminum can', 'Ultimate fruit refreshment'],
+    isFlagship: true,
+  },
+
+  // 39. MONA LISA Peach Drink Can
+  {
+    id: 'monalisa-drink-peach',
+    nameAr: 'شراب الخوخ الطبيعي موناليزا (كانز)',
+    nameEn: 'MONA LISA Peach Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_peach.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب الخوخ الفاخر من موناليزا بمذاق الخوخ الصيفي الناضج ونكهة مخملية منعشة ترضي جميع الأذواق في كل الأوقات.',
+    descriptionEn: 'MONA LISA Peach Drink crafted with ripe juicy peaches delivering superior fruity taste and refreshing aroma.',
+    featuresAr: ['مذاق الخوخ الصيفي الطبيعي الطازج', 'نسبة فاكهة مركزة ومذاق مخملي', 'مثالي للأيام الحارة والمناسبات العائلية'],
+    featuresEn: ['Fresh ripe summer peach taste', 'High fruit concentration', 'Ideal chilled refreshment for all seasons'],
+    isFlagship: true,
+  },
+
+  // 40. MONA LISA Blood Orange Drink Can
+  {
+    id: 'monalisa-drink-blood-orange',
+    nameAr: 'شراب البرتقال الأحمر موناليزا (كانز)',
+    nameEn: 'MONA LISA Blood Orange Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_blood_orange.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب البرتقال الأحمر (Blood Orange) المميز من موناليزا، توليفة فريدة بين حلاوة البرتقال وانتعاشه الفاكهي المكثف ولونه الياقوتي الجذاب.',
+    descriptionEn: 'MONA LISA Blood Orange Drink with deep ruby color and an exquisite sweet-tart Mediterranean citrus profile.',
+    featuresAr: ['نكهة البرتقال الأحمر الإيطالي الفريدة', 'لون ياقوتي طبيعي رائع', 'غني بالطاقة والانتعاش'],
+    featuresEn: ['Unique Mediterranean blood orange', 'Striking natural ruby color', 'Invigorating citrus notes'],
+    isFlagship: true,
+  },
+
+  // 41. MONA LISA Orange Drink Can
+  {
+    id: 'monalisa-drink-orange',
+    nameAr: 'شراب البرتقال الطبيعي موناليزا (كانز)',
+    nameEn: 'MONA LISA Orange Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_orange.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب البرتقال الكلاسيكي من موناليزا من ثمار البرتقال الذهبية المنتقاة بعناية، حيوية وانتعاش لا يضاهى لكل العائلة.',
+    descriptionEn: 'MONA LISA classic Orange Drink made from premium sun-ripened oranges packed with vibrant sunshine flavor.',
+    featuresAr: ['برتقال طبيعي ذهبي مشرق', 'توازن مثالي للحلاوة والانتعاش', 'الخيار اليومي المفضل لجميع أفراد الأسرة'],
+    featuresEn: ['Golden ripe citrus taste', 'Balanced sweetness & zest', 'Everyday family favorite'],
+    isFlagship: true,
+  },
+
+  // 42. MONA LISA Red Grape Drink Can
+  {
+    id: 'monalisa-drink-red-grape',
+    nameAr: 'شراب العنب الأحمر موناليزا (كانز)',
+    nameEn: 'MONA LISA Red Grape Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_red_grape.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب العنب الأحمر الملكي من موناليزا بعصير عناقيد العنب الفاخرة، طعم غني ومكثف يمنحك تجربة انتعاش راقية.',
+    descriptionEn: 'MONA LISA Red Grape Drink with deep, royal fruity notes and pure refreshing grape aroma.',
+    featuresAr: ['طعم عناقيد العنب الأحمر الفاخر', 'مذاق غني وقوام منعش', 'لون أرجواني ملكي جذاب'],
+    featuresEn: ['Rich cluster red grape flavor', 'Full-bodied fruit taste', 'Royal purple presentation'],
+    isFlagship: true,
+  },
+
+  // 43. MONA LISA Pear Drink Can
+  {
+    id: 'monalisa-drink-pear',
+    nameAr: 'شراب الكمثرى الطبيعي موناليزا (كانز)',
+    nameEn: 'MONA LISA Pear Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_pear.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب الكمثرى المنعش من موناليزا بعبير الإجاص الناعم، مذاق هادئ وراقٍ يجسد روعة الفواكه الطبيعية المنتقاة.',
+    descriptionEn: 'MONA LISA Pear Drink with delicate, aromatic natural pear sweetness and silky smooth refreshment.',
+    featuresAr: ['عبير الكمثرى الطبيعي الناعم', 'مذاق أوروبي هادئ ولطيف', 'خفيف ومنعش للمعدة'],
+    featuresEn: ['Delicate sweet pear aroma', 'Refined European fruit taste', 'Gentle & hydrating'],
+    isFlagship: true,
+  },
+
+  // 44. MONA LISA Mango Drink Can
+  {
+    id: 'monalisa-drink-mango',
+    nameAr: 'شراب المانجو الاستوائي موناليزا (كانز)',
+    nameEn: 'MONA LISA Mango Drink (More Fruit, More Taste)',
+    brand: 'MONALISA',
+    category: 'candy_juices',
+    image: './assets/products/monalisa_drink_mango.webp',
+    weight: 'عبوة كانز معدنية منعشة',
+    cartonSpec: 'كرتون شحن جملة 24 عبوة · More Fruit, More Taste',
+    descriptionAr: 'شراب المانجو الاستوائي الكثيف من موناليزا بعبق المانجو الناضجة ولونها الذهبي الساحر، متعة استوائية حقيقية.',
+    descriptionEn: 'MONA LISA Mango Drink delivering a rich tropical sensation with sweet velvety mango flavor.',
+    featuresAr: ['نكهة المانجو الاستوائية الكثيفة', 'قوام مخملي غني بالفاكهة', 'مذاق صيفي منعش يدوم طويلاً'],
+    featuresEn: ['Dense tropical mango essence', 'Velvety smooth mouthfeel', 'Long-lasting refreshing finish'],
+    isFlagship: true,
+  },
+
+  // 45. BAKEMATE Fruitz Pop
+  {
+    id: 'bakemate-fruitz-pop',
+    nameAr: 'مصاصات بيك ميت فروتز بوب محشوة بالعلكة',
+    nameEn: 'BAKEMATE Fruitz Pop (Lollipop with Bubble Gum)',
+    brand: 'BAKEMATE',
+    category: 'candy_juices',
+    image: './assets/products/bakemate_fruitz_pop.webp',
+    weight: 'أكياس وعلب عرض مشكلة',
+    cartonSpec: 'تشكيلة نكهات الفواكه: فراولة، مانجو، برتقال',
+    descriptionAr: 'مصاصات فروتز بوب اللذيذة من بيك ميت بنكهات الفواكه الطبيعية ومفاجأة علكة الفقاعات بالداخل، نكهة فاكهية في كل مصاصة وحاصلة على علامة أفضل العلامات التجارية.',
+    descriptionEn: 'BAKEMATE Fruitz Pop lollipops filled with fun chewy bubble gum in Strawberry, Mango, and Orange flavors (Best Brands 2025).',
+    featuresAr: ['محشوة بعلكة الفقاعات اللذيذة', '3 نكهات فواكه محبوبة: فراولة ومانجو وبرتقال', 'حائزة على علامة الجودة Best Brands 2025'],
+    featuresEn: ['Filled with chewy bubble gum', '3 kid-favorite fruit flavors', 'Award-winning Best Brands 2025 quality'],
+    isFlagship: true,
+  },
+
+  // 46. BAKEMATE Pop & Joy
+  {
+    id: 'bakemate-pop-and-joy',
+    nameAr: 'مصاصات بيك ميت بوب آند جوي بالفواكه والعلكة',
+    nameEn: 'BAKEMATE Pop & Joy (Filled Lollipop with Bubble Gum)',
+    brand: 'BAKEMATE',
+    category: 'candy_juices',
+    image: './assets/products/bakemate_pop_and_joy.webp',
+    weight: 'عبوات تجارية ملونة وجذابة',
+    cartonSpec: '4 نكهات منعشة: تفاح أخضر، فراولة، برتقال، بطيخ',
+    descriptionAr: 'مصاصات بوب آند جوي المبهجة من بيك ميت بأربعة ألوان ونكهات منعشة محشوة بقلب من العلكة، تصميم مرح جذاب لنقاط البيع والسوبرماركت.',
+    descriptionEn: 'BAKEMATE Pop & Joy vibrant bubble gum filled lollipops in Green Apple, Strawberry, Orange, and Watermelon.',
+    featuresAr: ['4 ألوان ونكهات منعشة مع علكة بالداخل', 'تصميم مرح وملفت على رفوف المتاجر', 'سعر اقتصادي مناسب للإقبال اليومي'],
+    featuresEn: ['4 fruit flavors with bubble gum center', 'High-impact colorful packaging', 'Fast-moving impulse buy product'],
+    isFlagship: true,
+  },
 ];
 
 export const CATEGORIES = [
   { id: 'all', nameAr: 'جميع المنتجات', nameEn: 'All Products' },
-  { id: 'biscuits', nameAr: 'البسكويت والكوكيز', nameEn: 'Biscuits & Cookies' },
-  { id: 'wafers', nameAr: 'الويفر والرولز', nameEn: 'Wafers & Rolls' },
-  { id: 'cakes', nameAr: 'الكيك والسويس رول والوافل', nameEn: 'Cakes, Rolls & Waffles' },
+  { id: 'biscuits', nameAr: 'البسكويت', nameEn: 'Biscuits' },
+  { id: 'wafers', nameAr: 'الويفر', nameEn: 'Wafers' },
+  { id: 'cakes', nameAr: 'الكيك', nameEn: 'Cakes' },
+  { id: 'candy_juices', nameAr: 'حلوى وعصائر', nameEn: 'Candy & Juices' },
   { id: 'confectionery', nameAr: 'الشوكولاتة وكريمة الدهن', nameEn: 'Chocolates & Spreads' },
-  { id: 'beverages', nameAr: 'مسحوق الكاكاو والمشروبات', nameEn: 'Cocoa Powder & Drinks' },
-  { id: 'other', nameAr: 'حليب مكثف ومواد غذائية', nameEn: 'Condensed Milk & Pantry' },
+  { id: 'other', nameAr: 'حليب مكثف ومواد غذائية', nameEn: 'Condensed Milk & Food Products' },
 ] as const;
 
 export const BRANDS = [

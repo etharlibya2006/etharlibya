@@ -34,16 +34,18 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
   }, [externalBrandFilter]);
 
   const filteredProducts = useMemo(() => {
+    if (!Array.isArray(productsList)) return [];
     return productsList.filter((item) => {
+      if (!item) return false;
       const matchCategory = selectedCategory === 'all' || item.category === selectedCategory;
       const matchBrand = selectedBrand === 'all' || item.brand === selectedBrand;
-      const q = searchQuery.toLowerCase().trim();
+      const q = (searchQuery || '').toLowerCase().trim();
       const matchSearch =
         !q ||
-        item.nameAr.toLowerCase().includes(q) ||
-        item.nameEn.toLowerCase().includes(q) ||
-        item.brand.toLowerCase().includes(q) ||
-        item.descriptionAr.toLowerCase().includes(q);
+        (Boolean(item.nameAr) && String(item.nameAr).toLowerCase().includes(q)) ||
+        (Boolean(item.nameEn) && String(item.nameEn).toLowerCase().includes(q)) ||
+        (Boolean(item.brand) && String(item.brand).toLowerCase().includes(q)) ||
+        (Boolean(item.descriptionAr) && String(item.descriptionAr).toLowerCase().includes(q));
 
       return matchCategory && matchBrand && matchSearch;
     });

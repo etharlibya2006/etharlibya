@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               />
             </div>
 
-            <div className="flex flex-col border-r rtl:border-r-0 rtl:border-l border-[#d9b239]/40 pr-3 rtl:pr-0 rtl:pl-3">
+            <div className="flex flex-col text-left rtl:text-right">
               <span className="text-xs font-black text-[#b4362d] font-cinzel tracking-wider">
                 {lang === 'ar' ? 'إيثار ليبيا' : 'ETHAR LIBYA'}
               </span>

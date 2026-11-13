@@ -7,7 +7,7 @@ interface LibyaDistributionMapProps {
   lang: Language;
 }
 
-type CityKey = 'tripoli' | 'misrata' | 'benghazi' | 'sebha';
+type CityKey = 'tripoli' | 'benghazi' | 'misrata' | 'zawiya' | 'zliten' | 'bayda' | 'sebha';
 
 export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, lang }) => {
   const [selectedCity, setSelectedCity] = useState<CityKey>('tripoli');
@@ -22,6 +22,8 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
       stats: string;
       color: string;
       geo: string;
+      shortLabelAr: string;
+      shortLabelEn: string;
     }
   > = {
     tripoli: {
@@ -32,15 +34,8 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
       stats: t.distribution.cities.tripoli.stats,
       color: '#d9b239', // Gold
       geo: "32°49' N · 13°07' E",
-    },
-    misrata: {
-      coords: { x: 378.1, y: 190.3 },
-      title: t.distribution.cities.misrata.name,
-      role: t.distribution.cities.misrata.role,
-      desc: t.distribution.cities.misrata.desc,
-      stats: t.distribution.cities.misrata.stats,
-      color: '#ffffff', // White
-      geo: "32°22' N · 15°05' E",
+      shortLabelAr: 'طرابلس (المقر)',
+      shortLabelEn: 'Tripoli (HQ)',
     },
     benghazi: {
       coords: { x: 693.9, y: 173.3 },
@@ -50,6 +45,52 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
       stats: t.distribution.cities.benghazi.stats,
       color: '#d9b239', // Gold
       geo: "32°07' N · 20°04' E",
+      shortLabelAr: 'بنغازي',
+      shortLabelEn: 'Benghazi',
+    },
+    misrata: {
+      coords: { x: 378.1, y: 190.3 },
+      title: t.distribution.cities.misrata.name,
+      role: t.distribution.cities.misrata.role,
+      desc: t.distribution.cities.misrata.desc,
+      stats: t.distribution.cities.misrata.stats,
+      color: '#ffffff', // White
+      geo: "32°22' N · 15°05' E",
+      shortLabelAr: 'مصراتة',
+      shortLabelEn: 'Misrata',
+    },
+    zawiya: {
+      coords: { x: 236.0, y: 82.0 },
+      title: t.distribution.cities.zawiya.name,
+      role: t.distribution.cities.zawiya.role,
+      desc: t.distribution.cities.zawiya.desc,
+      stats: t.distribution.cities.zawiya.stats,
+      color: '#ffffff', // White
+      geo: "32°45' N · 12°43' E",
+      shortLabelAr: 'الزاوية',
+      shortLabelEn: 'Zawiya',
+    },
+    zliten: {
+      coords: { x: 335.0, y: 140.0 },
+      title: t.distribution.cities.zliten.name,
+      role: t.distribution.cities.zliten.role,
+      desc: t.distribution.cities.zliten.desc,
+      stats: t.distribution.cities.zliten.stats,
+      color: '#ffffff', // White
+      geo: "32°27' N · 14°34' E",
+      shortLabelAr: 'زليتن',
+      shortLabelEn: 'Zliten',
+    },
+    bayda: {
+      coords: { x: 775.0, y: 135.0 },
+      title: t.distribution.cities.bayda.name,
+      role: t.distribution.cities.bayda.role,
+      desc: t.distribution.cities.bayda.desc,
+      stats: t.distribution.cities.bayda.stats,
+      color: '#d9b239', // Gold
+      geo: "32°45' N · 21°44' E",
+      shortLabelAr: 'البيضاء',
+      shortLabelEn: 'Al-Bayda',
     },
     sebha: {
       coords: { x: 380.2, y: 440.1 },
@@ -59,6 +100,8 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
       stats: t.distribution.cities.sebha.stats,
       color: '#ffffff', // White
       geo: "27°02' N · 14°25' E",
+      shortLabelAr: 'سبها',
+      shortLabelEn: 'Sebha',
     },
   };
 
@@ -231,9 +274,9 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
                       {/* Label with Background Badge for Maximum Contrast */}
                       <g transform={`translate(${city.coords.x}, ${city.coords.y - 24})`}>
                         <rect
-                          x={key === 'tripoli' ? -48 : key === 'misrata' ? -30 : key === 'benghazi' ? -30 : -25}
+                          x="-35"
                           y="-16"
-                          width={key === 'tripoli' ? 96 : key === 'misrata' ? 60 : key === 'benghazi' ? 60 : 50}
+                          width="70"
                           height="20"
                           rx="4"
                           fill="#50120d"
@@ -246,17 +289,11 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
                           y="-2"
                           textAnchor="middle"
                           fill="#ffffff"
-                          fontSize="11"
+                          fontSize="10"
                           fontWeight="bold"
                           className="font-cinzel select-none pointer-events-none"
                         >
-                          {key === 'tripoli'
-                            ? 'طرابلس (المقر)'
-                            : key === 'misrata'
-                            ? 'مصراتة'
-                            : key === 'benghazi'
-                            ? 'بنغازي'
-                            : 'سبها'}
+                          {lang === 'ar' ? city.shortLabelAr : city.shortLabelEn}
                         </text>
                       </g>
                     </g>
@@ -265,25 +302,19 @@ export const LibyaDistributionMap: React.FC<LibyaDistributionMapProps> = ({ t, l
               </svg>
             </div>
 
-            {/* City Selection Bar */}
-            <div className="grid grid-cols-4 gap-2 pt-4 border-t border-stone-200 text-xs">
+            {/* City Selection Bar - All 7 Distribution Nodes */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1.5 pt-4 border-t border-stone-200 text-xs">
               {(Object.keys(cityData) as CityKey[]).map((key) => (
                 <button
                   key={key}
                   onClick={() => setSelectedCity(key)}
-                  className={`py-2 px-1 text-center rounded font-bold transition-all border ${
+                  className={`py-2 px-1 text-center rounded font-bold transition-all border text-[11px] sm:text-xs truncate ${
                     selectedCity === key
                       ? 'bg-[#b4362d] text-white border-[#b4362d] shadow-md'
                       : 'bg-white text-stone-700 hover:bg-[#f6f3ee] border-stone-200'
                   }`}
                 >
-                  {key === 'tripoli'
-                    ? 'طرابلس'
-                    : key === 'misrata'
-                    ? 'مصراتة'
-                    : key === 'benghazi'
-                    ? 'بنغازي'
-                    : 'سبها'}
+                  {lang === 'ar' ? cityData[key].shortLabelAr : cityData[key].shortLabelEn}
                 </button>
               ))}
             </div>

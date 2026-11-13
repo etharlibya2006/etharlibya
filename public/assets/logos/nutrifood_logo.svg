@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="100%" height="100%">
+  <rect width="600" height="200" rx="16" fill="#1b4332" />
+  <rect x="8" y="8" width="584" height="184" rx="12" fill="none" stroke="#d9b239" stroke-width="3" opacity="0.6" />
+  <g>
+    <!-- Leaf Icon -->
+    <path d="M 95 100 C 95 65 125 50 150 50 C 150 75 135 105 105 115 Z" fill="#52b788" />
+    <path d="M 105 115 C 105 135 120 145 135 145 C 145 130 140 115 125 105 Z" fill="#d9b239" opacity="0.85" />
+    <!-- Brand Wordmark -->
+    <text x="350" y="112" text-anchor="middle" font-family="'Cinzel', 'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="52" fill="#ffffff" letter-spacing="3">
+      Nutri-Food
+    </text>
+    <text x="350" y="152" text-anchor="middle" font-family="'Cairo', sans-serif" font-weight="700" font-size="24" fill="#d9b239" letter-spacing="4">
+      غذائي · جودة أوروبية
+    </text>
+  </g>
+</svg>

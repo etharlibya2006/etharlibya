@@ -39,6 +39,7 @@ export class ErrorBoundary extends Component<Props, State> {
     try {
       // Clear potentially corrupted local state if any
       sessionStorage.clear();
+      localStorage.clear();
       window.location.href = window.location.pathname;
     } catch {
       window.location.reload();
@@ -59,7 +60,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
             <div className="space-y-2">
               <h1 className="text-2xl font-black text-stone-900 font-cinzel">
-                شركة إيثار ليبيا للاستيراد وتوزيع المواد الغذائية
+                شركة إيثار ليبيا لاستيراد المواد الغذائية
               </h1>
               <p className="text-sm font-bold text-[#b4362d]">
                 تم حماية الموقع تلقائياً من الشاشة البيضاء

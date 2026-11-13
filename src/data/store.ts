@@ -1,21 +1,35 @@
 import { Product, PRODUCTS } from './products';
 
 export interface AppSettings {
-  whatsappNumber: string; // e.g. "218925062360"
-  phoneDisplay: string;    // e.g. "+218 92 506 2360"
-  email: string;           // e.g. "info@etharlibya.ly"
+  whatsappNumber: string; // e.g. "0925062360"
+  phoneDisplay: string;    // e.g. "092 506 2360"
+  phoneSecondary: string;  // e.g. "091 325 3515"
+  email: string;           // e.g. "etharlibya2015@gmail.com"
   tripoliAddressAr: string;
   tripoliAddressEn: string;
   adminPin: string;        // Default: "ethar2026"
+  commercialLicenseNo: string;
+  taxNumber: string;
+  chamberRegNo: string;
+  facebookUrl: string;
+  tiktokUrl: string;
+  instagramUrl: string;
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  whatsappNumber: '218925062360',
-  phoneDisplay: '+218 92 506 2360',
-  email: 'info@ethar-libya.ly',
-  tripoliAddressAr: 'ليبيا، طرابلس - طريق السواني / الكريمية - مجمع المستودعات المركزية',
-  tripoliAddressEn: 'Tripoli, Libya - Al-Sawani Road / Al-Karimiyah Hub',
+  whatsappNumber: '0925062360',
+  phoneDisplay: '092 506 2360',
+  phoneSecondary: '091 325 3515',
+  email: 'etharlibya2015@gmail.com',
+  tripoliAddressAr: 'ليبيا، طرابلس - طريق السواني / الكريمية - مجمع المستودعات المركزية (شارع الثانوية والعسل)',
+  tripoliAddressEn: 'Tripoli, Libya - Al-Karimiyah Central Logistics Hub (Al-Thanawiya & Honey St)',
   adminPin: 'ethar2026',
+  commercialLicenseNo: '2006-218-0489',
+  taxNumber: '10920067845',
+  chamberRegNo: '45892 / طرابلس',
+  facebookUrl: 'https://facebook.com',
+  tiktokUrl: 'https://tiktok.com/@etharlibya',
+  instagramUrl: 'https://instagram.com/etharlibya',
 };
 
 export interface GalleryItem {
@@ -35,37 +49,65 @@ export interface GalleryItem {
   badgeEn: string;
 }
 
+export function normalizeAssetPath(raw?: string): string {
+  if (!raw) return '';
+  const trimmed = raw.trim();
+  if (
+    trimmed.startsWith('data:') ||
+    trimmed.startsWith('blob:') ||
+    trimmed.startsWith('http://') ||
+    trimmed.startsWith('https://')
+  ) {
+    return trimmed;
+  }
+  if (trimmed.startsWith('./assets/')) return trimmed;
+  if (trimmed.startsWith('/assets/')) return `.${trimmed}`;
+  if (trimmed.startsWith('assets/')) return `./${trimmed}`;
+  return trimmed;
+}
+
+function sanitizeGalleryItems(items: GalleryItem[]): GalleryItem[] {
+  const cleaned = items
+    .filter((item) => Boolean(item && item.src))
+    .map((item) => ({
+      ...item,
+      src: normalizeAssetPath(item.src),
+      fallbackSrc: item.fallbackSrc ? normalizeAssetPath(item.fallbackSrc) : undefined,
+    }));
+  return cleaned.length > 0 ? cleaned : DEFAULT_GALLERY_ITEMS;
+}
+
 export const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
   {
-    id: 'bonton_fleet_dispatch',
-    category: 'trucks',
-    src: './assets/facilities/bonton_fleet_dispatch.webp',
-    fallbackSrc: './assets/facilities/bonton_fleet_dispatch.jpg',
-    titleAr: 'تفريغ وشحن بون تون وشوكو بي آر (شاحنة ليبيا 25-53205)',
-    titleEn: 'Bakemate Freight Handling (Libya Plate 25-53205)',
-    tagAr: 'مناولة لوجستية متخصصة',
-    tagEn: 'Professional Freight Handling',
-    descAr: 'فريق العمل اللوجستي داخل الشاحنة لتفريغ وترتيب كراتين رولات بون تون (Bon Ton)، وبسكويت شوكو بي آر (Choco BR)، ويم وان (Wim Wan).',
-    descEn: 'Logistics handling crew inside the commercial transport vehicle unloading cartons of Bon Ton rolls and Choco BR biscuits for scheduled store distribution.',
-    locationAr: 'طرابلس - الكريمية · رصيف شحن الجملة',
-    locationEn: 'Tripoli Karimiyah Wholesale Dispatch Bay',
-    badgeAr: 'لوحة الشاحنة: ليبيا 25-53205',
-    badgeEn: 'Vehicle Plate: Libya 25-53205',
+    id: 'karimiyah_showroom_shelf',
+    category: 'warehouses',
+    src: './assets/facilities/karimiyah_showroom_shelf.webp',
+    fallbackSrc: './assets/facilities/karimiyah_showroom_shelf.jpg',
+    titleAr: 'صالة ومعرض المنتجات ونقطة التوزيع المركزية بالكريمية',
+    titleEn: 'Al-Karimiyah Central Showroom & Distribution Hub',
+    tagAr: 'المستودع الرئيسي وصالة العرض',
+    tagEn: 'HQ Showroom & Hub',
+    descAr: 'معرض ومركز التوزيع الرئيسي الذي يضم كافة أصناف موناليزا، بيك ميت، لوك مي، وباقي الوكالات لتسهيل المعاينة وتجهيز طلبيات الجملة للتجار.',
+    descEn: 'Master showroom and wholesale fulfillment center exhibiting full brand portfolios of MONALISA, BAKEMATE, LookMe, and partner lines.',
+    locationAr: 'طرابلس - الكريمية · شارع العسل والثانوية',
+    locationEn: 'Tripoli - Al-Karimiyah, Honey St & High School St',
+    badgeAr: 'معاينة واستلام جملة فوري',
+    badgeEn: 'Immediate Wholesale Pickup',
   },
   {
     id: 'truck_loading_dock',
     category: 'trucks',
     src: './assets/facilities/truck_loading_dock.webp',
     fallbackSrc: './assets/facilities/truck_loading_dock.jpg',
-    titleAr: 'تفريغ وتوريد شحنات مونا ليسا سويس رول',
-    titleEn: 'Container Dock Unloading - Mona Lisa Swiss Rolls',
-    tagAr: 'رصيف التحميل المباشر',
-    tagEn: 'Direct Logistics Loading Dock',
-    descAr: 'وصول الشاحنات المحملة بكراتين سويس رول مونا ليسا إلى رصيف التحميل المجهز بالمستودع المركزي بالكريمية، لتصنيفها وتوزيعها المباشر.',
-    descEn: 'Heavy logistics trailers docking at Tripoli Karimiyah hub unloading pallets of Mona Lisa Swiss Roll cartons for direct dispatch.',
+    titleAr: 'أرصفة الاستلام والتفريغ المباشر للحاويات وشحنات الكيك والويفر',
+    titleEn: 'Inbound Freight Logistics & Container Receiving Dock',
+    tagAr: 'رصيف الشحن والتفريغ المباشر',
+    tagEn: 'Direct Inbound Dock',
+    descAr: 'وصول الشاحنات الثقيلة والمقطورات المحملة بكراتين موناليزا وبضائع الاستيراد إلى رصيف التحميل المجهز بالمستودع المركزي بالكريمية لتفريغها وفرزها.',
+    descEn: 'Heavy logistics trailers docking at Tripoli Karimiyah master warehouse unloading pallets of MONALISA products for immediate sorting.',
     locationAr: 'طرابلس - الكريمية · مستودع الاستلام المركزي',
     locationEn: 'Tripoli - Al-Karimiyah Central Logistics Hub',
-    badgeAr: 'شحنات يومية منتظمة',
+    badgeAr: 'استقبال وتفريغ يومي منتظم',
     badgeEn: 'Daily Scheduled Inbound',
   },
   {
@@ -73,64 +115,48 @@ export const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
     category: 'trucks',
     src: './assets/facilities/refrigerated_fleet_worker.webp',
     fallbackSrc: './assets/facilities/refrigerated_fleet_worker.jpg',
-    titleAr: 'أسطول شاحنات التبريد المجهزة (لوحة طرابلس ن 34 - 2)',
-    titleEn: 'Insulated Refrigerated Fleet (Tripoli Plate 34-2 N)',
+    titleAr: 'مستودعات التبريد وشحن البضائع الحساسة بالأسطول المبرد',
+    titleEn: 'Insulated Refrigerated Transport Fleet (Tripoli Plate 34-2 N)',
     tagAr: 'نقل مبرد ومكيف 100%',
-    tagEn: 'Temperature-Controlled Logistics',
-    descAr: 'تحميل كراتين ويفر مونا ليسا سنوفليك واكسترا داخل مقصورة التبريد المعزولة لضمان ثبات القوام وجودة الشوكولاتة في مختلف فصول السنة.',
-    descEn: 'Logistics crew loading Mona Lisa Snowflake and Extra wafers into modern insulated refrigerated cargo bays preserving crispiness.',
+    tagEn: 'Temperature-Controlled Fleet',
+    descAr: 'تحميل كراتين ويفر وشوكولاتة موناليزا داخل مقصورات التبريد المعزولة لضمان ثبات القوام وجودة المنتج الفائقة في حرارة الصيف ومختلف فصول السنة.',
+    descEn: 'Logistics crew loading MONALISA chocolate and wafer products into modern insulated refrigerated cargo bays preserving optimum quality.',
     locationAr: 'مستودعات الكريمية · رصيف شاحنات التبريد',
     locationEn: 'Karimiyah Warehousing · Refrigerated Fleet Bay',
     badgeAr: 'لوحة نقل معتمدة: ن 34 - 2',
     badgeEn: 'Official Plate: 34-2 N',
   },
   {
+    id: 'bonton_fleet_dispatch',
+    category: 'warehouses',
+    src: './assets/facilities/bonton_fleet_dispatch.webp',
+    fallbackSrc: './assets/facilities/bonton_fleet_dispatch.jpg',
+    titleAr: 'مناولة بضائع الجملة وتجهيز شاحنات التوزيع للمدن والمحافظات',
+    titleEn: 'Bakemate & Confectionery Freight Dispatch (Libya 25-53205)',
+    tagAr: 'مناولة لوجستية متخصصة',
+    tagEn: 'Professional Freight Handling',
+    descAr: 'فريق العمل اللوجستي داخل الشاحنة لتفريغ وترتيب كراتين رولات بون تون (Bon Ton)، وبسكويت شوكو بي آر (Choco BR) لتسليمها لمتاجر الجملة والموزعين.',
+    descEn: 'Logistics handling crew inside commercial transport vehicles preparing cartons of Bon Ton rolls and Choco BR biscuits for scheduled retail deliveries.',
+    locationAr: 'طرابلس - الكريمية · رصيف شحن الجملة',
+    locationEn: 'Tripoli Karimiyah Wholesale Dispatch Bay',
+    badgeAr: 'شاحنة توزيع: ليبيا 25-53205',
+    badgeEn: 'Vehicle Plate: Libya 25-53205',
+  },
+  {
     id: 'pickup_distribution_road',
     category: 'distribution',
     src: './assets/facilities/pickup_distribution_road.webp',
     fallbackSrc: './assets/facilities/pickup_distribution_road.jpg',
-    titleAr: 'شاحنات التوزيع التجاري السريع على الطرق الليبية',
+    titleAr: 'شاحنات التوزيع التجاري السريع تجوب المدن والطرق الليبية',
     titleEn: 'Commercial Highway Express Delivery (Mona Lisa Wafers)',
-    tagAr: 'تغذية الأسواق والمحال',
+    tagAr: 'تغذية الأسواق والمحال يومياً',
     tagEn: 'Rapid Retail Replenishment',
-    descAr: 'شاحنات النقل الخفيف تنطلق يومياً محملة بكراتين ويفر مونا ليسا اكسترا (أزرق، أحمر، أخضر) لتوصيلها فورياً لمحلات التجزئة والسوبرماركت.',
-    descEn: 'Commercial delivery pickup transporting stacked secured Mona Lisa cartons across Libyan arterial highways directly to retailers.',
+    descAr: 'شاحنات النقل الخفيف تنطلق يومياً محملة بكراتين ويفر موناليزا اكسترا وباقي الأصناف لتوصيلها فورياً لمحلات التجزئة والسوبرماركت عبر كافة المدن.',
+    descEn: 'Commercial delivery pickup transporting stacked secured MONALISA cartons across Libyan arterial highways directly to retailers.',
     locationAr: 'الطريق الساحلي وشرايين النقل بين المدن',
     locationEn: 'Tripoli Arterial Expressways & Regional Routes',
-    badgeAr: 'توصيل خلال 24 ساعة',
-    badgeEn: '24h Fast Fulfillment',
-  },
-  {
-    id: 'karimiyah_showroom_shelf',
-    category: 'warehouses',
-    src: './assets/facilities/karimiyah_showroom_shelf.webp',
-    fallbackSrc: './assets/facilities/karimiyah_showroom_shelf.jpg',
-    titleAr: 'صالة عرض المنتجات النموذجية بالكريمية',
-    titleEn: 'Al-Karimiyah Showroom Unit (Honey St & High School St)',
-    tagAr: 'الكريمية شارع العسل والثانوية',
-    tagEn: 'Al-Karimiyah Honey St & High School St',
-    descAr: 'جناح وخزانة العرض النموذجية التي تضم أصناف ويفر مونا ليسا، بورتو بيلو، وبسكويت الشوكولاتة لتسهيل معاينة الأصناف واختيار طلبيات الجملة.',
-    descEn: 'Dedicated retail showroom display cabinet exhibiting the full portfolio of Mona Lisa wafers, Porto Bello snacks, and biscuits in Al-Karimiyah.',
-    locationAr: 'الكريمية · شارع العسل وشارع الثانوية',
-    locationEn: 'Al-Karimiyah, Honey St & High School St, Tripoli',
-    badgeAr: 'معاينة وطلب فوري',
-    badgeEn: 'On-Demand Wholesale Orders',
-  },
-  {
-    id: 'consumer_moments_wafers',
-    category: 'distribution',
-    src: './assets/facilities/consumer_moments_wafers.webp',
-    fallbackSrc: './assets/facilities/consumer_moments_wafers.jpg',
-    titleAr: 'اختيار العائلة الليبية الأول ولمسات السعادة',
-    titleEn: 'The Libyan Household Favorite - Pure Crispiness',
-    tagAr: 'ثقة المستهلك وجودة المذاق',
-    tagEn: 'Household Consumer Trust',
-    descAr: 'حضور منتجات مونا ليسا وبيك ميت في كل بيت ليبي؛ طعم الويفر الهش والمكونات النقية التي تمنح الأطفال والعائلات لحظات لا تُنسى.',
-    descEn: 'Mona Lisa wafers bring smiles to Libyan homes every day, renowned for rich cream, authentic Italian wafer recipe, and wholesome quality.',
-    locationAr: 'في كل بيت ليبي · من طرابلس إلى بنغازي وسبها',
-    locationEn: 'Across Libyan Homes from Tripoli to Benghazi',
-    badgeAr: 'جودة معتمدة ومرخصة',
-    badgeEn: 'FDA & Health Certified',
+    badgeAr: 'توصيل وتغذية مستمرة للأسواق',
+    badgeEn: 'Continuous Market Replenishment',
   },
 ];
 
@@ -207,7 +233,10 @@ export function getStoredProducts(): Product[] {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        return parsed.map((p: Product) => ({
+          ...p,
+          image: normalizeAssetPath(p.image),
+        }));
       }
     }
   } catch (err) {
@@ -243,7 +272,7 @@ export function getStoredGalleryItems(): GalleryItem[] {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        return sanitizeGalleryItems(parsed);
       }
     }
   } catch (err) {
@@ -279,7 +308,11 @@ export function getStoredBrands(): BrandItem[] {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        return parsed.map((b: BrandItem) => ({
+          ...b,
+          logo: normalizeAssetPath(b.logo),
+          fallbackLogo: b.fallbackLogo ? normalizeAssetPath(b.fallbackLogo) : undefined,
+        }));
       }
     }
   } catch (err) {
@@ -422,7 +455,11 @@ export async function initRemoteOrStaticData(): Promise<void> {
 
           if (Array.isArray(data.products) && data.products.length > 0) {
             try {
-              localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products));
+              const normalizedProducts = data.products.map((p: Product) => ({
+                ...p,
+                image: normalizeAssetPath(p.image),
+              }));
+              localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedProducts));
               changed = true;
             } catch {
               // Ignore storage quota
@@ -431,7 +468,8 @@ export async function initRemoteOrStaticData(): Promise<void> {
 
           if (Array.isArray(data.gallery) && data.gallery.length > 0) {
             try {
-              localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(data.gallery));
+              const cleanedGallery = sanitizeGalleryItems(data.gallery);
+              localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(cleanedGallery));
               changed = true;
             } catch {
               // Ignore storage quota
@@ -440,7 +478,12 @@ export async function initRemoteOrStaticData(): Promise<void> {
 
           if (Array.isArray(data.brands) && data.brands.length > 0) {
             try {
-              localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(data.brands));
+              const normalizedBrands = data.brands.map((b: BrandItem) => ({
+                ...b,
+                logo: normalizeAssetPath(b.logo),
+                fallbackLogo: b.fallbackLogo ? normalizeAssetPath(b.fallbackLogo) : undefined,
+              }));
+              localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(normalizedBrands));
               changed = true;
             } catch {
               // Ignore storage quota

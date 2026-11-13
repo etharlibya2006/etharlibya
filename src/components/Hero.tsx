@@ -35,43 +35,45 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Main Architectural Hero Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-auto w-full pt-4 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Main Editorial Text Column */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Small Emblem Logo (logoo.svg) & Sovereign Authority Lockup */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="h-10 w-10 sm:h-11 sm:w-11 shrink-0">
+          {/* Main Editorial & Brand Column */}
+          <div className="lg:col-span-7 space-y-5 text-center lg:text-start lg:rtl:text-right">
+            {/* 1. Ethar Libya Rosette Monogram Emblem - Exactly as shown in screenshot */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
                 <img
                   src="./assets/aistudio/logoo_78024bca.svg"
                   alt="Ethar Libya Monogram"
-                  className="h-full w-full object-contain filter drop-shadow-sm"
+                  className="w-full h-full object-contain filter drop-shadow-sm"
                 />
               </div>
+            </div>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-[#f6f3ee] border border-[#d9b239] shadow-sm">
+            {/* 2. CBL Sovereign Authority Badge */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#f6f3ee] border border-[#d9b239] shadow-xs">
                 <ShieldCheck className="w-4 h-4 text-[#b4362d] shrink-0" />
-                <span className="text-[11px] font-bold text-[#b4362d] tracking-wider font-cinzel">
+                <span className="text-[11px] sm:text-xs font-bold text-[#b4362d] tracking-wider font-cinzel">
                   {t.hero.cblBadge}
                 </span>
               </div>
             </div>
 
-            {/* Headline in Deep Black & Brick Red Typography */}
-            <div className="relative">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-stone-900 tracking-tight leading-[1.14] text-balance">
-                <span className="block">{lang === 'ar' ? 'نربط الأسواق العالمية' : 'Connecting Global Markets'}</span>
-                <span className="text-[#b4362d] block font-editorial italic font-bold">
-                  {lang === 'ar' ? 'بالسوق الليبي' : 'To The Libyan Market'}
-                </span>
-              </h1>
+            {/* 3. Official MONA LISA Flagship Brand Logo with Italian Stripes - Centerpiece as in screenshot */}
+            <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:mx-0 my-1 flex justify-center lg:justify-start">
+              <img
+                src="./assets/logos/monalisa_italy_flag_transparent.png"
+                alt="MONA LISA Brand Logo"
+                className="w-full h-auto object-contain filter drop-shadow-md select-none pointer-events-none"
+              />
             </div>
 
-            {/* Slogan Banner with Brick Red & Gold Frame */}
-            <div className="relative p-5 rounded-xl bg-gradient-to-r from-[#fbf9f5] via-white to-[#f6f3ee] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#b4362d] border-t border-b border-l rtl:border-l border-[#d9b239]/40 shadow-sm">
+            {/* 4. Slogan Banner (shown on desktop / tablet for institutional depth) */}
+            <div className="hidden sm:block relative p-4 sm:p-5 rounded-xl bg-gradient-to-r from-[#fbf9f5] via-white to-[#f6f3ee] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#b4362d] border-t border-b border-l rtl:border-l border-[#d9b239]/40 shadow-xs text-start rtl:text-right">
               <div className="flex items-center justify-between gap-4 mb-1">
-                <p className="text-base sm:text-xl font-extrabold text-[#b4362d] tracking-wide font-cinzel">
+                <p className="text-base sm:text-lg font-extrabold text-[#b4362d] tracking-wide font-cinzel">
                   {t.hero.slogan}
                 </p>
-                <span className="text-[11px] text-[#d9b239] font-mono tracking-widest uppercase font-bold hidden sm:inline">
+                <span className="text-[11px] text-[#d9b239] font-mono tracking-widest uppercase font-bold">
                   MMVI · 2006
                 </span>
               </div>
@@ -82,16 +84,16 @@ export const Hero: React.FC<HeroProps> = ({
               </p>
             </div>
 
-            {/* Concrete Value Description */}
-            <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl font-normal">
+            {/* 5. Concrete Value Description - Matching user screenshot */}
+            <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
               {t.hero.subheadline}
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            {/* 6. Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1">
               <button
                 onClick={onExploreProducts}
-                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white bg-[#b4362d] hover:bg-[#942921] rounded shadow-lg shadow-[#b4362d]/25 transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap border border-[#d9b239]"
+                className="inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-3.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white bg-[#b4362d] hover:bg-[#942921] rounded shadow-lg shadow-[#b4362d]/25 transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap border border-[#d9b239]"
               >
                 <span>{t.hero.exploreProducts}</span>
                 <ArrowIcon className="w-4 h-4 stroke-[3]" />
@@ -99,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               <button
                 onClick={onPartnerWithUs}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs sm:text-sm font-bold text-[#b4362d] bg-white hover:bg-[#fbf9f5] border-2 border-[#b4362d] rounded transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shadow-sm"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold text-[#b4362d] bg-white hover:bg-[#fbf9f5] border-2 border-[#b4362d] rounded transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shadow-sm"
               >
                 <Compass className="w-4 h-4 text-[#d9b239]" />
                 <span>{t.hero.partnerWithUs}</span>

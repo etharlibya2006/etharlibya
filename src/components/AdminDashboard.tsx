@@ -70,7 +70,11 @@ interface AdminDashboardProps {
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return sessionStorage.getItem('ethar_admin_auth') === 'true';
+    try {
+      return typeof window !== 'undefined' && sessionStorage.getItem('ethar_admin_auth') === 'true';
+    } catch {
+      return false;
+    }
   });
   const [enteredPin, setEnteredPin] = useState<string>('');
   const [pinError, setPinError] = useState<string>('');
@@ -202,7 +206,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
     const currentPin = settings.adminPin || 'ethar2026';
     if (enteredPin.trim() === currentPin) {
       setIsAuthenticated(true);
-      sessionStorage.setItem('ethar_admin_auth', 'true');
+      try {
+        sessionStorage.setItem('ethar_admin_auth', 'true');
+      } catch {}
       setPinError('');
       setEnteredPin('');
       showToast('تم تسجيل الدخول بنجاح إلى لوحة الإدارة');
@@ -213,7 +219,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem('ethar_admin_auth');
+    try {
+      sessionStorage.removeItem('ethar_admin_auth');
+    } catch {}
     setEnteredPin('');
   };
 
@@ -366,8 +374,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
     setEditingGalleryItem({
       id: `gallery-${Date.now()}`,
       category: 'trucks',
-      src: './assets/facilities/truck_loading_dock.webp',
-      fallbackSrc: './assets/facilities/truck_loading_dock.jpg',
+      src: './assets/facilities/pickup_distribution_road.webp',
+      fallbackSrc: './assets/facilities/pickup_distribution_road.jpg',
       titleAr: '',
       titleEn: '',
       tagAr: 'عمليات ميدانية',
@@ -531,13 +539,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
   };
 
   // Filtered Products in Admin
-  const filteredAdminProducts = products.filter((p) => {
-    const q = adminSearch.toLowerCase();
+  const filteredAdminProducts = (products || []).filter((p) => {
+    if (!p) return false;
+    const q = (adminSearch || '').toLowerCase().trim();
     const matchSearch =
       !q ||
-      p.nameAr.toLowerCase().includes(q) ||
-      p.nameEn.toLowerCase().includes(q) ||
-      p.brand.toLowerCase().includes(q);
+      (Boolean(p.nameAr) && String(p.nameAr).toLowerCase().includes(q)) ||
+      (Boolean(p.nameEn) && String(p.nameEn).toLowerCase().includes(q)) ||
+      (Boolean(p.brand) && String(p.brand).toLowerCase().includes(q));
     const matchCategory = adminCategory === 'all' || p.category === adminCategory;
     const matchBrand = adminBrand === 'all' || p.brand === adminBrand;
     return matchSearch && matchCategory && matchBrand;
@@ -1509,7 +1518,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                   >
                     <option value="biscuits">البسكويت والكوكيز</option>
                     <option value="wafers">الويفر والرولز</option>
-                    <option value="cakes">الكيك والسويس رول</option>
+                    <option value="cakes">الكيك</option>
+                    <option value="candy_juices">حلوى وعصائر</option>
                     <option value="confectionery">الشوكولاتة وكريمة الدهن</option>
                     <option value="beverages">مسحوق الكاكاو والمشروبات</option>
                     <option value="other">حليب مكثف ومواد غذائية</option>

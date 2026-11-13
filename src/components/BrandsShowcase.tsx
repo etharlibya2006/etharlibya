@@ -30,14 +30,14 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
     return () => window.removeEventListener('ethar_data_updated', handleUpdate);
   }, []);
 
-  const monalisaLogo = storedBrands.find((b) => b.brandKey === 'MONALISA')?.logo || './assets/logos/monalisa_italy_flag.webp';
+  const monalisaLogo = (storedBrands || []).find((b) => b && b.brandKey === 'MONALISA')?.logo || './assets/logos/monalisa_italy_flag.webp';
 
   const getBrandLogo = (brandKey: string, defaultLogo?: string) => {
-    const found = storedBrands.find((b) => b.brandKey === brandKey);
+    const found = (storedBrands || []).find((b) => b && b.brandKey === brandKey);
     return found?.logo || defaultLogo;
   };
 
-  const monalisaProducts = allProducts.filter((p) => p.brand === 'MONALISA').slice(0, 6);
+  const monalisaProducts = (allProducts || []).filter((p) => p && p.brand === 'MONALISA').slice(0, 6);
 
   const partnerBrands = [
     {
@@ -111,6 +111,32 @@ export const BrandsShowcase: React.FC<BrandsShowcaseProps> = ({
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
             {t.brands.subtitle}
           </p>
+        </div>
+
+        {/* Single Horizontal Full-Width Brand Logos Row - Static Logos Only, No Description, No Click */}
+        <div className="w-full mb-16 p-4 sm:p-6 bg-white rounded-2xl border-2 border-stone-200 shadow-sm">
+          <div className="flex items-center justify-between gap-3 sm:gap-6 overflow-x-auto no-scrollbar py-2">
+            {[
+              { id: 'MONALISA', name: 'MONALISA', logo: monalisaLogo },
+              { id: 'BAKEMATE', name: 'BAKEMATE', logo: './assets/logos/bakemate_seal.svg' },
+              { id: 'LookMe', name: 'LookMe', logo: './assets/logos/lookme_logo.svg' },
+              { id: 'Nutri-Food', name: 'Nutri-Food', logo: './assets/logos/nutrifood_logo.svg' },
+              { id: 'BOLANTY', name: 'BOLANTY', logo: './assets/logos/bolanty_logo.svg' },
+              { id: 'LIBRA', name: 'LIBRA', logo: './assets/logos/libra_logo.svg' },
+            ].map((brand) => (
+              <div
+                key={brand.id}
+                title={brand.name}
+                className="shrink-0 h-16 sm:h-20 w-28 sm:w-44 px-3 py-2 bg-stone-50 rounded-xl border border-stone-200 flex items-center justify-center shadow-xs select-none"
+              >
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="max-h-full max-w-full object-contain pointer-events-none"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Flagship MONALISA Showcase Pavilion (Deep Brick Red & Gold) */}

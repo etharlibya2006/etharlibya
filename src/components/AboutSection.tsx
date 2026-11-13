@@ -148,9 +148,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
           </div>
         </div>
 
-        {/* Central Bank of Libya (CBL) Compliance Certificate Box */}
+        {/* Central Bank of Libya (CBL) Compliance Certificate Box & Legal Accreditations */}
         <div className="p-8 sm:p-10 rounded-2xl bg-white border-2 border-[#b4362d] shadow-lg mb-20 relative">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 mb-6">
             <div className="w-16 h-16 rounded-xl bg-[#b4362d] flex items-center justify-center text-white shrink-0 shadow-md">
               <ShieldCheck className="w-10 h-10 stroke-[2.2]" />
             </div>
@@ -172,6 +172,34 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang }) => {
               </p>
             </div>
           </div>
+
+          {/* Legal Identifiers & Trade Registration Badges */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-stone-200">
+            <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+              <span className="text-[11px] text-stone-500 block mb-1 font-mono">
+                {lang === 'ar' ? 'السجل التجاري / الرخصة' : 'Commercial License'}
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-stone-900 font-mono" dir="ltr">
+                {t.contact.commercialLicense}
+              </span>
+            </div>
+            <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+              <span className="text-[11px] text-stone-500 block mb-1 font-mono">
+                {lang === 'ar' ? 'الرقم الضريبي المعتمد' : 'Tax Identification No.'}
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-stone-900 font-mono" dir="ltr">
+                {t.contact.taxNumber}
+              </span>
+            </div>
+            <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+              <span className="text-[11px] text-stone-500 block mb-1 font-mono">
+                {lang === 'ar' ? 'الغرفة التجارية (رقم النادي والقيد)' : 'Chamber of Commerce Reg.'}
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-[#b4362d] font-mono" dir="ltr">
+                {t.contact.chamberReg}
+              </span>
+            </div>
+          </div>
         </div>
 
 
@@ -186,21 +214,27 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
   const [activeTab, setActiveTab] = React.useState<'all' | 'trucks' | 'warehouses' | 'distribution'>('all');
   const [selectedItem, setSelectedItem] = React.useState<GalleryItem | null>(null);
   const [galleryItems, setGalleryItems] = React.useState<GalleryItem[]>(() => getStoredGalleryItems());
+  const [imgErrors, setImgErrors] = React.useState<Record<string, boolean>>({});
+  const [fallbackTried, setFallbackTried] = React.useState<Record<string, boolean>>({});
 
   React.useEffect(() => {
     const handleUpdate = () => {
       setGalleryItems(getStoredGalleryItems());
+      setImgErrors({});
+      setFallbackTried({});
     };
     window.addEventListener('ethar_data_updated', handleUpdate);
     return () => window.removeEventListener('ethar_data_updated', handleUpdate);
   }, []);
 
-  const filteredItems = activeTab === 'all'
-    ? galleryItems
-    : galleryItems.filter((item) => item.category === activeTab);
+  const safeGalleryItems = Array.isArray(galleryItems) ? galleryItems : [];
+  const hasTrucks = safeGalleryItems.some((i) => i && i.category === 'trucks');
+  const hasWarehouses = safeGalleryItems.some((i) => i && i.category === 'warehouses');
+  const hasDistribution = safeGalleryItems.some((i) => i && i.category === 'distribution');
 
-  const warehouseCover = galleryItems.find((i) => i.category === 'warehouses')?.src || './assets/facilities/karimiyah_showroom_shelf.webp';
-  const fleetCover = galleryItems.find((i) => i.category === 'trucks')?.src || './assets/facilities/truck_loading_dock.webp';
+  const filteredItems = activeTab === 'all'
+    ? safeGalleryItems
+    : safeGalleryItems.filter((item) => item && item.category === activeTab);
 
   return (
     <div>
@@ -221,193 +255,150 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2 p-1.5 bg-stone-200/70 rounded-xl">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-              activeTab === 'all'
-                ? 'bg-white text-[#b4362d] shadow-sm'
-                : 'text-stone-700 hover:text-stone-900'
-            }`}
-          >
-            {lang === 'ar' ? 'جميع الصور الميدانية' : 'All Operations'}
-          </button>
-          <button
-            onClick={() => setActiveTab('trucks')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-              activeTab === 'trucks'
-                ? 'bg-white text-[#b4362d] shadow-sm'
-                : 'text-stone-700 hover:text-stone-900'
-            }`}
-          >
-            {lang === 'ar' ? 'الشاحنات والتفريغ المبرد' : 'Trucks & Cold Cargo'}
-          </button>
-          <button
-            onClick={() => setActiveTab('warehouses')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-              activeTab === 'warehouses'
-                ? 'bg-white text-[#b4362d] shadow-sm'
-                : 'text-stone-700 hover:text-stone-900'
-            }`}
-          >
-            {lang === 'ar' ? 'مستودعات وسوق الكريمية' : 'Karimiyah Hub'}
-          </button>
-          <button
-            onClick={() => setActiveTab('distribution')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-              activeTab === 'distribution'
-                ? 'bg-white text-[#b4362d] shadow-sm'
-                : 'text-stone-700 hover:text-stone-900'
-            }`}
-          >
-            {lang === 'ar' ? 'التوزيع السريع في ليبيا' : 'Highway Logistics'}
-          </button>
-        </div>
+        {(hasTrucks || hasWarehouses || hasDistribution) && safeGalleryItems.length > 1 && (
+          <div className="flex flex-wrap gap-2 p-1.5 bg-stone-200/70 rounded-xl">
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                activeTab === 'all'
+                  ? 'bg-white text-[#b4362d] shadow-sm'
+                  : 'text-stone-700 hover:text-stone-900'
+              }`}
+            >
+              {lang === 'ar' ? 'جميع الصور الميدانية' : 'All Operations'}
+            </button>
+            {hasTrucks && (
+              <button
+                onClick={() => setActiveTab('trucks')}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeTab === 'trucks'
+                    ? 'bg-white text-[#b4362d] shadow-sm'
+                    : 'text-stone-700 hover:text-stone-900'
+                }`}
+              >
+                {lang === 'ar' ? 'الشاحنات والتفريغ المبرد' : 'Trucks & Cold Cargo'}
+              </button>
+            )}
+            {hasWarehouses && (
+              <button
+                onClick={() => setActiveTab('warehouses')}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeTab === 'warehouses'
+                    ? 'bg-white text-[#b4362d] shadow-sm'
+                    : 'text-stone-700 hover:text-stone-900'
+                }`}
+              >
+                {lang === 'ar' ? 'مستودعات وسوق الكريمية' : 'Karimiyah Hub'}
+              </button>
+            )}
+            {hasDistribution && (
+              <button
+                onClick={() => setActiveTab('distribution')}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeTab === 'distribution'
+                    ? 'bg-white text-[#b4362d] shadow-sm'
+                    : 'text-stone-700 hover:text-stone-900'
+                }`}
+              >
+                {lang === 'ar' ? 'التوزيع السريع في ليبيا' : 'Highway Logistics'}
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
-      {/* Main Highlights: 2 Macro Overview Cards (Square 1:1 Native) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        {/* Warehouse Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
-          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
-            <img
-              src={warehouseCover}
-              alt="Ethar Libya FMCG Warehouses"
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                if (e.currentTarget.src !== './assets/facilities/karimiyah_showroom_shelf.jpg') {
-                  e.currentTarget.src = './assets/facilities/karimiyah_showroom_shelf.jpg';
-                }
-              }}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-            <div className="absolute top-4 right-4 bg-[#b4362d] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
-              {lang === 'ar' ? 'المقر وسوق الكريمية' : 'Karimiyah HQ & Wholesale'}
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Warehouse className="w-5 h-5 text-[#d9b239] shrink-0" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
-                {lang === 'ar' ? 'المستودعات المركزية وسلاسل التخزين' : 'Central Logistics & Warehousing Hub'}
-              </span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
-              {t.about.facilityWarehouse}
-            </p>
-            <div className="mt-4 pt-4 border-t border-stone-200 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-500 font-mono">
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#b4362d]" />
-                {lang === 'ar' ? 'طرابلس - الكريمية (شارع الثانوية والعسل)' : 'Al-Karimiyah, Tripoli'}
-              </span>
-              <span className="text-[#b4362d] font-bold">
-                {lang === 'ar' ? 'مساحات مجهزة ومكيفة 24/7' : 'Certified High-Bay Storage'}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Distribution Fleet Card */}
-        <div className="group rounded-2xl overflow-hidden bg-white border-2 border-stone-200 hover:border-[#b4362d] transition-all shadow-md flex flex-col">
-          <div className="relative aspect-square w-full overflow-hidden bg-stone-100 flex items-center justify-center">
-            <img
-              src={fleetCover}
-              alt="Ethar Libya Distribution Fleet"
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                if (e.currentTarget.src !== './assets/facilities/truck_loading_dock.jpg') {
-                  e.currentTarget.src = './assets/facilities/truck_loading_dock.jpg';
-                }
-              }}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-            <div className="absolute top-4 right-4 bg-[#d9b239] text-stone-900 text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
-              {lang === 'ar' ? 'أسطول الشاحنات' : 'Distribution Fleet'}
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 text-white">
-              <Truck className="w-5 h-5 text-[#d9b239] shrink-0" />
-              <span className="font-bold text-base sm:text-lg font-cinzel text-white line-clamp-1">
-                {lang === 'ar' ? 'أسطول شاحنات التوزيع المجهزة' : 'Nationwide Commercial Distribution Fleet'}
-              </span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
-              {t.about.facilityFleet}
-            </p>
-            <div className="mt-4 pt-4 border-t border-stone-200 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-500 font-mono">
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#d9b239]" />
-                {lang === 'ar' ? 'تغطية: طرابلس، بنغازي، مصراتة، سبها، الزاوية' : 'Nationwide Fleet Coverage'}
-              </span>
-              <span className="text-[#b4362d] font-bold">
-                {lang === 'ar' ? 'شاحنات نقل مجهزة بمقصورات تبريد' : 'Temperature-Controlled Fleet'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 6 Real Operations Visual Gallery Grid (Aspect-Square 1:1) */}
+      {/* Unified Authentic Facilities & Logistics Gallery Grid (Aspect-Square 1:1, Zero Duplication) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredItems.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => setSelectedItem(item)}
-            className="group cursor-pointer rounded-2xl bg-white border border-stone-200 hover:border-[#b4362d] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
-          >
-            {/* Image Box - Aspect-Square (1:1 Ratio) */}
-            <div className="relative aspect-square w-full bg-stone-100 overflow-hidden flex items-center justify-center">
-              <img
-                src={item.src}
-                alt={lang === 'ar' ? item.titleAr : item.titleEn}
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  if (item.fallbackSrc && e.currentTarget.src !== item.fallbackSrc) {
-                    e.currentTarget.src = item.fallbackSrc;
-                  }
-                }}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
+        {filteredItems.map((item) => {
+          const hasError = !!imgErrors[item.id];
+          return (
+            <div
+              key={item.id}
+              onClick={() => setSelectedItem(item)}
+              className="group cursor-pointer rounded-2xl bg-white border border-stone-200 hover:border-[#b4362d] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+            >
+              {/* Image Box - Aspect-Square (1:1 Ratio) */}
+              <div className="relative aspect-square w-full bg-stone-900 overflow-hidden flex items-center justify-center">
+                {!hasError ? (
+                  <img
+                    src={fallbackTried[item.id] && item.fallbackSrc ? item.fallbackSrc : item.src}
+                    alt={lang === 'ar' ? item.titleAr : item.titleEn}
+                    loading="eager"
+                    decoding="async"
+                    onError={() => {
+                      if (item.fallbackSrc && !fallbackTried[item.id]) {
+                        setFallbackTried((prev) => ({ ...prev, [item.id]: true }));
+                      } else {
+                        setImgErrors((prev) => ({ ...prev, [item.id]: true }));
+                      }
+                    }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 p-6 flex flex-col justify-between text-white relative">
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-[#b4362d] flex items-center justify-center text-white shadow-md">
+                        {item.category === 'trucks' || item.category === 'distribution' ? (
+                          <Truck className="w-5 h-5 stroke-[2.2]" />
+                        ) : (
+                          <Warehouse className="w-5 h-5 stroke-[2.2]" />
+                        )}
+                      </div>
+                      <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/10 text-stone-200 border border-white/15">
+                        {lang === 'ar' ? item.tagAr : item.tagEn}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono text-[#d9b239] block mb-1">
+                        {lang === 'ar' ? item.badgeAr : item.badgeEn}
+                      </span>
+                      <h4 className="font-bold text-base text-white font-cinzel line-clamp-2">
+                        {lang === 'ar' ? item.titleAr : item.titleEn}
+                      </h4>
+                    </div>
+                  </div>
+                )}
+                {!hasError && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
+                )}
 
-              {/* Tag / Badge */}
-              <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold border border-white/20">
-                <span>{lang === 'ar' ? item.tagAr : item.tagEn}</span>
+                {/* Tag / Badge */}
+                {!hasError && (
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold border border-white/20">
+                    <span>{lang === 'ar' ? item.tagAr : item.tagEn}</span>
+                  </div>
+                )}
+
+                {/* Location pin & Title on photo */}
+                {!hasError && (
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <span className="text-[11px] font-mono text-[#d9b239] block mb-0.5">
+                      {lang === 'ar' ? item.badgeAr : item.badgeEn}
+                    </span>
+                    <h4 className="font-bold text-sm sm:text-base leading-snug line-clamp-1">
+                      {lang === 'ar' ? item.titleAr : item.titleEn}
+                    </h4>
+                  </div>
+                )}
               </div>
 
-              {/* Location pin & Title on photo */}
-              <div className="absolute bottom-3 left-3 right-3 text-white">
-                <span className="text-[11px] font-mono text-[#d9b239] block mb-0.5">
-                  {lang === 'ar' ? item.badgeAr : item.badgeEn}
-                </span>
-                <h4 className="font-bold text-sm sm:text-base leading-snug line-clamp-1">
-                  {lang === 'ar' ? item.titleAr : item.titleEn}
-                </h4>
+              {/* Description */}
+              <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                <p className="text-xs text-stone-600 leading-relaxed mb-3 line-clamp-2">
+                  {lang === 'ar' ? item.descAr : item.descEn}
+                </p>
+                <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-2 text-xs text-stone-500">
+                  <span className="font-mono text-stone-700 truncate max-w-[65%]">
+                    {lang === 'ar' ? item.locationAr : item.locationEn}
+                  </span>
+                  <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1 shrink-0">
+                    {lang === 'ar' ? 'عرض التفاصيل' : 'View Details'}
+                  </span>
+                </div>
               </div>
             </div>
-
-            {/* Description */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-              <p className="text-xs text-stone-600 leading-relaxed mb-3 line-clamp-2">
-                {lang === 'ar' ? item.descAr : item.descEn}
-              </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-2 text-xs text-stone-500">
-                <span className="font-mono text-stone-700 truncate max-w-[65%]">
-                  {lang === 'ar' ? item.locationAr : item.locationEn}
-                </span>
-                <span className="text-[#b4362d] font-bold group-hover:underline inline-flex items-center gap-1 shrink-0">
-                  {lang === 'ar' ? 'عرض الصورة المكبرة' : 'Expand Photo'}
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Full-Screen Lightbox Modal - Optimized for Square 1:1 Images */}
@@ -432,12 +423,37 @@ const OperationalShowcase: React.FC<{ t: Translations; lang: Language }> = ({ t,
             </button>
 
             {/* Modal Image Frame */}
-            <div className="relative w-full max-h-[68vh] bg-stone-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
-              <img
-                src={selectedItem.src}
-                alt={lang === 'ar' ? selectedItem.titleAr : selectedItem.titleEn}
-                className="max-h-[64vh] max-w-full aspect-square sm:aspect-auto object-contain mx-auto rounded-xl shadow-2xl"
-              />
+            <div className="relative w-full min-h-[320px] max-h-[68vh] bg-stone-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+              {!imgErrors[selectedItem.id] ? (
+                <img
+                  src={fallbackTried[selectedItem.id] && selectedItem.fallbackSrc ? selectedItem.fallbackSrc : selectedItem.src}
+                  alt={lang === 'ar' ? selectedItem.titleAr : selectedItem.titleEn}
+                  onError={() => {
+                    if (selectedItem.fallbackSrc && !fallbackTried[selectedItem.id]) {
+                      setFallbackTried((prev) => ({ ...prev, [selectedItem.id]: true }));
+                    } else {
+                      setImgErrors((prev) => ({ ...prev, [selectedItem.id]: true }));
+                    }
+                  }}
+                  className="max-h-[64vh] max-w-full aspect-square sm:aspect-auto object-contain mx-auto rounded-xl shadow-2xl"
+                />
+              ) : (
+                <div className="text-center p-12 text-white flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-2xl bg-[#b4362d] flex items-center justify-center text-white mb-4 shadow-lg">
+                    {selectedItem.category === 'trucks' || selectedItem.category === 'distribution' ? (
+                      <Truck className="w-8 h-8 stroke-[2.2]" />
+                    ) : (
+                      <Warehouse className="w-8 h-8 stroke-[2.2]" />
+                    )}
+                  </div>
+                  <span className="text-sm font-mono text-[#d9b239] block mb-2 font-bold">
+                    {lang === 'ar' ? selectedItem.badgeAr : selectedItem.badgeEn}
+                  </span>
+                  <h4 className="text-lg font-bold text-white max-w-md">
+                    {lang === 'ar' ? selectedItem.titleAr : selectedItem.titleEn}
+                  </h4>
+                </div>
+              )}
               <div className="absolute top-4 left-4 bg-[#b4362d] text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                 {lang === 'ar' ? selectedItem.tagAr : selectedItem.tagEn}
               </div>

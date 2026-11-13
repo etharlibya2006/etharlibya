@@ -7,7 +7,6 @@ export interface AppSettings {
   email: string;           // e.g. "etharlibya2015@gmail.com"
   tripoliAddressAr: string;
   tripoliAddressEn: string;
-  adminPin: string;        // Default: "ethar2026"
   commercialLicenseNo: string;
   taxNumber: string;
   chamberRegNo: string;
@@ -23,7 +22,6 @@ export const DEFAULT_SETTINGS: AppSettings = {
   email: 'etharlibya2015@gmail.com',
   tripoliAddressAr: 'ليبيا، طرابلس - طريق السواني / الكريمية - مجمع المستودعات المركزية (شارع الثانوية والعسل)',
   tripoliAddressEn: 'Tripoli, Libya - Al-Karimiyah Central Logistics Hub (Al-Thanawiya & Honey St)',
-  adminPin: 'ethar2026',
   commercialLicenseNo: '2006-218-0489',
   taxNumber: '10920067845',
   chamberRegNo: '45892 / طرابلس',
@@ -245,26 +243,6 @@ export function getStoredProducts(): Product[] {
   return PRODUCTS;
 }
 
-// Save products to localStorage and trigger custom event
-export function saveStoredProducts(products: Product[]): void {
-  try {
-    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'products' } }));
-  } catch (err) {
-    console.error('Error saving stored products:', err);
-  }
-}
-
-// Reset products back to original PRODUCTS array
-export function resetStoredProducts(): void {
-  try {
-    localStorage.removeItem(PRODUCTS_STORAGE_KEY);
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'products' } }));
-  } catch (err) {
-    console.error('Error resetting products:', err);
-  }
-}
-
 // Get Gallery Items
 export function getStoredGalleryItems(): GalleryItem[] {
   try {
@@ -279,26 +257,6 @@ export function getStoredGalleryItems(): GalleryItem[] {
     console.error('Error reading stored gallery:', err);
   }
   return DEFAULT_GALLERY_ITEMS;
-}
-
-// Save Gallery Items
-export function saveStoredGalleryItems(items: GalleryItem[]): void {
-  try {
-    localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(items));
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'gallery' } }));
-  } catch (err) {
-    console.error('Error saving stored gallery:', err);
-  }
-}
-
-// Reset Gallery Items
-export function resetStoredGalleryItems(): void {
-  try {
-    localStorage.removeItem(GALLERY_STORAGE_KEY);
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'gallery' } }));
-  } catch (err) {
-    console.error('Error resetting gallery:', err);
-  }
 }
 
 // Get Brands
@@ -321,26 +279,6 @@ export function getStoredBrands(): BrandItem[] {
   return DEFAULT_BRAND_ITEMS;
 }
 
-// Save Brands
-export function saveStoredBrands(items: BrandItem[]): void {
-  try {
-    localStorage.setItem(BRANDS_STORAGE_KEY, JSON.stringify(items));
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'brands' } }));
-  } catch (err) {
-    console.error('Error saving stored brands:', err);
-  }
-}
-
-// Reset Brands
-export function resetStoredBrands(): void {
-  try {
-    localStorage.removeItem(BRANDS_STORAGE_KEY);
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'brands' } }));
-  } catch (err) {
-    console.error('Error resetting brands:', err);
-  }
-}
-
 // Get settings
 export function getStoredSettings(): AppSettings {
   try {
@@ -352,73 +290,6 @@ export function getStoredSettings(): AppSettings {
     console.error('Error reading stored settings:', err);
   }
   return DEFAULT_SETTINGS;
-}
-
-// Save settings
-export function saveStoredSettings(settings: AppSettings): void {
-  try {
-    localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
-    window.dispatchEvent(new CustomEvent('ethar_data_updated', { detail: { type: 'settings' } }));
-  } catch (err) {
-    console.error('Error saving stored settings:', err);
-  }
-}
-
-// Export all data as downloadable JSON
-export function exportDataAsJSON(): string {
-  const data = getCurrentSiteDataPayload();
-  return JSON.stringify(data, null, 2);
-}
-
-// Get current full site data payload
-export function getCurrentSiteDataPayload() {
-  return {
-    version: '2.0',
-    app: 'Ethar Libya Corporate Portal',
-    updatedAt: new Date().toISOString(),
-    products: getStoredProducts(),
-    gallery: getStoredGalleryItems(),
-    brands: getStoredBrands(),
-    settings: getStoredSettings(),
-  };
-}
-
-// Download site_data.json directly for GitHub commit
-export function downloadSiteDataFile(): void {
-  try {
-    const payload = getCurrentSiteDataPayload();
-    const jsonString = JSON.stringify(payload, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'site_data.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  } catch (err) {
-    console.error('Failed to download site_data.json:', err);
-  }
-}
-
-// Attempt direct save to workspace/disk if running via dev server
-export async function syncSiteDataToDisk(): Promise<{ success: boolean; message: string }> {
-  try {
-    const payload = getCurrentSiteDataPayload();
-    const res = await fetch('./api/save-site-data', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return { success: true, message: data.message || 'تم حفظ التحديثات بنجاح في ملفات المشروع' };
-    }
-    return { success: false, message: 'تعذر الحفظ المباشر على الخادم؛ يرجى تنزيل ملف site_data.json ورفعه لمستودع GitHub' };
-  } catch {
-    return { success: false, message: 'بيئة الاستضافة ثابتة؛ يمكنك تحميل ملف site_data.json ورفعه لمستودع GitHub بنقرة واحدة' };
-  }
 }
 
 // Asynchronously load public/data/site_data.json on initial load without breaking or blocking UI
@@ -501,30 +372,5 @@ export async function initRemoteOrStaticData(): Promise<void> {
       // Continue to next candidate
     }
   }
-}
-
-// Import data from JSON
-export function importDataFromJSON(jsonString: string): boolean {
-  try {
-    const data = JSON.parse(jsonString);
-    if (data) {
-      if (Array.isArray(data.products)) {
-        saveStoredProducts(data.products);
-      }
-      if (Array.isArray(data.gallery)) {
-        saveStoredGalleryItems(data.gallery);
-      }
-      if (Array.isArray(data.brands)) {
-        saveStoredBrands(data.brands);
-      }
-      if (data.settings) {
-        saveStoredSettings({ ...DEFAULT_SETTINGS, ...data.settings });
-      }
-      return true;
-    }
-  } catch (err) {
-    console.error('Invalid JSON imported:', err);
-  }
-  return false;
 }
 

@@ -18,7 +18,7 @@ export const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ t, lang, exter
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
 
-  // Listen for data updates from admin dashboard
+  // Listen for static/remote data updates
   useEffect(() => {
     const handleDataUpdate = () => {
       setProductsList(getStoredProducts());

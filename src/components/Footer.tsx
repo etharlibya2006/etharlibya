@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Translations, Language } from '../data/translations';
 import { ShieldCheck, MessageCircle, ArrowUp } from 'lucide-react';
 
@@ -6,32 +6,9 @@ interface FooterProps {
   t: Translations;
   lang: Language;
   onNavigate: (sectionId: string) => void;
-  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate, onOpenAdmin }) => {
-  const clickCountRef = useRef(0);
-  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleLogoClick = () => {
-    clickCountRef.current += 1;
-    if (clickCountRef.current >= 5) {
-      clickCountRef.current = 0;
-      if (clickTimerRef.current) {
-        clearTimeout(clickTimerRef.current);
-        clickTimerRef.current = null;
-      }
-      onOpenAdmin?.();
-      return;
-    }
-
-    if (clickTimerRef.current) {
-      clearTimeout(clickTimerRef.current);
-    }
-    clickTimerRef.current = setTimeout(() => {
-      clickCountRef.current = 0;
-    }, 3000);
-  };
+export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate }) => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,8 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ t, lang, onNavigate, onOpenAdmin
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div
-                onClick={handleLogoClick}
-                className="cursor-pointer select-none active:scale-95 transition-transform inline-block"
+                className="select-none inline-block"
                 title="Ethar Libya - إيثار ليبيا"
               >
                 <img
